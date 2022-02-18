@@ -22,7 +22,9 @@ void LoaderSubsystem::InnerLoader(double speed)
 {
 #ifndef NOHW
     m_inner.Set(speed);
+    #ifdef C418
     m_innerUp.Set(speed);
+    #endif
 #endif
 }
 

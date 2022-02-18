@@ -4,7 +4,6 @@
 
 #include "commands/LoadInnerCommand.h"
 #include "constants.h"
-#ifndef C418
 LoadInnerCommand::LoadInnerCommand(LoaderSubsystem* pLoader, double speed) 
 {
   // Use addRequirements() here to declare subsystem dependencies.
@@ -29,4 +28,3 @@ void LoadInnerCommand::End(bool interrupted) {}
 bool LoadInnerCommand::IsFinished() {
   return false;
 }
-#endif

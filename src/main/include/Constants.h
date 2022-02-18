@@ -3,14 +3,14 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-#define C419    
+#define C418 
 //#define NOHW
 
 //PWM
 constexpr int PWM_LEFT                  = 1;
 constexpr int PWM_RIGHT                 = 0;
 constexpr int PWM_LOADER_INTAKE         = 5;
-constexpr int PWM_LOADER_INTAKE_UPPER   = 6;
+constexpr int PWM_LOADER_INTAKE_UPPER   = 6; //temperary
 constexpr int PWM_LOADER_INNER          = 4; 
 constexpr int PWM_SHOOTER               = 5;
 constexpr int PWM_CLIMB                 = 6;
