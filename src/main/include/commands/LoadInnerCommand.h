@@ -8,7 +8,7 @@
 #include <frc2/command/CommandHelper.h>
 
 #include "subsystems/LoaderSubsystem.h"
-
+#ifndef C418
 /**
  * An example command.
  *
@@ -34,3 +34,4 @@ class LoadInnerCommand
 
   double m_speed = 1.0;
 };
+#endif

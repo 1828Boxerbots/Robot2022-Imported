@@ -28,6 +28,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
  #ifndef NOHW
   frc::Victor m_intake{PWM_LOADER_INTAKE};
   frc::Victor m_inner{PWM_LOADER_INNER};
+  frc::Victor m_innerUp{PWM_LOADER_INTAKE_UPPER};
  #endif
   // Photogate
 
