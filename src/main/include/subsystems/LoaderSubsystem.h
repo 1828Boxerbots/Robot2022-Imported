@@ -6,7 +6,6 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc/motorcontrol/Victor.h>
-#include <frc/Servo.h>
 
 #include "Constants.h"
 
@@ -19,9 +18,6 @@ class LoaderSubsystem : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
-  // Arm Functions
-  double GetServo();
-  void SetServoAngle(double angle);
   // Motor Intake Functions
   void IntakeLoader(double speed);
   void InnerLoader(double speed);
@@ -30,7 +26,6 @@ class LoaderSubsystem : public frc2::SubsystemBase {
 
  private:
  #ifndef NOHW
-  frc::Servo m_armServo{PWM_ARM_SERVO};
   frc::Victor m_intake{PWM_LOADER_INTAKE};
   frc::Victor m_inner{PWM_LOADER_INNER};
  #endif

@@ -9,24 +9,6 @@ LoaderSubsystem::LoaderSubsystem() = default;
 // This method will be called once per scheduler run
 void LoaderSubsystem::Periodic() {}
 
-// ARM FUNCTIONS
-
-double LoaderSubsystem::GetServo()
-{
-#ifndef NOHW
-    return m_armServo.Get();
-#else
-    return 0.0;
-#endif
-}
-
-void LoaderSubsystem::SetServoAngle(double angle)
-{
-#ifndef NOHW
-    m_armServo.Set(angle);
-#endif
-}
-
 // MOTOR INTAKE FUNCTIONS
 
 void LoaderSubsystem::IntakeLoader(double speed)

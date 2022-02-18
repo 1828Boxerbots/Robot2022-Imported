@@ -7,7 +7,6 @@
 ClimbSubsystem::ClimbSubsystem()
 {
 #ifndef NOHW
-    m_encoderBack.SetDistancePerPulse(m_pulseDisBack);
     m_encoderFront.SetDistancePerPulse(m_pulseDisFront);
 #endif
 }
@@ -20,12 +19,11 @@ void ClimbSubsystem::Periodic() {}
 void ClimbSubsystem::ResetEncoder()
 {
 #ifndef NOHW
-    m_encoderBack.Reset();
     m_encoderFront.Reset();
 #endif
 }
 
-double ClimbSubsystem::GetFrontDistance()
+double ClimbSubsystem::GetDistance()
 {
 #ifndef NOHW
     return m_encoderFront.GetDistance();
@@ -34,16 +32,7 @@ double ClimbSubsystem::GetFrontDistance()
 #endif
 }
 
-double ClimbSubsystem::GetBackDistance()
-{
-#ifndef NOHW
-    return m_encoderBack.GetDistance();
-#else
-    return 0.0;
-#endif
-}
-
-int ClimbSubsystem::GetFrontRaw()
+int ClimbSubsystem::GetRaw()
 {
 #ifndef NOHW
     return m_encoderFront.GetRaw();
@@ -52,27 +41,11 @@ int ClimbSubsystem::GetFrontRaw()
 #endif
 }
 
-int ClimbSubsystem::GetBackRaw()
-{
-#ifndef NOHW
-    return m_encoderBack.GetRaw();
-#else
-    return 0;
-#endif
-}
-
 // MOTOR FUNCTIONS
 
-void ClimbSubsystem::FrontClimb(double speed)
+void ClimbSubsystem::ClimbMotor(double speed)
 {
 #ifndef NOHW
-    m_front.Set(speed);
-#endif
-}
-
-void ClimbSubsystem::BackClimb(double speed)
-{
-#ifndef NOHW
-    m_back.Set(speed);
+    m_climb.Set(speed);
 #endif
 }

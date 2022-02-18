@@ -44,11 +44,3 @@ void ShooterSubsystem::ShootMotor(double speed)
     m_shooterMotor.Set(speed);
 #endif
 }
-
-// TURRET FUNCTIONS
-void ShooterSubsystem::MoveTurret(double speed)
-{
-#ifndef NOHW
-    m_turretMotor.Set(speed);
-#endif
-}

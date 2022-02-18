@@ -7,7 +7,8 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "subsystems/LoaderSubsystem.h"
+#include "subsystems/DriveTrainSubsystem.h"
+
 /**
  * An example command.
  *
@@ -15,10 +16,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class LoadIntakeCommand
-    : public frc2::CommandHelper<frc2::CommandBase, LoadIntakeCommand> {
+class SwitchCaseTop
+    : public frc2::CommandHelper<frc2::CommandBase, SwitchCaseTop> {
  public:
-  LoadIntakeCommand(LoaderSubsystem* pLoader, double speed = 1.0);
+  SwitchCaseTop(DriveTrainSubsystem* pDrive);
 
   void Initialize() override;
 
@@ -28,8 +29,7 @@ class LoadIntakeCommand
 
   bool IsFinished() override;
 
- private:
-  LoaderSubsystem* m_pLoader;
-
-  double m_speed = 1.0;
+  protected:
+  DriveTrainSubsystem* m_pDrive;
+  bool m_isFinished = false;
 };

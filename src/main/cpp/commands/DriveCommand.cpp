@@ -28,8 +28,8 @@ void DriveCommand::Execute()
   {
     //Tank Drive
     case DriveTrainSubsystem::TANK_STYLE:
-      m_left = m_pController->GetLeftY();
-      m_right = m_pController->GetRightY();
+      m_left = -m_pController->GetLeftY();
+      m_right = -m_pController->GetRightY();
       CheckDeadZone(m_left);
       CheckDeadZone(m_right);
       m_pDriveTrain->MoveTank(m_left * m_scale, m_right * m_scale);
@@ -46,7 +46,7 @@ void DriveCommand::Execute()
 
     //RC Drive
     case DriveTrainSubsystem::RC_STYLE:
-      m_left = m_pController->GetLeftY();
+      m_left = -m_pController->GetLeftY();
       m_right = m_pController->GetRightX();
       CheckDeadZone(m_left);
       CheckDeadZone(m_right);

@@ -27,15 +27,11 @@ class ShooterSubsystem : public frc2::SubsystemBase {
   // Shooter Functions
   void ShootMotor(double speed);
 
-  // Turret Functions
-  void MoveTurret(double speed);
-
  private:
  #ifndef NOHW
   frc::Encoder m_shooterEncoder{DIO_SHOOTER_ENCODER_A, DIO_SHOOTER_ENCODER_B};
   frc::Spark m_shooterMotor{PWM_SHOOTER};
 
-  frc::Spark m_turretMotor{PWM_TURRET};
   #endif
   // Halleffect
 

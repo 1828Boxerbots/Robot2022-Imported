@@ -9,6 +9,14 @@
 
 #include "subsystems/DriveTrainSubsystem.h"
 #include "commands/DriveCommand.h"
+#include "commands/LoadInnerCommand.h"
+#include "commands/LoadIntakeCommand.h"
+
+#include "commands/AutoTestCMD/SwitchCaseTop.h"
+#include "commands/AutoTestCMD/SwitchCaseMid.h"
+#include "commands/AutoTestCMD/SwitchCaseBottom.h"
+
+#include <frc/DigitalInput.h>
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -21,16 +29,32 @@ class RobotContainer {
  public:
   RobotContainer();
 
+  void Init();
+
   frc2::Command* GetAutonomousCommand();
   void RunDrive();
+  int GetDPDT();
+  void EncoderValues();
 
  private:
   // The robot's subsystems and commands are defined here...
   DriveTrainSubsystem m_driveTrain;
-  DriveCommand* m_pDriveCommand;
+  DriveCommand* m_pDriveCommand = nullptr;
+  LoadInnerCommand* m_pLoadInner = nullptr;
+  LoadInnerCommand* m_pStopInnter = nullptr;
+  LoadIntakeCommand* m_pLoadIntake = nullptr;
+  LoadIntakeCommand* m_pStopIntale = nullptr;
+
+  // AUTO TEST CMD
+  SwitchCaseTop* m_pSwitchTop = nullptr;
+  SwitchCaseMid* m_pSwitchMid = nullptr;
+  SwitchCaseBottom* m_pSwitchBottom = nullptr;
 
   frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
   frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};
+
+  frc::DigitalInput m_topSwitch{DIO_SWITCH_TOP};
+  frc::DigitalInput m_bottomSwitch{DIO_SWITCH_BOTTOM};
 
   void ConfigureButtonBindings();
   //Buttons

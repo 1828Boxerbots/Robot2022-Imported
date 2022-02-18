@@ -7,27 +7,25 @@
 //#define NOHW
 
 //PWM
-constexpr int PWM_LEFT                  = 0;
-constexpr int PWM_RIGHT                 = 1;
-constexpr int PWM_ARM_SERVO             = 2; // May be a motor
+constexpr int PWM_LEFT                  = 2;
+constexpr int PWM_RIGHT                 = 3;
 constexpr int PWM_LOADER_INTAKE         = 3;
 constexpr int PWM_LOADER_INNER          = 4; 
 constexpr int PWM_SHOOTER               = 5;
-constexpr int PWM_CLIMB_BACK            = 6;
-constexpr int PWM_CLIMB_FRONT           = 7;
-constexpr int PWM_TURRET                = 8;
+constexpr int PWM_CLIMB                 = 6;
 
 //DIO
-constexpr int DIO_DRIVE_LEFT_A          = 0;
-constexpr int DIO_DRIVE_LEFT_B          = 1;
-constexpr int DIO_DRIVE_RIGHT_A         = 2;
-constexpr int DIO_DRIVE_RIGHT_B         = 3;
+constexpr int DIO_DRIVE_LEFT_A          = 8;
+constexpr int DIO_DRIVE_LEFT_B          = 9;
+constexpr int DIO_DRIVE_RIGHT_A         = 0;
+constexpr int DIO_DRIVE_RIGHT_B         = 1;
 constexpr int DIO_SHOOTER_ENCODER_A     = 4;
 constexpr int DIO_SHOOTER_ENCODER_B     = 5;
-constexpr int DIO_CLIMBFRONT_ENCODER_A  = 6;
-constexpr int DIO_CLIMBFRONT_ENCODER_B  = 7;
-constexpr int DIO_CLIMBBACK_ENCODER_A   = 8;
-constexpr int DIO_CLIMBBACK_ENCODER_B   = 9;
+constexpr int DIO_CLIMB_ENCODER_A       = 6;
+constexpr int DIO_CLIMB_ENCODER_B       = 7;
+
+constexpr int DIO_SWITCH_TOP            = 3;
+constexpr int DIO_SWITCH_BOTTOM         = 2;
 
 constexpr int USB_CONTROLLER_ONE        = 0;
 constexpr int USB_CONTROLLER_TWO        = 1;

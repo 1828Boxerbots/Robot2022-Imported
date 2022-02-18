@@ -21,22 +21,17 @@ class ClimbSubsystem : public frc2::SubsystemBase {
 
   // ENCODER FUNCTIONS
   void ResetEncoder();
-  double GetFrontDistance();
-  double GetBackDistance();
-  int GetFrontRaw();
-  int GetBackRaw();
+  double GetDistance();
+  int GetRaw();
 
   // MOTOR FUNCTIONS
-  void FrontClimb(double speed);
-  void BackClimb(double speed);
+  void ClimbMotor(double speed);
 
  private:
  #ifndef NOHW
-  frc::Spark m_front{PWM_CLIMB_FRONT};
-  frc::Spark m_back{PWM_CLIMB_BACK};
+  frc::Spark m_climb{PWM_CLIMB};
 
-  frc::Encoder m_encoderFront{DIO_CLIMBFRONT_ENCODER_A, DIO_CLIMBFRONT_ENCODER_B};
-  frc::Encoder m_encoderBack{DIO_CLIMBBACK_ENCODER_A, DIO_CLIMBBACK_ENCODER_B};
+  frc::Encoder m_encoderFront{DIO_CLIMB_ENCODER_A, DIO_CLIMB_ENCODER_B};
  #endif
 
   double m_pulseDisFront = 0.1;

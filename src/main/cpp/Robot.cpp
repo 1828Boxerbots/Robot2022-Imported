@@ -7,7 +7,10 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandScheduler.h>
 
-void Robot::RobotInit() {}
+void Robot::RobotInit() 
+{
+  m_container.Init();
+}
 
 /**
  * This function is called every robot packet, no matter the mode. Use
@@ -60,7 +63,10 @@ void Robot::TeleopInit() {
 /**
  * This function is called periodically during operator control.
  */
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() 
+{
+  m_container.EncoderValues();
+}
 
 /**
  * This function is called periodically during test mode.

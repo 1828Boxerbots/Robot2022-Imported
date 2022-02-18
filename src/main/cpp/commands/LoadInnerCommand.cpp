@@ -4,11 +4,11 @@
 
 #include "commands/LoadInnerCommand.h"
 
-LoadInnerCommand::LoadInnerCommand(LoaderSubsystem* pLoader) 
+LoadInnerCommand::LoadInnerCommand(LoaderSubsystem* pLoader, double speed) 
 {
   // Use addRequirements() here to declare subsystem dependencies.
   m_pLoader = pLoader;
-
+  m_speed = speed;
   AddRequirements(pLoader);
 }
 

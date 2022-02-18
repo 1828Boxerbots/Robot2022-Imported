@@ -4,11 +4,11 @@
 
 #include "commands/LoadIntakeCommand.h"
 
-LoadIntakeCommand::LoadIntakeCommand(LoaderSubsystem* pLoader) 
+LoadIntakeCommand::LoadIntakeCommand(LoaderSubsystem* pLoader, double speed) 
 {
   // Use addRequirements() here to declare subsystem dependencies.
   m_pLoader = pLoader;
-
+  m_speed = speed;
   AddRequirements(pLoader);
 }
 

@@ -19,7 +19,7 @@
 class LoadInnerCommand
     : public frc2::CommandHelper<frc2::CommandBase, LoadInnerCommand> {
  public:
-  LoadInnerCommand(LoaderSubsystem* pLoader);
+  LoadInnerCommand(LoaderSubsystem* pLoader, double speed = 1.0);
 
   void Initialize() override;
 
