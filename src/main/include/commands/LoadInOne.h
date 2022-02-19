@@ -21,4 +21,5 @@ class LoadInOne : public frc2::CommandHelper<frc2::CommandBase, LoadInOne> {
 
   LoaderSubsystem* m_pLoader=nullptr;
 double m_sped;
+bool m_isFinished=false;
 };
