@@ -33,7 +33,7 @@ void LoaderSubsystem::InnerLoader(double speed)
 bool LoaderSubsystem::IsPhotoActive()
 {
 #ifndef NOHW
-    return true;
+    return m_photogate.Get();
 #else
     return false;
 #endif
