@@ -8,6 +8,7 @@
 #include <frc/motorcontrol/Victor.h>
 
 #include "Constants.h"
+#include <frc/DigitalInput.h>
 
 class LoaderSubsystem : public frc2::SubsystemBase {
  public:
@@ -34,6 +35,8 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   frc::Victor m_innerUp{PWM_LOADER_INTAKE_UPPER};
 
   frc::Victor m_arm{PWM_ARM};
+
+  frc::DigitalInput m_photogate{DIO_PHOTOGATE};
  #endif
   // Photogate
 
