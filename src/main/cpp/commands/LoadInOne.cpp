@@ -4,11 +4,11 @@
 
 #include "commands/LoadInOne.h"
 
-LoadInOne::LoadInOne( LoaderSubsystem *pLOAD, double sped)
- {
-m_sped = sped;
+LoadInOne::LoadInOne( LoaderSubsystem *pLoader, double speed)
+{
+  m_speed = speed;
   // Use AddRequirements() here to declare subsystem dependencies.
-  m_pLoader = pLOAD;
+  m_pLoader = pLoader;
   AddRequirements(m_pLoader);
 }
 
@@ -18,8 +18,8 @@ void LoadInOne::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void LoadInOne::Execute() 
 {
-  m_pLoader->InnerLoader(m_sped);
-  m_pLoader->IntakeLoader(m_sped);
+  m_pLoader->InnerLoader(m_speed);
+  m_pLoader->IntakeLoader(m_speed);
 }
 
 // Called once the command ends or is interrupted.

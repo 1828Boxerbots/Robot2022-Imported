@@ -7,7 +7,7 @@
 class LoadInOne : public frc2::CommandHelper<frc2::CommandBase, LoadInOne> {
  public:
 
-  LoadInOne( LoaderSubsystem* pLOAD,double sped);
+  LoadInOne( LoaderSubsystem* pLoader,double speed);
 
   void Initialize() override;
 
@@ -20,5 +20,5 @@ class LoadInOne : public frc2::CommandHelper<frc2::CommandBase, LoadInOne> {
  private: 
 
   LoaderSubsystem* m_pLoader=nullptr;
-double m_sped;
+  double m_speed;
 };
