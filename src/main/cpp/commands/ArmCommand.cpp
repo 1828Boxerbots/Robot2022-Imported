@@ -2,30 +2,29 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/LoadInOne.h"
+#include "commands/ArmCommand.h"
 
-LoadInOne::LoadInOne( LoaderSubsystem *pLoader, double speed)
+ArmCommand::ArmCommand(LoaderSubsystem *pLoader, double speed)
 {
-  m_speed = speed;
-  // Use AddRequirements() here to declare subsystem dependencies.
+  // Use addRequirements() here to declare subsystem dependencies.
   m_pLoader = pLoader;
-  AddRequirements(m_pLoader);
+  m_speed = speed;
+  AddRequirements(pLoader);
 }
 
 // Called when the command is initially scheduled.
-void LoadInOne::Initialize() {}
+void ArmCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void LoadInOne::Execute() 
+void ArmCommand::Execute() 
 {
-  m_pLoader->InnerLoader(m_speed);
-  m_pLoader->IntakeLoader(m_speed);
+  m_pLoader->MoveArm(m_speed);
 }
 
 // Called once the command ends or is interrupted.
-void LoadInOne::End(bool interrupted) {}
+void ArmCommand::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool LoadInOne::IsFinished() {
-  return m_isFinished;
+bool ArmCommand::IsFinished() {
+  return false;
 }

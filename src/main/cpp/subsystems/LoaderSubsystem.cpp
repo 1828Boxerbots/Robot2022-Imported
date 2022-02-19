@@ -38,3 +38,12 @@ bool LoaderSubsystem::IsPhotoActive()
     return false;
 #endif
 }
+
+// ARM FUNCTIONS
+
+void LoaderSubsystem::MoveArm(double speed)
+{
+#ifndef NOHW
+    m_arm.Set(speed);
+#endif
+}

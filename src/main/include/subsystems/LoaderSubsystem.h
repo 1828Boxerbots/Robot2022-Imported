@@ -24,11 +24,16 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   // Photogate Functions
   bool IsPhotoActive();
 
+  //Arm Functions
+  void MoveArm(double speed);
+
  private:
  #ifndef NOHW
   frc::Victor m_intake{PWM_LOADER_INTAKE};
   frc::Victor m_inner{PWM_LOADER_INNER};
   frc::Victor m_innerUp{PWM_LOADER_INTAKE_UPPER};
+
+  frc::Victor m_arm{PWM_ARM};
  #endif
   // Photogate
 
