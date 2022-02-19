@@ -14,6 +14,7 @@ constexpr int PWM_LOADER_INTAKE_UPPER   = 6; //temperary
 constexpr int PWM_LOADER_INNER          = 4; 
 constexpr int PWM_SHOOTER               = 5;
 constexpr int PWM_CLIMB                 = 6;
+constexpr int PWM_ARM                   = 7;
 
 //DIO
 constexpr int DIO_DRIVE_LEFT_A          = 2;
