@@ -26,5 +26,5 @@ void LoadInnerCommand::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool LoadInnerCommand::IsFinished() {
-  return false;
+  return m_isFinished;
 }

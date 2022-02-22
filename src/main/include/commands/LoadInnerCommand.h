@@ -32,4 +32,6 @@ class LoadInnerCommand
   LoaderSubsystem* m_pLoader;
 
   double m_speed = 1.0;
+
+  bool m_isFinished = false;
 };
