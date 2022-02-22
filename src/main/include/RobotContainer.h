@@ -4,14 +4,18 @@
 
 #pragma once
 
+#include <frc2/command/button/Button.h>
 #include <frc2/command/Command.h>
 #include <frc/XboxController.h>
+
+#include "commands/ShooterCommand.h"
+#include "commands/LoadInOne.h"
 
 #include "subsystems/DriveTrainSubsystem.h"
 #include "commands/DriveCommand.h"
 #include "commands/LoadInnerCommand.h"
 #include "commands/LoadIntakeCommand.h"
-
+#include "subsystems/LoaderSubsystem.h"
 #include "commands/AutoTestCMD/SwitchCaseTop.h"
 #include "commands/AutoTestCMD/SwitchCaseMid.h"
 #include "commands/AutoTestCMD/SwitchCaseBottom.h"
@@ -31,7 +35,7 @@ class RobotContainer {
 
   void Init();
 
-  frc2::Command* GetAutonomousCommand();
+  frc2::Command* GetAutonomousCommand(); 
   void RunDrive();
   int GetDPDT();
   void EncoderValues();
@@ -62,4 +66,11 @@ class RobotContainer {
   void SetButtonB();
   void SetButtonX();
   void SetButtonY();
+  LoaderSubsystem* m_pLoadItUp=nullptr;
+  frc2::Button m_yButton {[this] {return m_controllerOne.GetYButton();}};
+  frc2::Button m_aButton {[this] {return m_controllerOne.GetAButton();}};
+  frc2::Button m_xButton {[this] {return m_controllerOne.GetXButton();}};
+ LoadInOne *m_ploader                = nullptr;
+ LoadInOne *m_pEject                 = nullptr;
+ LoadInOne *m_pNumberOneCallAFullStop= nullptr;
 };

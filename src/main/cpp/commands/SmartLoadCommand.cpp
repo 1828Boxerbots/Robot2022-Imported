@@ -2,29 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/ArmCommand.h"
+#include "commands/SmartLoadCommand.h"
 
-ArmCommand::ArmCommand(LoaderSubsystem *pLoader, double speed)
-{
+SmartLoadCommand::SmartLoadCommand() {
   // Use addRequirements() here to declare subsystem dependencies.
-  m_pLoader = pLoader;
-  m_speed = speed;
-  AddRequirements(pLoader); 
 }
 
 // Called when the command is initially scheduled.
-void ArmCommand::Initialize() {}
+void SmartLoadCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ArmCommand::Execute() 
-{
-  m_pLoader->MoveArm(m_speed);
-}
+void SmartLoadCommand::Execute() {}
 
 // Called once the command ends or is interrupted.
-void ArmCommand::End(bool interrupted) {}
+void SmartLoadCommand::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool ArmCommand::IsFinished() {
-  return m_isFinished;
+bool SmartLoadCommand::IsFinished() {
+  return false;
 }
