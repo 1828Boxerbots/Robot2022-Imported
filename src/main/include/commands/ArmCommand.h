@@ -33,4 +33,6 @@ class ArmCommand
   LoaderSubsystem *m_pLoader;
 
   double m_speed = 0;
+
+  bool m_isFinished = false;
 };

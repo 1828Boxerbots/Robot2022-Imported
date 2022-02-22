@@ -26,5 +26,5 @@ void LoadIntakeCommand::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool LoadIntakeCommand::IsFinished() {
-  return false;
+  return m_isFinished;
 }

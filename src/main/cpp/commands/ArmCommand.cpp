@@ -26,5 +26,5 @@ void ArmCommand::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool ArmCommand::IsFinished() {
-  return false;
+  return m_isFinished;
 }
