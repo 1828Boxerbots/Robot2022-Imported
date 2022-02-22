@@ -9,7 +9,7 @@ ArmCommand::ArmCommand(LoaderSubsystem *pLoader, double speed)
   // Use addRequirements() here to declare subsystem dependencies.
   m_pLoader = pLoader;
   m_speed = speed;
-  AddRequirements(pLoader);
+  AddRequirements(pLoader); 
 }
 
 // Called when the command is initially scheduled.
