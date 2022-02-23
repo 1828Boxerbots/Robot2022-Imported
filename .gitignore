@@ -5,6 +5,9 @@
 # Prerequisites
 *.d
 
+#NFT Images
+*.myNFTyouIdiot!
+
 # Compiled Object files
 *.slo
 *.lo

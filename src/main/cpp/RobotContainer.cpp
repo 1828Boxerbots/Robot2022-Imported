@@ -1,7 +1,6 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
 #include "RobotContainer.h"
 
 RobotContainer::RobotContainer() 
@@ -12,7 +11,9 @@ RobotContainer::RobotContainer()
   m_pSwitchTop = new SwitchCaseTop(&m_driveTrain);
   m_pSwitchMid = new SwitchCaseMid(&m_driveTrain);
   m_pSwitchBottom = new SwitchCaseBottom(&m_driveTrain);
-
+  m_ploader = new LoadInOne(&m_pLoadItUp,1);
+  m_pNumberOneCallAFullStop= new LoadInOne(&m_pLoadItUp,0);
+  m_pEject = new LoadInOne(&m_pLoadItUp,-1);
   // Configure the button bindings
   ConfigureButtonBindings();
 }
@@ -25,16 +26,22 @@ void RobotContainer::Init()
 void RobotContainer::ConfigureButtonBindings() 
 {
   // Configure your button bindings here
+  SetButtonY();
+  SetButtonA();
+}
+
+void RobotContainer::SetButtonY()
+{
+//Shoot, because the shooter is at the peak of the robot.
+  m_yButton.WhenHeld(m_pEject);
+  m_yButton.WhenReleased(m_pNumberOneCallAFullStop);
 }
 
 void RobotContainer::SetButtonA()
 {
-  
-}
-
-void RobotContainer::SetButtonB()
-{
-
+  //Load, Because the loader is near the drive train on the bottom.
+  m_aButton.WhenHeld(m_ploader);
+  m_aButton.WhenReleased(m_pNumberOneCallAFullStop);
 }
 
 void RobotContainer::RunDrive()
@@ -45,8 +52,10 @@ void RobotContainer::RunDrive()
 
 int RobotContainer::GetDPDT()
 {
-  bool isTop = !m_topSwitch.Get();
-  bool isBottom = !m_bottomSwitch.Get();
+  // bool isTop = !m_topSwitch.Get();
+  // bool isBottom = !m_bottomSwitch.Get();
+  bool isTop = false;
+  bool isBottom = false;
   frc::SmartDashboard::PutBoolean("TopSwitch", isTop);
   frc::SmartDashboard::PutBoolean("BottomSwitch", isBottom);
   

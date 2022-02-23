@@ -96,6 +96,7 @@ units::degree_t DriveTrainSubsystem::GetADIAngle()
 #ifndef NOHW
     frc::SmartDashboard::PutNumber("ADI Angle", (double)m_adi.GetAngle());
     return m_adi.GetAngle();
+    return 0_deg;
 #else
     return 0;
 #endif
@@ -105,6 +106,7 @@ units::degree_t DriveTrainSubsystem::GetAngleX()
 {
 #ifndef NOHW
     return m_adi.GetGyroAngleX();
+    return 0_deg;
 #else
     return 0;
 #endif
@@ -114,6 +116,7 @@ units::degree_t DriveTrainSubsystem::GetAngleY()
 {
 #ifndef NOHW
     return m_adi.GetGyroAngleY();
+    return 0_deg;
 #else
     return 0;
 #endif
@@ -123,6 +126,7 @@ units::degree_t DriveTrainSubsystem::GetAngleZ()
 {
 #ifndef NOHW
     return m_adi.GetGyroAngleZ();
+    return 0_deg;
 #else
     return 0;
 #endif

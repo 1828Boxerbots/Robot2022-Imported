@@ -6,13 +6,13 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 #include "subsystems/ShooterSubsystem.h"
-/**
- * An example command.
- *
- * Note that this extends CommandHelper, rather extending CommandBase
- * directly; this is crucially important, or else the decorator functions in
- * Command will *not* work!
- */
+/********************************************************************************
+ * An example command.                                                          *
+ *                                                                              *
+ * Note that this extends CommandHelper, rather extending CommandBase           *
+ * directly; this is crucially important, or else the decorator functions in    *
+ * Command will *not* work!                                                     *
+ ********************************************************************************/
 class ShooterCommand
     : public frc2::CommandHelper<frc2::CommandBase, ShooterCommand> {
  public:

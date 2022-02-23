@@ -6,9 +6,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
 #include "subsystems/LoaderSubsystem.h"
-
 /**
  * An example command.
  *
@@ -16,10 +14,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class ArmCommand
-    : public frc2::CommandHelper<frc2::CommandBase, ArmCommand> {
+class SmartLoadCommand
+    : public frc2::CommandHelper<frc2::CommandBase, SmartLoadCommand> {
  public:
-  ArmCommand(LoaderSubsystem *pLoader, double speed);
+  SmartLoadCommand();
 
   void Initialize() override;
 
@@ -28,11 +26,5 @@ class ArmCommand
   void End(bool interrupted) override;
 
   bool IsFinished() override;
-
-  protected:
-  LoaderSubsystem *m_pLoader;
-
-  double m_speed = 0;
-
-  bool m_isFinished = false;
+private:
 };
