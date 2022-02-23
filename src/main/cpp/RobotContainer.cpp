@@ -14,6 +14,11 @@ RobotContainer::RobotContainer()
   m_ploader = new LoadInOne(&m_pLoadItUp,1);
   m_pNumberOneCallAFullStop= new LoadInOne(&m_pLoadItUp,0);
   m_pEject = new LoadInOne(&m_pLoadItUp,-1);
+  m_pLoadInner = new LoadInnerCommand(&m_pLoadItUp, 1.0);
+  m_pLoadIntake = new LoadIntakeCommand(&m_pLoadItUp, 1.0);
+  m_ploadToPhoto = new LoadToPhotoCommand(&m_pLoadItUp, 1.0);
+  m_pStopIntale = new LoadIntakeCommand(&m_pLoadItUp, 0.0);
+  m_pStopInnter = new LoadInnerCommand(&m_pLoadItUp, 0.0);
   // Configure the button bindings
   ConfigureButtonBindings();
 }
@@ -28,7 +33,28 @@ void RobotContainer::ConfigureButtonBindings()
   // Configure your button bindings here
   SetButtonY();
   SetButtonA();
+  SetButtonX();
+  SetButtonB();
+  SetLeftBumper();
 }
+
+void RobotContainer::SetButtonB()
+{
+   m_bButton.WhenHeld(m_pLoadIntake);
+  m_bButton.WhenReleased(m_pStopIntale);
+}
+
+void RobotContainer::SetButtonX()
+{
+    m_xButton.WhenHeld(m_pLoadInner);
+    m_xButton.WhenReleased(m_pStopInnter);
+}
+
+void RobotContainer::SetLeftBumper()
+{
+  m_leftBumper.WhenHeld(m_ploadToPhoto);
+}
+
 
 void RobotContainer::SetButtonY()
 {

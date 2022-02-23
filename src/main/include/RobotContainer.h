@@ -12,6 +12,7 @@
 #include "commands/LoadInOne.h"
 
 #include "subsystems/DriveTrainSubsystem.h"
+#include "commands/LoadToPhotoCommand.h"
 #include "commands/DriveCommand.h"
 #include "commands/LoadInnerCommand.h"
 #include "commands/LoadIntakeCommand.h"
@@ -43,11 +44,13 @@ class RobotContainer {
  private:
     // The robot's subsystems and commands are defined here...
     DriveTrainSubsystem m_driveTrain;
+    LoadToPhotoCommand *m_ploadToPhoto = nullptr;
     DriveCommand* m_pDriveCommand = nullptr;
     LoadInnerCommand* m_pLoadInner = nullptr;
     LoadInnerCommand* m_pStopInnter = nullptr;
     LoadIntakeCommand* m_pLoadIntake = nullptr;
     LoadIntakeCommand* m_pStopIntale = nullptr;
+
 
     // AUTO TEST CMD
     SwitchCaseTop* m_pSwitchTop = nullptr;
@@ -66,12 +69,14 @@ class RobotContainer {
     void SetButtonB();
     void SetButtonX();
     void SetButtonY();
+    void SetLeftBumper();
     LoaderSubsystem m_pLoadItUp;
 
     frc2::Button m_aButton {[this] {return m_controllerOne.GetAButton();}};
     frc2::Button m_bButton {[this] {return m_controllerOne.GetBButton();}};
     frc2::Button m_xButton {[this] {return m_controllerOne.GetXButton();}};
     frc2::Button m_yButton {[this] {return m_controllerOne.GetYButton();}};
+    frc2::Button m_leftBumper {[this] {return m_controllerOne.GetLeftBumper();}};
     frc2::Button m_rightTrigger {[this] {return m_controllerOne.GetRightTriggerAxis();}};
     frc2::Button m_leftTrigger {[this] {return m_controllerOne.GetLeftTriggerAxis();}};
     
