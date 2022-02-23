@@ -41,36 +41,41 @@ class RobotContainer {
   void EncoderValues();
 
  private:
-  // The robot's subsystems and commands are defined here...
-  DriveTrainSubsystem m_driveTrain;
-  DriveCommand* m_pDriveCommand = nullptr;
-  LoadInnerCommand* m_pLoadInner = nullptr;
-  LoadInnerCommand* m_pStopInnter = nullptr;
-  LoadIntakeCommand* m_pLoadIntake = nullptr;
-  LoadIntakeCommand* m_pStopIntale = nullptr;
+    // The robot's subsystems and commands are defined here...
+    DriveTrainSubsystem m_driveTrain;
+    DriveCommand* m_pDriveCommand = nullptr;
+    LoadInnerCommand* m_pLoadInner = nullptr;
+    LoadInnerCommand* m_pStopInnter = nullptr;
+    LoadIntakeCommand* m_pLoadIntake = nullptr;
+    LoadIntakeCommand* m_pStopIntale = nullptr;
 
-  // AUTO TEST CMD
-  SwitchCaseTop* m_pSwitchTop = nullptr;
-  SwitchCaseMid* m_pSwitchMid = nullptr;
-  SwitchCaseBottom* m_pSwitchBottom = nullptr;
+    // AUTO TEST CMD
+    SwitchCaseTop* m_pSwitchTop = nullptr;
+    SwitchCaseMid* m_pSwitchMid = nullptr;
+    SwitchCaseBottom* m_pSwitchBottom = nullptr;
 
-  frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
-  frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};
+    frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
+    frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};
 
-  frc::DigitalInput m_topSwitch{DIO_DPDT_TOP};
-  frc::DigitalInput m_bottomSwitch{DIO_DPDT_BOTTOM};
+    // frc::DigitalInput m_topSwitch{DIO_DPDT_TOP};
+    // frc::DigitalInput m_bottomSwitch{DIO_DPDT_BOTTOM};
 
-  void ConfigureButtonBindings();
-  //Buttons
-  void SetButtonA();
-  void SetButtonB();
-  void SetButtonX();
-  void SetButtonY();
-  LoaderSubsystem* m_pLoadItUp=nullptr;
-  frc2::Button m_yButton {[this] {return m_controllerOne.GetYButton();}};
-  frc2::Button m_aButton {[this] {return m_controllerOne.GetAButton();}};
-  frc2::Button m_xButton {[this] {return m_controllerOne.GetXButton();}};
- LoadInOne *m_ploader                = nullptr;
- LoadInOne *m_pEject                 = nullptr;
- LoadInOne *m_pNumberOneCallAFullStop= nullptr;
+    void ConfigureButtonBindings();
+    //Buttons
+    void SetButtonA();
+    void SetButtonB();
+    void SetButtonX();
+    void SetButtonY();
+    LoaderSubsystem m_pLoadItUp;
+
+    frc2::Button m_aButton {[this] {return m_controllerOne.GetAButton();}};
+    frc2::Button m_bButton {[this] {return m_controllerOne.GetBButton();}};
+    frc2::Button m_xButton {[this] {return m_controllerOne.GetXButton();}};
+    frc2::Button m_yButton {[this] {return m_controllerOne.GetYButton();}};
+    frc2::Button m_rightTrigger {[this] {return m_controllerOne.GetRightTriggerAxis();}};
+    frc2::Button m_leftTrigger {[this] {return m_controllerOne.GetLeftTriggerAxis();}};
+    
+    LoadInOne *m_ploader                = nullptr;
+    LoadInOne *m_pEject                 = nullptr;
+    LoadInOne *m_pNumberOneCallAFullStop= nullptr;
 };

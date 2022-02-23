@@ -11,10 +11,9 @@ RobotContainer::RobotContainer()
   m_pSwitchTop = new SwitchCaseTop(&m_driveTrain);
   m_pSwitchMid = new SwitchCaseMid(&m_driveTrain);
   m_pSwitchBottom = new SwitchCaseBottom(&m_driveTrain);
-  m_pLoadItUp = new LoaderSubsystem;
-  m_ploader = new LoadInOne(m_pLoadItUp,1);
-  m_pNumberOneCallAFullStop= new LoadInOne(m_pLoadItUp,0);
-  m_pEject = new LoadInOne(m_pLoadItUp,-1);
+  m_ploader = new LoadInOne(&m_pLoadItUp,1);
+  m_pNumberOneCallAFullStop= new LoadInOne(&m_pLoadItUp,0);
+  m_pEject = new LoadInOne(&m_pLoadItUp,-1);
   // Configure the button bindings
   ConfigureButtonBindings();
 }
@@ -53,8 +52,10 @@ void RobotContainer::RunDrive()
 
 int RobotContainer::GetDPDT()
 {
-  bool isTop = !m_topSwitch.Get();
-  bool isBottom = !m_bottomSwitch.Get();
+  // bool isTop = !m_topSwitch.Get();
+  // bool isBottom = !m_bottomSwitch.Get();
+  bool isTop = false;
+  bool isBottom = false;
   frc::SmartDashboard::PutBoolean("TopSwitch", isTop);
   frc::SmartDashboard::PutBoolean("BottomSwitch", isBottom);
   
