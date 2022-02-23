@@ -43,20 +43,21 @@ class RobotContainer {
 
  private:
     // The robot's subsystems and commands are defined here...
-    DriveTrainSubsystem m_driveTrain;
-    LoadToPhotoCommand *m_ploadToPhoto = nullptr;
-    DriveCommand* m_pDriveCommand = nullptr;
-    LoadInnerCommand* m_pLoadInner = nullptr;
-    LoadInnerCommand* m_pStopInnter = nullptr;
-    LoadIntakeCommand* m_pLoadIntake = nullptr;
-    LoadIntakeCommand* m_pStopIntale = nullptr;
-
-
-    // AUTO TEST CMD
-    SwitchCaseTop* m_pSwitchTop = nullptr;
-    SwitchCaseMid* m_pSwitchMid = nullptr;
-    SwitchCaseBottom* m_pSwitchBottom = nullptr;
-
+    DriveTrainSubsystem m_driveTrain;               
+    ShooterSubsystem m_Shooter;                     
+    LoadToPhotoCommand *m_ploadToPhoto    =nullptr;
+    DriveCommand* m_pDriveCommand         =nullptr;
+    LoadInnerCommand* m_pLoadInner        =nullptr;
+    LoadInnerCommand* m_pStopInnter       =nullptr;
+    LoadIntakeCommand* m_pLoadIntake      =nullptr;
+    LoadIntakeCommand* m_pStopIntale      =nullptr;
+    ShooterCommand* m_pShoot              =nullptr;
+    ShooterCommand* m_pStopShoot          =nullptr;
+    // AUTO TEST CMD                                
+    SwitchCaseTop* m_pSwitchTop = nullptr;          
+    SwitchCaseMid* m_pSwitchMid = nullptr;           
+    SwitchCaseBottom* m_pSwitchBottom = nullptr;       
+                                                            
     frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
     frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};
 
@@ -70,6 +71,8 @@ class RobotContainer {
     void SetButtonX();
     void SetButtonY();
     void SetLeftBumper();
+    void SetRightTrigger();
+    void SetLeftTrigger();
     LoaderSubsystem m_pLoadItUp;
 
     frc2::Button m_aButton {[this] {return m_controllerOne.GetAButton();}};

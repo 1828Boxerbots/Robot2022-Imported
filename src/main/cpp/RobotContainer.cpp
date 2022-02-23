@@ -19,6 +19,8 @@ RobotContainer::RobotContainer()
   m_ploadToPhoto = new LoadToPhotoCommand(&m_pLoadItUp, 1.0);
   m_pStopIntale = new LoadIntakeCommand(&m_pLoadItUp, 0.0);
   m_pStopInnter = new LoadInnerCommand(&m_pLoadItUp, 0.0);
+  m_pShoot = new ShooterCommand(&m_Shooter, -1.0);
+  m_pStopShoot = new ShooterCommand(&m_Shooter, 0.0);
   // Configure the button bindings
   ConfigureButtonBindings();
 }
@@ -36,20 +38,25 @@ void RobotContainer::ConfigureButtonBindings()
   SetButtonX();
   SetButtonB();
   SetLeftBumper();
+  SetRightTrigger();
 }
 
 void RobotContainer::SetButtonB()
 {
-   m_bButton.WhenHeld(m_pLoadIntake);
+  m_bButton.WhenHeld(m_pLoadIntake);
   m_bButton.WhenReleased(m_pStopIntale);
 }
 
 void RobotContainer::SetButtonX()
 {
-    m_xButton.WhenHeld(m_pLoadInner);
-    m_xButton.WhenReleased(m_pStopInnter);
+  m_xButton.WhenHeld(m_pLoadInner);
+  m_xButton.WhenReleased(m_pStopInnter);
 }
-
+void RobotContainer::SetRightTrigger()
+{
+  m_rightTrigger.WhenHeld(m_pShoot);
+  m_rightTrigger.WhenReleased(m_pStopShoot);
+}
 void RobotContainer::SetLeftBumper()
 {
   m_leftBumper.WhenHeld(m_ploadToPhoto);
