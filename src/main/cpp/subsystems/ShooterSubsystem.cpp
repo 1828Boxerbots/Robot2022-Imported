@@ -17,12 +17,7 @@
 
 #include "subsystems/ShooterSubsystem.h"
 
-ShooterSubsystem::ShooterSubsystem()
-{
-#ifndef NOHW
-    m_shooterEncoder.SetDistancePerPulse(m_pulseDisShoot);
-#endif
-}
+ShooterSubsystem::ShooterSubsystem(){}
 
 // This method will be called once per scheduler run
 void ShooterSubsystem::Periodic() {}
@@ -31,6 +26,7 @@ void ShooterSubsystem::Periodic() {}
 void ShooterSubsystem::ResetEncoder()
 {
 #ifndef NOHW
+    m_shooterEncoder.SetDistancePerPulse(m_pulseDisShoot);
     m_shooterEncoder.Reset();
 #endif
 }
