@@ -4,25 +4,24 @@
 
 #include "subsystems/DriveTrainSubsystem.h"
 
-DriveTrainSubsystem::DriveTrainSubsystem()
-{
-#ifndef NOHW
-    m_leftEncoder.SetDistancePerPulse(m_pulseDisLeft);
-    m_rightEncoder.SetDistancePerPulse(m_pulseDisRight);
-#endif
-}
+DriveTrainSubsystem::DriveTrainSubsystem(){}
 
 // This method will be called once per scheduler run
 void DriveTrainSubsystem::Periodic() {}
 
 void DriveTrainSubsystem::Init()
 {
+    #ifndef NOHW
     m_rightMotor.SetInverted(true);
     m_leftEncoder.Reset();
     m_rightEncoder.Reset();
     m_leftEncoder.SetReverseDirection(true);
     m_rightEncoder.SetReverseDirection(true);
     m_adi.Reset();
+    
+        m_leftEncoder.SetDistancePerPulse(m_pulseDisLeft);
+        m_rightEncoder.SetDistancePerPulse(m_pulseDisRight);
+    #endif
 }
 
 // MOTOR FUNCTIONS

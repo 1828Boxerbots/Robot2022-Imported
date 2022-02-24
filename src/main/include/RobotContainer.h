@@ -75,6 +75,8 @@ class RobotContainer
     void SetButtonX();
     void SetButtonY();
     void SetLeftBumper();
+    void SetRightTrigger();
+    void SetLeftTrigger();
 
     frc2::Button m_aButton {[this] {return m_controllerOne.GetAButton();}};
     frc2::Button m_bButton {[this] {return m_controllerOne.GetBButton();}};

@@ -41,6 +41,7 @@ void RobotContainer::ConfigureButtonBindings()
   SetButtonX();
   SetButtonB();
   SetLeftBumper();
+  SetRightTrigger();
 }
 
 void RobotContainer::SetButtonB()
@@ -51,10 +52,12 @@ void RobotContainer::SetButtonB()
 
 void RobotContainer::SetButtonX()
 {
-    m_xButton.WhenHeld(m_ploadInnerCmd);
-    m_xButton.WhenReleased(m_pstopInnerCmd);
+  m_xButton.WhenHeld(m_ploadInnerCmd);
+  m_xButton.WhenReleased(m_pstopInnerCmd);
 }
-
+void RobotContainer::SetRightTrigger()
+{
+}
 void RobotContainer::SetLeftBumper()
 {
     m_leftBumper.WhenHeld(m_ploadToPhotoCmd);
