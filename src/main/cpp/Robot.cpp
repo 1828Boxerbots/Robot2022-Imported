@@ -66,6 +66,7 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() 
 {
   m_container.EncoderValues();
+  m_container.TestPhoto();
 }
 
 /**

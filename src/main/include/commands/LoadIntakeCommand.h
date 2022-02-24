@@ -18,7 +18,7 @@
 class LoadIntakeCommand
     : public frc2::CommandHelper<frc2::CommandBase, LoadIntakeCommand> {
  public:
-  LoadIntakeCommand(LoaderSubsystem* pLoader, double speed = 1.0);
+  LoadIntakeCommand(LoaderSubsystem* pLoader, double speed = 0.5);
 
   void Initialize() override;
 
@@ -31,7 +31,7 @@ class LoadIntakeCommand
  private:
   LoaderSubsystem* m_pLoader;
 
-  double m_speed = 1.0;
+  double m_speed = 0.5;
 
   bool m_isFinished = false;
 };

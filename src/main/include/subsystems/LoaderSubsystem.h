@@ -29,6 +29,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   void MoveArm(double speed);
 
  private:
+ int m_heartBeat = 0;
  #ifndef NOHW
   frc::Victor m_intake{PWM_LOADER_INTAKE};
   frc::Victor m_inner{PWM_LOADER_INNER};

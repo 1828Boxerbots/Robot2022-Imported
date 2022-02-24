@@ -23,7 +23,7 @@ void LoadToPhotoCommand::Initialize()
 void LoadToPhotoCommand::Execute() 
 {
   m_pLoader->IntakeLoader(m_speed);
-  m_pLoader->InnerLoader(m_speed);
+  m_pLoader->InnerLoader(-m_speed);
 
   int count = 0;
 

@@ -19,7 +19,7 @@ void LoadInOne::Initialize() {}
 void LoadInOne::Execute() 
 {
   m_pLoader->InnerLoader(m_speed);
-  m_pLoader->IntakeLoader(m_speed);
+  m_pLoader->IntakeLoader(-m_speed);
 }
 
 // Called once the command ends or is interrupted.

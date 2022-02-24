@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/LoaderSubsystem.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 LoaderSubsystem::LoaderSubsystem() = default;
 
@@ -23,7 +24,7 @@ void LoaderSubsystem::InnerLoader(double speed)
 #ifndef NOHW
     m_inner.Set(speed);
     #ifdef C418
-    m_innerUp.Set(speed);
+    m_innerUp.Set(-speed);
     #endif
 #endif
 }
@@ -32,7 +33,11 @@ void LoaderSubsystem::InnerLoader(double speed)
 
 bool LoaderSubsystem::IsPhotoActive()
 {
+        frc::SmartDashboard::PutNumber("LoaderSubsystem-HeartBeat", m_heartBeat++);
+
 #ifndef NOHW
+    frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsPhotoActive", m_photogate.Get());
+
     return m_photogate.Get();
 #else
     return false;

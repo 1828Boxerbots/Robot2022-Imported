@@ -6,26 +6,31 @@
 RobotContainer::RobotContainer() 
 {
   // Initialize all of your commands and subsystems here
-  m_pDriveCommand = new DriveCommand(&m_driveTrain, &m_controllerOne, DriveTrainSubsystem::TANK_STYLE);
+  m_pdriveCmd = new DriveCommand(&m_driveTrainSub, &m_controllerOne, DriveTrainSubsystem::TANK_STYLE);
 
-  m_pSwitchTop = new SwitchCaseTop(&m_driveTrain);
-  m_pSwitchMid = new SwitchCaseMid(&m_driveTrain);
-  m_pSwitchBottom = new SwitchCaseBottom(&m_driveTrain);
-  m_ploader = new LoadInOne(&m_pLoadItUp,1);
-  m_pNumberOneCallAFullStop= new LoadInOne(&m_pLoadItUp,0);
-  m_pEject = new LoadInOne(&m_pLoadItUp,-1);
-  m_pLoadInner = new LoadInnerCommand(&m_pLoadItUp, 1.0);
-  m_pLoadIntake = new LoadIntakeCommand(&m_pLoadItUp, 1.0);
-  m_ploadToPhoto = new LoadToPhotoCommand(&m_pLoadItUp, 1.0);
-  m_pStopIntale = new LoadIntakeCommand(&m_pLoadItUp, 0.0);
-  m_pStopInnter = new LoadInnerCommand(&m_pLoadItUp, 0.0);
+  m_pswitchTop = new SwitchCaseTop(&m_driveTrainSub);
+  m_pswitchMid = new SwitchCaseMid(&m_driveTrainSub);
+  m_pswitchBottom = new SwitchCaseBottom(&m_driveTrainSub );
+  m_ploader = new LoadInOne(&m_loaderSub,1);
+  m_pnumberOneCallAFullStop= new LoadInOne(&m_loaderSub,0);
+  m_peject = new LoadInOne(&m_loaderSub,1);
+  m_ploadInnerCmd = new LoadInnerCommand(&m_loaderSub, -1.0);
+  m_ploadIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 1.0);
+  m_ploadToPhotoCmd = new LoadToPhotoCommand(&m_loaderSub, 1.0);
+  m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
+  m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
   // Configure the button bindings
   ConfigureButtonBindings();
 }
 
 void RobotContainer::Init()
 {
-  m_driveTrain.Init();
+  m_driveTrainSub.Init();
+}
+
+void RobotContainer::TestPhoto()
+{
+  m_loaderSub.IsPhotoActive();
 }
 
 void RobotContainer::ConfigureButtonBindings() 
@@ -40,40 +45,40 @@ void RobotContainer::ConfigureButtonBindings()
 
 void RobotContainer::SetButtonB()
 {
-   m_bButton.WhenHeld(m_pLoadIntake);
-  m_bButton.WhenReleased(m_pStopIntale);
+  m_bButton.WhenHeld(m_ploadIntakeCmd);
+  m_bButton.WhenReleased(m_pstopIntakeCmd);
 }
 
 void RobotContainer::SetButtonX()
 {
-    m_xButton.WhenHeld(m_pLoadInner);
-    m_xButton.WhenReleased(m_pStopInnter);
+    m_xButton.WhenHeld(m_ploadInnerCmd);
+    m_xButton.WhenReleased(m_pstopInnerCmd);
 }
 
 void RobotContainer::SetLeftBumper()
 {
-  m_leftBumper.WhenHeld(m_ploadToPhoto);
+    m_leftBumper.WhenHeld(m_ploadToPhotoCmd);
 }
 
 
 void RobotContainer::SetButtonY()
 {
 //Shoot, because the shooter is at the peak of the robot.
-  m_yButton.WhenHeld(m_pEject);
-  m_yButton.WhenReleased(m_pNumberOneCallAFullStop);
+m_yButton.WhenHeld(m_peject);
+m_yButton.WhenReleased(m_pnumberOneCallAFullStop);
 }
 
 void RobotContainer::SetButtonA()
 {
   //Load, Because the loader is near the drive train on the bottom.
   m_aButton.WhenHeld(m_ploader);
-  m_aButton.WhenReleased(m_pNumberOneCallAFullStop);
+  m_aButton.WhenReleased(m_pnumberOneCallAFullStop);
 }
 
 void RobotContainer::RunDrive()
 {
   // RUN DRIVE
-  m_driveTrain.SetDefaultCommand(*m_pDriveCommand);
+  m_driveTrainSub .SetDefaultCommand(*m_pdriveCmd);
 }
 
 int RobotContainer::GetDPDT()
@@ -107,9 +112,9 @@ void RobotContainer::EncoderValues()
 {
   double disLeft, disRight;
   int rawLeft, rawRight;
-  m_driveTrain.GetEncoderDistance(&disLeft, &disRight);
-  m_driveTrain.GetEncoderRaw(&rawLeft, &rawRight);
-  units::degree_t angle = m_driveTrain.GetADIAngle();
+  m_driveTrainSub .GetEncoderDistance(&disLeft, &disRight);
+  m_driveTrainSub .GetEncoderRaw(&rawLeft, &rawRight);
+  units::degree_t angle = m_driveTrainSub .GetADIAngle();
 
   frc::SmartDashboard::PutNumber("Left E Dis", disLeft);
   frc::SmartDashboard::PutNumber("Right E Dis", disRight);
@@ -126,15 +131,15 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   switch (GetDPDT())
   {
   case 1:
-    cmd = m_pSwitchTop;
+    cmd = m_pswitchTop;
     break;
     
   case 2:
-    cmd = m_pSwitchBottom;
+    cmd = m_pswitchBottom;
     break;
 
   case 3:
-    cmd = m_pSwitchMid;
+    cmd = m_pswitchMid;
     break;
 
   default:
