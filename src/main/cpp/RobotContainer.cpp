@@ -19,6 +19,8 @@ RobotContainer::RobotContainer()
   m_ploadToPhotoCmd = new LoadToPhotoCommand(&m_loaderSub, 1.0);
   m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
+  m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
+  m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
 
   
   // Configure the button bindings
@@ -43,8 +45,10 @@ void RobotContainer::ConfigureButtonBindings()
   SetButtonA();
   SetButtonX();
   SetButtonB();
+  SetRightBumper();
   SetLeftBumper();
   SetRightTrigger();
+  SetLeftTrigger();
 }
 
 void RobotContainer::SetButtonB()
@@ -58,9 +62,20 @@ void RobotContainer::SetButtonX()
   m_xButton.WhenHeld(m_ploadInnerCmd);
   m_xButton.WhenReleased(m_pstopInnerCmd);
 }
+
 void RobotContainer::SetRightTrigger()
 {
 }
+
+void RobotContainer::SetLeftTrigger()
+{
+}
+
+void RobotContainer::SetRightBumper()
+{
+
+}
+
 void RobotContainer::SetLeftBumper()
 {
     m_leftBumper.WhenHeld(m_ploadToPhotoCmd);

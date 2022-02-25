@@ -21,6 +21,7 @@
 #include "commands/AutoTestCMD/SwitchCaseMid.h"
 #include "commands/AutoTestCMD/SwitchCaseBottom.h"
 #include "subsystems/ShooterSubsystem.h"
+#include "commands/AutoArmCommand.h"
 
 #include <frc/DigitalInput.h>
 
@@ -57,7 +58,8 @@ class RobotContainer
     LoadInnerCommand* m_pstopInnerCmd = nullptr;
     LoadIntakeCommand* m_ploadIntakeCmd = nullptr;
     LoadIntakeCommand* m_pstopIntakeCmd = nullptr;
-
+    AutoArmCommand *m_pupAutoArmCmd = nullptr;
+    AutoArmCommand *m_pdownAutoArmCmd = nullptr;
 
     // AUTO TEST CMD
     SwitchCaseTop* m_pswitchTop = nullptr;
@@ -76,6 +78,7 @@ class RobotContainer
     void SetButtonB();
     void SetButtonX();
     void SetButtonY();
+    void SetRightBumper();
     void SetLeftBumper();
     void SetRightTrigger();
     void SetLeftTrigger();

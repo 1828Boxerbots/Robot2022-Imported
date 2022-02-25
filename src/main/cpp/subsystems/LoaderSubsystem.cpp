@@ -52,3 +52,43 @@ void LoaderSubsystem::MoveArm(double speed)
     m_arm.Set(speed);
 #endif
 }
+
+bool LoaderSubsystem::IsLowLimitSwitchActive()
+{
+  frc::SmartDashboard::PutNumber("LoaderSubsystem-HeartBeat", m_heartBeat++);
+
+    bool Low= false;
+  
+   #ifndef NOHW
+    bool High = m_limitSwitchHigh.Get();
+    Low= m_limitSwitchLow.Get();
+
+
+    frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsHighLimitSwitchActive", High);
+    frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsLowLimitSwitchActive", Low);
+
+    return Low;
+#else
+    return false;
+#endif
+}
+
+bool LoaderSubsystem::IsHighLimitSwitchActive()
+{
+    frc::SmartDashboard::PutNumber("LoaderSubsystem-HeartBeat", m_heartBeat++);
+
+    bool High= false;
+  
+   #ifndef NOHW
+    bool Low = m_limitSwitchLow.Get();
+    High= m_limitSwitchHigh.Get();
+
+
+    frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsHighLimitSwitchActive", High);
+    frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsLowLimitSwitchActive", Low);
+
+    return High;
+#else
+    return false;
+#endif
+}

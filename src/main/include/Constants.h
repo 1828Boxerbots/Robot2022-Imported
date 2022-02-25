@@ -28,6 +28,8 @@ constexpr int DIO_DPDT_TOP              = 0;
 constexpr int DIO_DPDT_BOTTOM           = 0;
 constexpr int DIO_SPST                  = 0;
 constexpr int DIO_PHOTOGATE             = 8;
+constexpr int DIO_HALLEFFECT_LOWER       = 6;
+constexpr int DIO_HALLEFFECT_HIGHER     = 7;
 
 constexpr int DIO_CLIMB_ENCODER_A       = 6; //Maybe
 constexpr int DIO_CLIMB_ENCODER_B       = 7; //Maybe

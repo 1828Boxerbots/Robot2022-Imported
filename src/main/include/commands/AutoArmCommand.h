@@ -6,7 +6,6 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
 #include "subsystems/LoaderSubsystem.h"
 #include "Util.h"
 /**
@@ -19,7 +18,7 @@
 class AutoArmCommand
     : public frc2::CommandHelper<frc2::CommandBase, AutoArmCommand> {
  public:
-  AutoArmCommand(LoaderSubsystem *pLoader, double speed, units::second_t moveTime);
+  AutoArmCommand(LoaderSubsystem *pLoader, double speed);
 
   void Initialize() override;
 
@@ -32,8 +31,7 @@ class AutoArmCommand
   protected:
   LoaderSubsystem *m_pLoader;
 
-  double m_speed;
-  units::second_t m_moveTime;
+  double m_speed = 0.0;
 
   bool m_isFinished = false;
 };
