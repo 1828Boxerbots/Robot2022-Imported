@@ -20,7 +20,8 @@ RobotContainer::RobotContainer()
   m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
 
-  
+  m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub);
+
   // Configure the button bindings
   ConfigureButtonBindings();
 }
@@ -63,7 +64,7 @@ void RobotContainer::SetRightTrigger()
 }
 void RobotContainer::SetLeftBumper()
 {
-    m_leftBumper.WhenHeld(m_ploadToPhotoCmd);
+  m_leftBumper.WhenHeld(m_ploadToPhotoCmd);
 }
 
 
@@ -77,8 +78,8 @@ m_yButton.WhenReleased(m_pnumberOneCallAFullStop);
 void RobotContainer::SetButtonA()
 {
   //Load, Because the loader is near the drive train on the bottom.
-  m_aButton.WhenHeld(m_ploader);
-  m_aButton.WhenReleased(m_pnumberOneCallAFullStop);
+  m_aButton.WhenHeld(m_pVisionAllignCmd);
+  //m_aButton.WhenReleased(m_pnumberOneCallAFullStop);
 }
 
 void RobotContainer::RunDrive()

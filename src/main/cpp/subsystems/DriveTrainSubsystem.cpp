@@ -149,10 +149,12 @@ void DriveTrainSubsystem::MoveArcade(double X, double Y)
 // IMU AND DRIVE FUNCTIONS
 void DriveTrainSubsystem::TurnAngleRelative(units::degree_t angle, double speed, units::degree_t deadZone)
 {
-    units::degree_t currentAngle = GetADIAngle();
+    units::degree_t currentAngle = GetAngleX();
     units::degree_t targetAngle = currentAngle + angle;
     units::degree_t lowAngle = targetAngle - deadZone;
     units::degree_t highAngle = targetAngle + deadZone;
+
+    frc::SmartDashboard::PutNumber("TargetAngle-Relative", (double)targetAngle);
 
     while(currentAngle > highAngle or currentAngle < lowAngle)
     {
@@ -164,7 +166,8 @@ void DriveTrainSubsystem::TurnAngleRelative(units::degree_t angle, double speed,
         {
             MoveTank(speed, -speed);
         }
-        currentAngle = GetADIAngle();
+        currentAngle = GetAngleX();
+        frc::SmartDashboard::PutNumber("CurrentAngle-Relative", (double)currentAngle);
     }
 
     //Stop
@@ -173,10 +176,11 @@ void DriveTrainSubsystem::TurnAngleRelative(units::degree_t angle, double speed,
 
 void DriveTrainSubsystem::TurnAngleAbsolute(units::degree_t angle, double speed, units::degree_t deadZone)
 {
-    units::degree_t currentAngle = GetADIAngle();
+    units::degree_t currentAngle = GetAngleX();
     units::degree_t lowAngle = angle - deadZone;
     units::degree_t highAngle = angle + deadZone;
 
+    frc::SmartDashboard::PutNumber("TargetAngle-Absolute", (double)angle);
     while(currentAngle > highAngle or currentAngle < lowAngle)
     {
         if(currentAngle > highAngle)
@@ -187,7 +191,8 @@ void DriveTrainSubsystem::TurnAngleAbsolute(units::degree_t angle, double speed,
         {
             MoveTank(speed, -speed);
         }
-        currentAngle = GetADIAngle();
+        currentAngle = GetAngleX();
+        frc::SmartDashboard::PutNumber("CurrentAngle-Absolute", (double)currentAngle);
     }
 
     //Stop

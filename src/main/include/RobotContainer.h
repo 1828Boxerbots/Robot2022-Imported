@@ -22,6 +22,8 @@
 #include "commands/AutoTestCMD/SwitchCaseBottom.h"
 #include "subsystems/ShooterSubsystem.h"
 
+#include "commands/VisionAllignCommand.h"
+
 #include <frc/DigitalInput.h>
 
 /**
@@ -58,6 +60,7 @@ class RobotContainer
     LoadIntakeCommand* m_ploadIntakeCmd = nullptr;
     LoadIntakeCommand* m_pstopIntakeCmd = nullptr;
 
+    VisionAllignCommand* m_pVisionAllignCmd = nullptr;
 
     // AUTO TEST CMD
     SwitchCaseTop* m_pswitchTop = nullptr;
