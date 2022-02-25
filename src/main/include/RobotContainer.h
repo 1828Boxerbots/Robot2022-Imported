@@ -20,6 +20,7 @@
 #include "commands/AutoTestCMD/SwitchCaseTop.h"
 #include "commands/AutoTestCMD/SwitchCaseMid.h"
 #include "commands/AutoTestCMD/SwitchCaseBottom.h"
+#include "subsystems/ShooterSubsystem.h"
 
 #include <frc/DigitalInput.h>
 
@@ -48,7 +49,8 @@ class RobotContainer
     // The robot's subsystems and commands are defined here...
     DriveTrainSubsystem m_driveTrainSub;
     LoaderSubsystem m_loaderSub;
-    
+    ShooterSubsystem m_shootSub;
+
     LoadToPhotoCommand *m_ploadToPhotoCmd = nullptr;
     DriveCommand* m_pdriveCmd = nullptr;
     LoadInnerCommand* m_ploadInnerCmd = nullptr;
@@ -90,4 +92,7 @@ class RobotContainer
     LoadInOne *m_ploader                = nullptr;
     LoadInOne *m_peject                 = nullptr;
     LoadInOne *m_pnumberOneCallAFullStop= nullptr;
+
+    ShooterCommand *m_pShoot = nullptr;
+    ShooterCommand *m_pStopShoot = nullptr;
 };

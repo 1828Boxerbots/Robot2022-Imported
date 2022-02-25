@@ -5,28 +5,32 @@
 #include "subsystems/ClimbSubsystem.h"
 
 ClimbSubsystem::ClimbSubsystem()
-{
-#ifndef NOHW
-    m_encoderFront.SetDistancePerPulse(m_pulseDisFront);
-#endif
-}
+{ }
 
 // This method will be called once per scheduler run
 void ClimbSubsystem::Periodic() {}
+
+void ClimbSubsystem::Init()
+{
+#ifndef NOHW
+    m_climbEncoder.SetDistancePerPulse(m_DISPULSE_CLIMB);
+#endif
+    ResetEncoder();
+}
 
 // ENCODER FUNCTIONS
 
 void ClimbSubsystem::ResetEncoder()
 {
 #ifndef NOHW
-    m_encoderFront.Reset();
+    m_climbEncoder.Reset();
 #endif
 }
 
 double ClimbSubsystem::GetDistance()
 {
 #ifndef NOHW
-    return m_encoderFront.GetDistance();
+    return m_climbEncoder.GetDistance();
 #else
     return 0.0;
 #endif
@@ -35,7 +39,7 @@ double ClimbSubsystem::GetDistance()
 int ClimbSubsystem::GetRaw()
 {
 #ifndef NOHW
-    return m_encoderFront.GetRaw();
+    return m_climbEncoder.GetRaw();
 #else
     return 0;
 #endif

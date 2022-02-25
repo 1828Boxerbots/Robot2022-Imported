@@ -19,6 +19,8 @@ RobotContainer::RobotContainer()
   m_ploadToPhotoCmd = new LoadToPhotoCommand(&m_loaderSub, 1.0);
   m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
+
+  
   // Configure the button bindings
   ConfigureButtonBindings();
 }
@@ -31,6 +33,7 @@ void RobotContainer::Init()
 void RobotContainer::TestPhoto()
 {
   m_loaderSub.IsPhotoActive();
+  m_shootSub.GetEncoderRaw();
 }
 
 void RobotContainer::ConfigureButtonBindings() 

@@ -19,6 +19,8 @@ class ClimbSubsystem : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
+  void Init();
+
   // ENCODER FUNCTIONS
   void ResetEncoder();
   double GetDistance();
@@ -31,11 +33,11 @@ class ClimbSubsystem : public frc2::SubsystemBase {
  #ifndef NOHW
   frc::Spark m_climb{PWM_CLIMB};
 
-  frc::Encoder m_encoderFront{DIO_CLIMB_ENCODER_A, DIO_CLIMB_ENCODER_B};
+  frc::Encoder m_climbEncoder{DIO_CLIMB_ENCODER_A, DIO_CLIMB_ENCODER_B};
  #endif
-
-  double m_pulseDisFront = 0.1;
-  double m_pulseDisBack = 0.1;
+ 
+  //Equation: circumfrence (pi*d) / pulses_per_revolution (have to test)
+  const double m_DISPULSE_CLIMB = 0.1;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

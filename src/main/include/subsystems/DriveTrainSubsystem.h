@@ -77,9 +77,10 @@ class DriveTrainSubsystem : public frc2::SubsystemBase {
   DriveStyles m_currentStyle;
 
   //ROCKY - (3.14 * 8) / -2485
+  //C418 - (3.14 * 6) / 363
   //Equation: circumfrence (pi*d) / pulses_per_revolution (have to test)
-  double m_pulseDisLeft = (3.14 * 8) / 2485;
-  double m_pulseDisRight = (3.14 * 8) / 2485;
+  const double m_DISPULSE_LEFT = (3.14 * 6) / 363;
+  const double m_DISPULSE_RIGHT = (3.14 * 6) / 363;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

@@ -7,6 +7,7 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc/Encoder.h>
 #include <frc/motorcontrol/Spark.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
 
@@ -19,10 +20,13 @@ class ShooterSubsystem : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
+  void Init();
+
   // Encocder Functions
   void ResetEncoder();
-  double GetEncoderSpeed();
+  double GetShooterSpeed();
   int GetEncoderRaw();
+  void SetShooterSpeed(double targetSpeed, double speed = 1);
 
   // Shooter Functions
   void ShootMotor(double speed);
@@ -34,8 +38,8 @@ class ShooterSubsystem : public frc2::SubsystemBase {
 
   #endif
   // Halleffect
-
-  double m_pulseDisShoot = 2;
+  //Equation: 1 / # of pulses per revolution (have to test)
+  const double m_DISPULSE_SHOOT = 1/80;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

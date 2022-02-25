@@ -22,16 +22,23 @@ ShooterSubsystem::ShooterSubsystem(){}
 // This method will be called once per scheduler run
 void ShooterSubsystem::Periodic() {}
 
+void ShooterSubsystem::Init()
+{
+#ifndef NOHW
+    m_shooterEncoder.SetDistancePerPulse(m_DISPULSE_SHOOT);
+#endif
+    ResetEncoder();
+}
+
 // ENCODER FUNCTIONS
 void ShooterSubsystem::ResetEncoder()
 {
 #ifndef NOHW
-    m_shooterEncoder.SetDistancePerPulse(m_pulseDisShoot);
     m_shooterEncoder.Reset();
 #endif
 }
 
-double ShooterSubsystem::GetEncoderSpeed()
+double ShooterSubsystem::GetShooterSpeed()
 {
 #ifndef NOHW
     //Units are distance PER SECOND as scaled by SetDistancePerPulse()
@@ -39,9 +46,15 @@ double ShooterSubsystem::GetEncoderSpeed()
 #endif
 }
 
+void ShooterSubsystem::SetShooterSpeed(double targetSpeed, double speed)
+{
+
+}
+
 int ShooterSubsystem::GetEncoderRaw()
 {
 #ifndef NOHW
+    frc::SmartDashboard::PutNumber("ShooterRaw", m_shooterEncoder.GetRaw());
     return m_shooterEncoder.GetRaw();
 #endif
 }

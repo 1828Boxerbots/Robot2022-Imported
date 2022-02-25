@@ -11,7 +11,7 @@ void DriveTrainSubsystem::Periodic() {}
 
 void DriveTrainSubsystem::Init()
 {
-    #ifndef NOHW
+#ifndef NOHW
     m_rightMotor.SetInverted(true);
     m_leftEncoder.Reset();
     m_rightEncoder.Reset();
@@ -19,9 +19,9 @@ void DriveTrainSubsystem::Init()
     m_rightEncoder.SetReverseDirection(true);
     m_adi.Reset();
     
-        m_leftEncoder.SetDistancePerPulse(m_pulseDisLeft);
-        m_rightEncoder.SetDistancePerPulse(m_pulseDisRight);
-    #endif
+    m_leftEncoder.SetDistancePerPulse(m_DISPULSE_LEFT);
+    m_rightEncoder.SetDistancePerPulse(m_DISPULSE_RIGHT);
+#endif
 }
 
 // MOTOR FUNCTIONS
