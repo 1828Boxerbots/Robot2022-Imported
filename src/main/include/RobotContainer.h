@@ -23,6 +23,8 @@
 #include "subsystems/ShooterSubsystem.h"
 #include "commands/AutoArmCommand.h"
 
+#include "commands/VisionAllignCommand.h"
+
 #include <frc/DigitalInput.h>
 
 /**
@@ -60,6 +62,8 @@ class RobotContainer
     LoadIntakeCommand* m_pstopIntakeCmd = nullptr;
     AutoArmCommand *m_pupAutoArmCmd = nullptr;
     AutoArmCommand *m_pdownAutoArmCmd = nullptr;
+
+    VisionAllignCommand* m_pVisionAllignCmd = nullptr;
 
     // AUTO TEST CMD
     SwitchCaseTop* m_pswitchTop = nullptr;
