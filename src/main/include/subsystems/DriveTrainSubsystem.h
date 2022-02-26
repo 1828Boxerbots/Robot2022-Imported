@@ -9,6 +9,8 @@
 #include <frc/Encoder.h>
 #include <frc/ADIS16448_IMU.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 
 #include "../Constants.h"
 
@@ -55,6 +57,10 @@ class DriveTrainSubsystem : public frc2::SubsystemBase {
   units::degree_t GetAngleY();
   units::degree_t GetAngleZ();
 
+  // PI/Vision Functions
+  double GetPIAngle();
+  void VisionAllign(double speed, units::degree_t deadZone);
+
   // IMU and Drive Functions
   void TurnAngleRelative(units::degree_t angle, double speed = 0.5, units::degree_t deadZone = 1_deg);
   void TurnAngleAbsolute(units::degree_t angle, double speed = 0.5, units::degree_t deadZone = 1_deg);
@@ -72,6 +78,9 @@ class DriveTrainSubsystem : public frc2::SubsystemBase {
   frc::Encoder m_rightEncoder{DIO_DRIVE_RIGHT_A, DIO_DRIVE_RIGHT_B};
 
   frc::ADIS16448_IMU m_adi;
+
+  nt::NetworkTableEntry m_piAngle;
+  std::shared_ptr<nt::NetworkTable> m_table;
 
  #endif
   DriveStyles m_currentStyle;

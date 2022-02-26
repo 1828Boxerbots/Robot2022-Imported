@@ -31,8 +31,6 @@ class VisionShootCommand
   void Execute() override;
 
   void LoadToPhoto();
-  void VisionAllign();
-  void ShootSpeed(double targetSpeed);
 
   void End(bool interrupted) override;
 
@@ -44,14 +42,6 @@ class VisionShootCommand
   double m_driveSpeed;
   double m_loadSpeed;
   units::degree_t m_deadZone;
-
-  //Networktable table
-  std::shared_ptr<nt::NetworkTable> m_table;
-
-  //Networktable Entries
-  nt::NetworkTableEntry m_piAngle;
-
-  double m_turnAngle;
 
   bool m_isFinished = false;
 };

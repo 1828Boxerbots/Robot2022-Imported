@@ -55,9 +55,17 @@ double ShooterSubsystem::GetShootDistance()
 #endif
 }
 
-void ShooterSubsystem::SetShooterSpeed(double targetSpeed, double speed)
+void ShooterSubsystem::SetShooterSpeed(double targetSpeed)
 {
+    //Using a linear function speed= (78)power + 0 (found testing different powers and graphing their speeds)
+    // y=mx+b -> x= (y+b)/m
+    double power = targetSpeed / 78;
 
+    ShootMotor(-power);
+    while(GetShooterSpeed() < targetSpeed)
+    {
+        GetShooterSpeed();
+    }
 }
 
 int ShooterSubsystem::GetEncoderRaw()

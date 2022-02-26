@@ -36,13 +36,5 @@ class VisionAllignCommand
   double m_speed;
   units::degree_t m_deadZone;
 
-  //Networktable table
-  std::shared_ptr<nt::NetworkTable> m_table;
-
-  //Networktable Entries
-  nt::NetworkTableEntry m_piAngle;
-
-  double m_turnAngle;
-
   bool m_isFinished = false;
 };

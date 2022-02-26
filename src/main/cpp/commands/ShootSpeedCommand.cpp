@@ -20,17 +20,9 @@ void ShootSpeedCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void ShootSpeedCommand::Execute()
 {
-  //Using a linear function speed= (1565)power + 0 (found testing different powers and graphing their speeds)
-  // y=mx+b -> x= (y+b)/m
-  double power = m_targetSpeed / 1565;
-
-  m_pShooter->ShootMotor(-power);
-  while(m_pShooter->GetShooterSpeed() < m_targetSpeed)
-  {
-    m_pShooter->GetShooterSpeed();
-  }
+  m_pShooter->SetShooterSpeed(m_targetSpeed);
   
-  while(!m_pLoader->IsPhotoActive())
+  while(m_pLoader->IsPhotoActive() == false)
   {
     m_pLoader->InnerLoader(-1.0);
   }

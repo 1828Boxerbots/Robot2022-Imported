@@ -15,28 +15,12 @@ VisionAllignCommand::VisionAllignCommand(DriveTrainSubsystem *pDrive, double spe
 
 // Called when the command is initially scheduled.
 void VisionAllignCommand::Initialize()
-{
-  //Get the default instance of NetworkTables that was created automatically
-  auto inst = nt::NetworkTableInstance::GetDefault();
-
-  //Get the table within that instance that contains the data. There can
-  //be as many tables as you like and exist to make it easier to organize
-  //your data. In this case, it's a table called datatable.
-  m_table = inst.GetTable("datatable");
-
-  //Get the entries within that table that correspond Angle from the PI
-  m_piAngle = m_table->GetEntry("Angle");
-}
+{ }
 
 // Called repeatedly when this Command is scheduled to run
 void VisionAllignCommand::Execute()
 {
-  m_turnAngle = -m_piAngle.GetDouble(-666);
-  frc::SmartDashboard::PutNumber("PiAngle", m_turnAngle);
-  if(m_turnAngle != -666)
-  {
-    m_pDrive->TurnAngleRelative((units::degree_t)m_turnAngle, m_speed, m_deadZone);
-  }
+  m_pDrive->VisionAllign(m_speed, m_deadZone);
   m_isFinished = true;
 }
 

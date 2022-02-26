@@ -27,7 +27,7 @@ class ShooterSubsystem : public frc2::SubsystemBase {
   double GetShooterSpeed();
   double GetShootDistance();
   int GetEncoderRaw();
-  void SetShooterSpeed(double targetSpeed, double speed = 1);
+  void SetShooterSpeed(double targetSpeed);
 
   // Shooter Functions
   void ShootMotor(double speed);

@@ -21,6 +21,17 @@ void DriveTrainSubsystem::Init()
     
     m_leftEncoder.SetDistancePerPulse(m_DISPULSE_LEFT);
     m_rightEncoder.SetDistancePerPulse(m_DISPULSE_RIGHT);
+
+    //Get the default instance of NetworkTables that was created automatically
+    auto inst = nt::NetworkTableInstance::GetDefault();
+
+    //Get the table within that instance that contains the data. There can
+    //be as many tables as you like and exist to make it easier to organize
+    //your data. In this case, it's a table called datatable.
+    m_table = inst.GetTable("datatable");
+
+    //Get the entries within that table that correspond Angle from the PI
+    m_piAngle = m_table->GetEntry("Angle");
 #endif
 }
 
@@ -256,4 +267,21 @@ void DriveTrainSubsystem::SetDrive(DriveStyles styles)
 DriveTrainSubsystem::DriveStyles DriveTrainSubsystem::GetDrive()
 {
     return m_currentStyle;
+}
+
+
+// PI / VISION FUNCTIONS
+double DriveTrainSubsystem::GetPIAngle()
+{
+    return m_piAngle.GetDouble(-666);
+}
+
+void DriveTrainSubsystem::VisionAllign(double speed, units::degree_t deadZone)
+{
+    double turnAngle = -GetPIAngle();
+    frc::SmartDashboard::PutNumber("PiAngle", turnAngle);
+    if(turnAngle != -666)
+    {
+        TurnAngleRelative((units::degree_t)turnAngle, speed, deadZone);
+    }
 }
