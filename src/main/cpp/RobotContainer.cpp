@@ -21,6 +21,9 @@ RobotContainer::RobotContainer()
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
+  m_pupClimbCmd = new ClimbCommand(&m_ClimbSub, 0.3, 170);
+  m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
+
 
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, 1);
@@ -35,6 +38,8 @@ RobotContainer::RobotContainer()
 void RobotContainer::Init()
 {
   m_driveTrainSub.Init();
+  m_loaderSub.Init();
+  m_ClimbSub.Init();
 }
 
 void RobotContainer::TestPhoto()
@@ -58,13 +63,15 @@ void RobotContainer::ConfigureButtonBindings()
 
 void RobotContainer::SetButtonB()
 {
-  m_bButton.WhenHeld(m_ploadToPhotoCmd);
+  m_bButton.WhenPressed(m_pupClimbCmd);
+ // m_bButton.WhenHeld(m_ploadToPhotoCmd);
  // m_bButton.WhenReleased(m_pStopShoot);
 }
 
 void RobotContainer::SetButtonX()
 {
-  m_xButton.WhenHeld(m_pShootSpeed);
+  m_xButton.WhenPressed(m_pdownClimbCmd);
+ // m_xButton.WhenHeld(m_pShootSpeed);
   //m_xButton.WhenReleased(m_pStopShoot);
 }
 
@@ -99,6 +106,11 @@ void RobotContainer::SetButtonA()
   //Load, Because the loader is near the drive train on the bottom.
   m_aButton.WhenHeld(m_pShoot);
   m_aButton.WhenReleased(m_pStopShoot);
+}
+
+void RobotContainer::ClimbEncoder()
+{
+  m_ClimbSub.EncoderTest();
 }
 
 void RobotContainer::RunDrive()

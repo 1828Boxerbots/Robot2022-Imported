@@ -10,6 +10,8 @@ LoaderSubsystem::LoaderSubsystem() = default;
 // This method will be called once per scheduler run
 void LoaderSubsystem::Periodic() {}
 
+void LoaderSubsystem::Init() {};
+
 // MOTOR INTAKE FUNCTIONS
 
 void LoaderSubsystem::IntakeLoader(double speed)

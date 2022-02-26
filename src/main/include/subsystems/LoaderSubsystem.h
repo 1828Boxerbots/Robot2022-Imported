@@ -13,6 +13,8 @@ class LoaderSubsystem : public frc2::SubsystemBase {
  public:
   LoaderSubsystem();
 
+  void Init();
+
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */

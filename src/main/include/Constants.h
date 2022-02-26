@@ -5,6 +5,8 @@
 #pragma once
 #define C418 
 //#define NOHW
+#define NOHW_CLIMB
+
 
 //PWM
 constexpr int PWM_LEFT                  = 1;
@@ -31,8 +33,8 @@ constexpr int DIO_PHOTOGATE             = 8;
 constexpr int DIO_HALLEFFECT_LOWER       = 6;
 constexpr int DIO_HALLEFFECT_HIGHER     = 7;
 
-constexpr int DIO_CLIMB_ENCODER_A       = 6; //Maybe
-constexpr int DIO_CLIMB_ENCODER_B       = 7; //Maybe
+constexpr int DIO_CLIMB_ENCODER_A       = 0; //Maybe
+constexpr int DIO_CLIMB_ENCODER_B       = 1; //Maybe
 
 
 constexpr int USB_CONTROLLER_ONE        = 0;

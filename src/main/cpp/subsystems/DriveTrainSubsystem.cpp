@@ -97,7 +97,7 @@ units::degree_t DriveTrainSubsystem::GetADIAngle()
     return m_adi.GetAngle();
     return 0_deg;
 #else
-    return 0;
+    return (units::degree_t) 0;
 #endif
 }
 
@@ -107,7 +107,7 @@ units::degree_t DriveTrainSubsystem::GetAngleX()
     return m_adi.GetGyroAngleX();
     return 0_deg;
 #else
-    return 0;
+    return (units::degree_t) 0;
 #endif
 }
 
@@ -117,7 +117,7 @@ units::degree_t DriveTrainSubsystem::GetAngleY()
     return m_adi.GetGyroAngleY();
     return 0_deg;
 #else
-    return 0;
+    return (units::degree_t) 0;
 #endif
 }
 
@@ -127,7 +127,7 @@ units::degree_t DriveTrainSubsystem::GetAngleZ()
     return m_adi.GetGyroAngleZ();
     return 0_deg;
 #else
-    return 0;
+    return (units::degree_t) 0;
 #endif
 }
 

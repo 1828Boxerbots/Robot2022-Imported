@@ -58,6 +58,7 @@ void Robot::TeleopInit() {
   }
 
   m_container.RunDrive();
+  m_container.ClimbEncoder();
 }
 
 /**

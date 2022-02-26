@@ -46,6 +46,8 @@ class RobotContainer
 
   void TestPhoto();
 
+  void ClimbEncoder();
+
   frc2::Command* GetAutonomousCommand(); 
   void RunDrive();
   int GetDPDT();

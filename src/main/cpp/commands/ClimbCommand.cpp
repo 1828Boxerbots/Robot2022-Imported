@@ -5,6 +5,7 @@
 #include "commands/ClimbCommand.h"
 #include "cmath"
 
+// The distance is inches.
 ClimbCommand::ClimbCommand(ClimbSubsystem *pClimb, double speed, double distance) 
 {
   m_pClimb = pClimb;
@@ -20,36 +21,38 @@ void ClimbCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void ClimbCommand::Execute() 
 {
-  double StartingClimbPosition = m_pClimb->GetDistance();
-  double CurrentClimbDistance;
-  m_pClimb->ResetEncoder();
+  double CurrentClimbDistance = 0;
   m_pClimb->ClimbMotor(0.0);
- 
+  double StartingClimbPosition = m_pClimb->GetDistance();
+
+  frc::SmartDashboard::PutNumber("ClimbCommand-ClimbStart", StartingClimbPosition);
+  frc::SmartDashboard::PutNumber("ClimbCommand-ClimbSpeed", m_speed);
+
  if (m_speed > 0)
  {
-  while(CurrentClimbDistance < m_distance)
+  while(CurrentClimbDistance < fabsf(m_distance))
     {
-      m_pClimb->ClimbMotor(fabsf(m_speed));
-
-      frc::SmartDashboard::PutNumber("ClimbCommand-CurrentClimbDistance", CurrentClimbDistance);
-      
+      m_pClimb->ClimbMotor(-fabsf(m_speed));
       double CurrentClimbPosition = m_pClimb->GetDistance();
 
+
+      frc::SmartDashboard::PutNumber("ClimbCommand-CurrentClimbDistance", CurrentClimbDistance);
+      frc::SmartDashboard::PutNumber("ClimbCommand-CurrentClimbPosition+", CurrentClimbPosition);
+      
        CurrentClimbDistance = CurrentClimbPosition - StartingClimbPosition;
       } 
  }
  else if (m_speed < 0)
  {
-  while(CurrentClimbDistance > m_distance)
+  while(CurrentClimbDistance < -fabsf(m_distance))
     {
-      m_pClimb->ClimbMotor(-fabsf(m_speed));
+      m_pClimb->ClimbMotor(fabsf(m_speed));
+      double CurrentClimbPosition = m_pClimb->GetDistance();
 
       frc::SmartDashboard::PutNumber("ClimbCommand-CurrentClimbDistance", CurrentClimbDistance);
-      
-      double CurrentClimbPosition = m_pClimb->GetDistance();
-     
+      frc::SmartDashboard::PutNumber("ClimbCommand-CurrentClimbPosition-", CurrentClimbPosition);     
 
-      CurrentClimbDistance = fabsf(CurrentClimbPosition) - StartingClimbPosition;
+      CurrentClimbDistance = CurrentClimbPosition - StartingClimbPosition;
       } 
  }
  
