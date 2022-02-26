@@ -22,6 +22,7 @@ RobotContainer::RobotContainer()
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
 
+
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub);
 
   // Configure the button bindings

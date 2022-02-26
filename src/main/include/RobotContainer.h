@@ -22,6 +22,8 @@
 #include "commands/AutoTestCMD/SwitchCaseBottom.h"
 #include "subsystems/ShooterSubsystem.h"
 #include "commands/AutoArmCommand.h"
+#include "subsystems/ClimbSubsystem.h"
+#include "commands/ClimbCommand.h"
 
 #include "commands/VisionAllignCommand.h"
 
@@ -53,6 +55,7 @@ class RobotContainer
     DriveTrainSubsystem m_driveTrainSub;
     LoaderSubsystem m_loaderSub;
     ShooterSubsystem m_shootSub;
+    ClimbSubsystem m_ClimbSub;
 
     LoadToPhotoCommand *m_ploadToPhotoCmd = nullptr;
     DriveCommand* m_pdriveCmd = nullptr;
@@ -62,6 +65,8 @@ class RobotContainer
     LoadIntakeCommand* m_pstopIntakeCmd = nullptr;
     AutoArmCommand *m_pupAutoArmCmd = nullptr;
     AutoArmCommand *m_pdownAutoArmCmd = nullptr;
+    ClimbCommand *m_pupClimbCmd = nullptr;
+    ClimbCommand *m_pdownClimbCmd = nullptr;
 
     VisionAllignCommand* m_pVisionAllignCmd = nullptr;
 
