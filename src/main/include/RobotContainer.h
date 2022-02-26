@@ -24,6 +24,7 @@
 #include "commands/AutoArmCommand.h"
 #include "subsystems/ClimbSubsystem.h"
 #include "commands/ClimbCommand.h"
+#include "commands/Pos1AutoCommand.h"
 
 #include "commands/VisionAllignCommand.h"
 #include "commands/ShootSpeedCommand.h"
@@ -70,13 +71,14 @@ class RobotContainer
     AutoArmCommand *m_pdownAutoArmCmd = nullptr;
     ClimbCommand *m_pupClimbCmd = nullptr;
     ClimbCommand *m_pdownClimbCmd = nullptr;
+    
 
     VisionAllignCommand* m_pVisionAllignCmd = nullptr;
 
     // AUTO TEST CMD
-    SwitchCaseTop* m_pswitchTop = nullptr;
-    SwitchCaseMid* m_pswitchMid = nullptr;
-    SwitchCaseBottom* m_pswitchBottom = nullptr;
+    Pos1AutoCommand *m_pPos1AutoCmd = nullptr;
+    Pos1AutoCommand *m_pPos2AutoCmd = nullptr;
+    Pos1AutoCommand *m_pPos3AutoCmd = nullptr;
 
     frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
     frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};

@@ -4,11 +4,12 @@
 
 #include "commands/Pos1AutoCommand.h"
 
-Pos1AutoCommand::Pos1AutoCommand(DriveTrainSubsystem *pdrive, LoaderSubsystem *pload, ShooterSubsystem *pshoot) 
+Pos1AutoCommand::Pos1AutoCommand(DriveTrainSubsystem *pdrive, LoaderSubsystem *pload, ShooterSubsystem *pshoot, double turnAngle) 
 {
   m_pdrive = pdrive;
   m_ploader = pload;
   m_pshooter = pshoot;
+  m_turnAngle = turnAngle;
 
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements(m_pdrive);
@@ -27,7 +28,7 @@ void Pos1AutoCommand::Execute()
   double distanceToBall = 40.375;
   double forwardSpeed = 0.6;
   double innerSpeed = 0.5;
-  units::degree_t turnAngle = (units::degree_t) 180.0;
+  units::degree_t turnAngle = (units::degree_t) m_turnAngle;
   double turnSpeed = 0.3;
   units::degree_t turnDeadZone = (units::degree_t) 0.5;
   double shooterSpeed = 0.7;

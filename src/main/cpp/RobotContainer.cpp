@@ -7,10 +7,6 @@ RobotContainer::RobotContainer()
 {
   // Initialize all of your commands and subsystems here
   m_pdriveCmd = new DriveCommand(&m_driveTrainSub, &m_controllerOne, DriveTrainSubsystem::TANK_STYLE);
-
-  m_pswitchTop = new SwitchCaseTop(&m_driveTrainSub);
-  m_pswitchMid = new SwitchCaseMid(&m_driveTrainSub);
-  m_pswitchBottom = new SwitchCaseBottom(&m_driveTrainSub );
   m_ploader = new LoadInOne(&m_loaderSub,1);
   m_pnumberOneCallAFullStop= new LoadInOne(&m_loaderSub,0);
   m_peject = new LoadInOne(&m_loaderSub,1);
@@ -22,7 +18,9 @@ RobotContainer::RobotContainer()
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
-
+  m_pPos1AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
+  m_pPos2AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
+  m_pPos3AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 170.0);
 
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, 1);
@@ -174,15 +172,15 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   switch (GetDPDT())
   {
   case 1:
-    cmd = m_pswitchTop;
+    cmd = m_pPos1AutoCmd;
     break;
     
   case 2:
-    cmd = m_pswitchBottom;
+    cmd = m_pPos2AutoCmd;
     break;
 
   case 3:
-    cmd = m_pswitchMid;
+    cmd = m_pPos3AutoCmd;
     break;
 
   default:

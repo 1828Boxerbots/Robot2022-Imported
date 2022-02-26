@@ -22,7 +22,7 @@
 class Pos1AutoCommand
     : public frc2::CommandHelper<frc2::CommandBase, Pos1AutoCommand> {
  public:
-  Pos1AutoCommand(DriveTrainSubsystem *pdrive, LoaderSubsystem *pload, ShooterSubsystem *pshoot);
+  Pos1AutoCommand(DriveTrainSubsystem *pdrive, LoaderSubsystem *pload, ShooterSubsystem *pshoot, double turnAngle);
 
   void Initialize() override;
 
@@ -39,4 +39,5 @@ class Pos1AutoCommand
   ShooterSubsystem *m_pshooter = nullptr;
 
   bool m_IsFinished = false;
+  double m_turnAngle = 0.0;
 };
