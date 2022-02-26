@@ -20,43 +20,8 @@ void AutoArmCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void AutoArmCommand::Execute() 
 {
-  frc::SmartDashboard::PutString("AutoArmCommand", "Execute Start");
-  m_pLoader->MoveArm(0.0);
+  m_pLoader->AutoArm(m_speed);
 
-  int count = 0;
-  //Assuming the m_speed >0 is up while m_speed < 0 is down
-  if (m_speed > 0)
-  {
-    frc::SmartDashboard::PutString("AutoArmCommand 1", "speed>0");
-
-     while (m_pLoader->IsHighLimitSwitchActive() == true)
-    {
-      m_pLoader->MoveArm(fabsf(m_speed));
-      bool HigherLimitSwitch = m_pLoader->IsHighLimitSwitchActive();
-      frc::SmartDashboard::PutNumber("AutoArmCommand-Count", count++);
-    } 
-  }
-
-  else if (m_speed < 0) 
-  {
-    frc::SmartDashboard::PutString("AutoArmCommand 1", "speed<0");
-
-    while (m_pLoader->IsLowLimitSwitchActive() == true)
-    {
-      m_pLoader->MoveArm(-fabsf(m_speed));
-      bool LowerLimitSwitch = m_pLoader->IsLowLimitSwitchActive();
-      frc::SmartDashboard::PutNumber("AutoArmCommand-Count", count++);
-    } 
-  } 
-  else
-  {
-    frc::SmartDashboard::PutString("AutoArmCommand 1", "speed=0");
-  }
-
-    frc::SmartDashboard::PutString("AutoArmCommand", "Execute End");
-
-
-  m_pLoader->MoveArm(0.0);
   m_isFinished = true;
 }
 

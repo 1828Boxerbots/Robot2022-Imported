@@ -35,7 +35,7 @@ class ShooterSubsystem : public frc2::SubsystemBase {
  private:
  #ifndef NOHW
   frc::Encoder m_shooterEncoder{DIO_SHOOTER_ENCODER_A, DIO_SHOOTER_ENCODER_B};
-  frc::Spark m_shooterMotor{PWM_SHOOTER};
+  frc::Spark m_shooterMotor{9};
 
   #endif
   // Halleffect

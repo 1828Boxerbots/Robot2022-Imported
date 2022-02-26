@@ -21,7 +21,6 @@ RobotContainer::RobotContainer()
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
-  m_pupClimbCmd = new ClimbCommand(&m_ClimbSub, 0.3, 170);
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
 
 
@@ -64,14 +63,16 @@ void RobotContainer::ConfigureButtonBindings()
 
 void RobotContainer::SetButtonB()
 {
-  m_bButton.WhenPressed(m_pupClimbCmd);
+  m_bButton.WhenHeld(m_pupAutoArmCmd);
+ // m_bButton.WhenPressed(m_pupClimbCmd);
  // m_bButton.WhenHeld(m_ploadToPhotoCmd);
  // m_bButton.WhenReleased(m_pStopShoot);
 }
 
 void RobotContainer::SetButtonX()
 {
-  m_xButton.WhenHeld(m_ploadToPhotoCmd);
+  m_xButton.WhenHeld(m_pdownAutoArmCmd);
+ // m_xButton.WhenHeld(m_ploadToPhotoCmd);
  // m_xButton.WhenPressed(m_pdownClimbCmd);
  // m_xButton.WhenHeld(m_pShootSpeed);
   //m_xButton.WhenReleased(m_pStopShoot);

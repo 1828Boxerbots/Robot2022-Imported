@@ -113,3 +113,44 @@ void LoaderSubsystem::LoadToPhoto(double speed)
   IntakeLoader(0.0);
   InnerLoader(0.0);
 }
+
+void LoaderSubsystem::AutoArm(double speed)
+{
+ frc::SmartDashboard::PutString("AutoArmCommand", "Execute Start");
+  MoveArm(0.0);
+
+  int count = 0;
+  //Assuming the speed >0 is up while speed < 0 is down
+  if (speed > 0)
+  {
+    frc::SmartDashboard::PutString("AutoArmCommand 1", "speed>0");
+
+     while (IsHighLimitSwitchActive() == true)
+    {
+      MoveArm(fabsf(speed));
+      bool HigherLimitSwitch = IsHighLimitSwitchActive();
+      frc::SmartDashboard::PutNumber("AutoArmCommand-Count", count++);
+    } 
+  }
+
+  else if (speed < 0) 
+  {
+    frc::SmartDashboard::PutString("AutoArmCommand 1", "speed<0");
+
+    while (IsLowLimitSwitchActive() == true)
+    {
+      MoveArm(-fabsf(speed));
+      bool LowerLimitSwitch = IsLowLimitSwitchActive();
+      frc::SmartDashboard::PutNumber("AutoArmCommand-Count", count++);
+    } 
+  } 
+  else
+  {
+    frc::SmartDashboard::PutString("AutoArmCommand 1", "speed=0");
+  }
+
+    frc::SmartDashboard::PutString("AutoArmCommand", "Execute End");
+
+
+  MoveArm(0.0);
+}

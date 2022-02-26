@@ -31,6 +31,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   bool IsHighLimitSwitchActive();
   bool IsLowLimitSwitchActive();
   //Arm Functions
+  void AutoArm(double speed);
   void MoveArm(double speed);
 
  private:
@@ -39,7 +40,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   frc::Victor m_intake{PWM_LOADER_INTAKE};
   frc::Victor m_inner{PWM_LOADER_INNER};
   frc::Victor m_innerUp{PWM_LOADER_INTAKE_UPPER};
-  frc::Victor m_arm{PWM_ARM};
+  frc::Victor m_arm{PWM_SHOOTER};
 
   frc::DigitalInput m_photogate{DIO_PHOTOGATE};
   frc::DigitalInput m_limitSwitchLow{DIO_HALLEFFECT_LOWER};
