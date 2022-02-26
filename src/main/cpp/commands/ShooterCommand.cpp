@@ -17,6 +17,7 @@ void ShooterCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void ShooterCommand::Execute() 
 {
+  frc::SmartDashboard::PutNumber("Shooter Speed: RPS ", m_pShooter->GetShooterSpeed());
   m_pShooter->ShootMotor(m_speed);
 }
 

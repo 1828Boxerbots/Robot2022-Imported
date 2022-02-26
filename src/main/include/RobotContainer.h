@@ -24,6 +24,7 @@
 #include "commands/AutoArmCommand.h"
 
 #include "commands/VisionAllignCommand.h"
+#include "commands/ShootSpeedCommand.h"
 
 #include <frc/DigitalInput.h>
 
@@ -100,6 +101,7 @@ class RobotContainer
     LoadInOne *m_peject                 = nullptr;
     LoadInOne *m_pnumberOneCallAFullStop= nullptr;
 
+    ShootSpeedCommand *m_pShootSpeed = nullptr;
     ShooterCommand *m_pShoot = nullptr;
     ShooterCommand *m_pStopShoot = nullptr;
 };

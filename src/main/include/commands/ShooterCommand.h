@@ -5,6 +5,7 @@
 #pragma once
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include "subsystems/ShooterSubsystem.h"
 /********************************************************************************
  * An example command.                                                          *

@@ -16,11 +16,15 @@ RobotContainer::RobotContainer()
   m_peject = new LoadInOne(&m_loaderSub,1);
   m_ploadInnerCmd = new LoadInnerCommand(&m_loaderSub, -1.0);
   m_ploadIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 1.0);
-  m_ploadToPhotoCmd = new LoadToPhotoCommand(&m_loaderSub, 1.0);
+  m_ploadToPhotoCmd = new LoadToPhotoCommand(&m_loaderSub, 0.2);
   m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
+
+  m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
+  m_pShoot = new ShooterCommand(&m_shootSub, 1);
+  m_pStopShoot = new ShooterCommand(&m_shootSub, 0.0);
 
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub);
 
@@ -54,14 +58,14 @@ void RobotContainer::ConfigureButtonBindings()
 
 void RobotContainer::SetButtonB()
 {
-  m_bButton.WhenHeld(m_ploadIntakeCmd);
-  m_bButton.WhenReleased(m_pstopIntakeCmd);
+  m_bButton.WhenHeld(m_ploadToPhotoCmd);
+ // m_bButton.WhenReleased(m_pStopShoot);
 }
 
 void RobotContainer::SetButtonX()
 {
-  m_xButton.WhenHeld(m_ploadInnerCmd);
-  m_xButton.WhenReleased(m_pstopInnerCmd);
+  m_xButton.WhenHeld(m_pShootSpeed);
+  //m_xButton.WhenReleased(m_pStopShoot);
 }
 
 void RobotContainer::SetRightTrigger()
@@ -86,15 +90,15 @@ void RobotContainer::SetLeftBumper()
 void RobotContainer::SetButtonY()
 {
 //Shoot, because the shooter is at the peak of the robot.
-m_yButton.WhenHeld(m_peject);
-m_yButton.WhenReleased(m_pnumberOneCallAFullStop);
+m_yButton.WhenHeld(m_pShoot);
+m_yButton.WhenReleased(m_pStopShoot);
 }
 
 void RobotContainer::SetButtonA()
 {
   //Load, Because the loader is near the drive train on the bottom.
-  m_aButton.WhenHeld(m_pVisionAllignCmd);
-  //m_aButton.WhenReleased(m_pnumberOneCallAFullStop);
+  m_aButton.WhenHeld(m_pShoot);
+  m_aButton.WhenReleased(m_pStopShoot);
 }
 
 void RobotContainer::RunDrive()
