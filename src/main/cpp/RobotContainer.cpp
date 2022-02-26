@@ -40,6 +40,7 @@ void RobotContainer::Init()
   m_driveTrainSub.Init();
   m_loaderSub.Init();
   m_ClimbSub.Init();
+  m_shootSub.Init();
 }
 
 void RobotContainer::TestPhoto()
@@ -158,6 +159,8 @@ void RobotContainer::EncoderValues()
   frc::SmartDashboard::PutNumber("Right E Dis", disRight);
   frc::SmartDashboard::PutNumber("Left E Raw", rawLeft);
   frc::SmartDashboard::PutNumber("Right E Raw", rawRight);
+
+  m_shootSub.GetShootDistance();
 
   frc::SmartDashboard::PutNumber("ADI Angle", (double)angle);
 }

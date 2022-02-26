@@ -47,6 +47,14 @@ double ShooterSubsystem::GetShooterSpeed()
 #endif
 }
 
+double ShooterSubsystem::GetShootDistance()
+{
+#ifndef NOHW
+    frc::SmartDashboard::PutNumber("ShooterDistance", m_shooterEncoder.GetDistance());
+    return m_shooterEncoder.GetDistance();
+#endif
+}
+
 void ShooterSubsystem::SetShooterSpeed(double targetSpeed, double speed)
 {
 
