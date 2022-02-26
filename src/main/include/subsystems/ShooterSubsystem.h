@@ -25,6 +25,7 @@ class ShooterSubsystem : public frc2::SubsystemBase {
   // Encocder Functions
   void ResetEncoder();
   double GetShooterSpeed();
+  double GetShootDistance();
   int GetEncoderRaw();
   void SetShooterSpeed(double targetSpeed, double speed = 1);
 
@@ -39,7 +40,7 @@ class ShooterSubsystem : public frc2::SubsystemBase {
   #endif
   // Halleffect
   //Equation: 1 / # of pulses per revolution (have to test)
-  const double m_DISPULSE_SHOOT = 1/80;
+  const double m_DISPULSE_SHOOT = 1.0/20.0;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };
