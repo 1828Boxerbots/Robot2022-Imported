@@ -94,3 +94,22 @@ bool LoaderSubsystem::IsHighLimitSwitchActive()
     return false;
 #endif
 }
+
+void LoaderSubsystem::LoadToPhoto(double speed)
+{
+  IntakeLoader(speed);
+  InnerLoader(-speed);
+
+  int count = 0;
+
+  do 
+  {
+    bool photo = IsPhotoActive();
+
+    frc::SmartDashboard::PutNumber("LoadToPhotoCommand-Count", count++);
+    frc::SmartDashboard::PutBoolean("LoadToPhotoCommand-Photo", photo);
+  } while (IsPhotoActive() == true);
+
+  IntakeLoader(0.0);
+  InnerLoader(0.0);
+}

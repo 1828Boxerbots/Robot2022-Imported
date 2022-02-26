@@ -71,7 +71,8 @@ void RobotContainer::SetButtonB()
 
 void RobotContainer::SetButtonX()
 {
-  m_xButton.WhenPressed(m_pdownClimbCmd);
+  m_xButton.WhenHeld(m_ploadToPhotoCmd);
+ // m_xButton.WhenPressed(m_pdownClimbCmd);
  // m_xButton.WhenHeld(m_pShootSpeed);
   //m_xButton.WhenReleased(m_pStopShoot);
 }

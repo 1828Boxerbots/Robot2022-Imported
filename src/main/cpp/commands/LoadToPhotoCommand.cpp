@@ -22,21 +22,7 @@ void LoadToPhotoCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void LoadToPhotoCommand::Execute() 
 {
-  m_pLoader->IntakeLoader(m_speed);
-  m_pLoader->InnerLoader(-m_speed);
-
-  int count = 0;
-
-  do 
-  {
-    bool photo = m_pLoader->IsPhotoActive();
-
-    frc::SmartDashboard::PutNumber("LoadToPhotoCommand-Count", count++);
-    frc::SmartDashboard::PutBoolean("LoadToPhotoCommand-Photo", photo);
-  } while (m_pLoader->IsPhotoActive() == true);
-
-  m_pLoader->IntakeLoader(0.0);
-  m_pLoader->InnerLoader(0.0);
+ m_pLoader->LoadToPhoto(m_speed);
 
   m_isFinished = true;
 }
