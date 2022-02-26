@@ -42,6 +42,7 @@ double ShooterSubsystem::GetShooterSpeed()
 {
 #ifndef NOHW
     //Units are distance PER SECOND as scaled by SetDistancePerPulse()
+    frc::SmartDashboard::PutNumber("ShooterSpeed", m_shooterEncoder.GetRate());
     return m_shooterEncoder.GetRate();
 #endif
 }
