@@ -38,22 +38,6 @@ void VisionShootCommand::Execute()
   m_isFinished = true;
 }
 
-void VisionShootCommand::LoadToPhoto()
-{
-  m_pLoader->IntakeLoader(m_loadSpeed);
-  m_pLoader->InnerLoader(-m_loadSpeed);
-
-  do 
-  {
-    bool photo = m_pLoader->IsPhotoActive();
-
-    frc::SmartDashboard::PutBoolean("VisionShootCMD-Photo", photo);
-  } while (m_pLoader->IsPhotoActive() == true);
-
-  m_pLoader->IntakeLoader(0.0);
-  m_pLoader->InnerLoader(0.0);
-}
-
 // Called once the command ends or is interrupted.
 void VisionShootCommand::End(bool interrupted) {}
 
