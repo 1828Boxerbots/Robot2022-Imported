@@ -18,7 +18,7 @@ RobotContainer::RobotContainer()
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
-  m_pPos1AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
+  m_pPos1AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 175.0);
   m_pPos2AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
   m_pPos3AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 170.0);
 
@@ -171,21 +171,21 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   frc::SmartDashboard::PutBoolean("Auto Status", true);
   switch (GetDPDT())
   {
-  case 1:
+  default:
     cmd = m_pPos1AutoCmd;
     break;
     
-  case 2:
-    cmd = m_pPos2AutoCmd;
-    break;
+  //case 2:
+   // cmd = m_pPos2AutoCmd;
+   // break;
 
-  case 3:
-    cmd = m_pPos3AutoCmd;
-    break;
+ // case 3:
+  //  cmd = m_pPos3AutoCmd;
+  //  break;
 
-  default:
-    cmd = nullptr;
-    break;
+ // default:
+  //  cmd = nullptr;
+   // break;
   }
   
   if(cmd == nullptr)

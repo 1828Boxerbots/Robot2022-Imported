@@ -74,7 +74,7 @@ void DriveTrainSubsystem::GetEncoderDistance(double* pLeft, double* pRight)
     }
     if(pRight != nullptr)
     {   
-        *pRight = right;
+        *pRight = -right;
     }
 
 #endif
@@ -171,11 +171,11 @@ void DriveTrainSubsystem::TurnAngleRelative(units::degree_t angle, double speed,
     {
         if(currentAngle > highAngle)
         {
-            MoveTank(-speed, speed);
+            MoveTank(speed, -speed);
         }
         else if(currentAngle < lowAngle)
         {
-            MoveTank(speed, -speed);
+            MoveTank(-speed, speed);
         }
         currentAngle = GetAngleX();
         frc::SmartDashboard::PutNumber("CurrentAngle-Relative", (double)currentAngle);
@@ -220,7 +220,7 @@ void DriveTrainSubsystem::ForwardInInch(double inch, double speed)
     while(currentDistance < targetDistance)
     {
         MoveTank(speed, speed);
-        GetEncoderDistance(&currentDistance);
+        GetEncoderDistance(nullptr,&currentDistance);
     }
 
     //Stop
