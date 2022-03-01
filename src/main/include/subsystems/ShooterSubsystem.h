@@ -6,7 +6,7 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc/Encoder.h>
-#include <frc/motorcontrol/Spark.h>
+#include <frc/motorcontrol/Victor.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
@@ -35,7 +35,7 @@ class ShooterSubsystem : public frc2::SubsystemBase {
  private:
  #ifndef NOHW
   frc::Encoder m_shooterEncoder{DIO_SHOOTER_ENCODER_A, DIO_SHOOTER_ENCODER_B};
-  frc::Spark m_shooterMotor{9};
+  frc::Victor m_shooterMotor{PWM_SHOOTER};
 
   #endif
   // Halleffect

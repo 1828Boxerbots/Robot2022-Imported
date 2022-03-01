@@ -2,38 +2,33 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/LoadToPhotoCommand.h"
-#include <frc/smartdashboard/SmartDashboard.h>
+#include "commands/LoadToShooterCommand.h"
 
-LoadToPhotoCommand::LoadToPhotoCommand(LoaderSubsystem *ploader, double speed) 
+LoadToShooterCommand::LoadToShooterCommand(LoaderSubsystem *ploader, double speed) 
 {
   m_pLoader = ploader;
   m_speed = speed;
-  // Use addRequirements() here to declare subsystem dependencies.
 
-  AddRequirements(ploader);
+  // Use addRequirements() here to declare subsystem dependencies.
+   AddRequirements(ploader);
 }
 
 // Called when the command is initially scheduled.
-void LoadToPhotoCommand::Initialize() 
-{
-}
+void LoadToShooterCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void LoadToPhotoCommand::Execute() 
+void LoadToShooterCommand::Execute() 
 {
- m_pLoader->LoadToPhoto(m_speed, true);
+   m_pLoader->LoadToPhoto(m_speed, false);
 
   m_isFinished = true;
 }
 
 // Called once the command ends or is interrupted.
-void LoadToPhotoCommand::End(bool interrupted) 
-{
-}
+void LoadToShooterCommand::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool LoadToPhotoCommand::IsFinished() 
+bool LoadToShooterCommand::IsFinished() 
 {
   return m_isFinished;
 }

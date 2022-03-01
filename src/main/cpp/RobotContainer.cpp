@@ -13,14 +13,15 @@ RobotContainer::RobotContainer()
   m_ploadInnerCmd = new LoadInnerCommand(&m_loaderSub, -1.0);
   m_ploadIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 1.0);
   m_ploadToPhotoCmd = new LoadToPhotoCommand(&m_loaderSub, 0.2);
+  m_ploadToShooterCmd = new LoadToShooterCommand(&m_loaderSub, 0.2);
   m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
-  m_pPos1AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 175.0);
-  m_pPos2AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
-  m_pPos3AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 170.0);
+  m_pwallAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
+  m_pmiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 175.0);
+  m_paloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 170.0);
 
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, 1);
@@ -61,7 +62,8 @@ void RobotContainer::ConfigureButtonBindings()
 
 void RobotContainer::SetButtonB()
 {
-  m_bButton.WhenHeld(m_pupAutoArmCmd);
+  m_bButton.WhenHeld(m_ploadToShooterCmd);
+ // m_bButton.WhenHeld(m_pupAutoArmCmd);
  // m_bButton.WhenPressed(m_pupClimbCmd);
  // m_bButton.WhenHeld(m_ploadToPhotoCmd);
  // m_bButton.WhenReleased(m_pStopShoot);
@@ -69,7 +71,8 @@ void RobotContainer::SetButtonB()
 
 void RobotContainer::SetButtonX()
 {
-  m_xButton.WhenHeld(m_pdownAutoArmCmd);
+  m_xButton.WhenHeld(m_ploadToPhotoCmd);
+//  m_xButton.WhenHeld(m_pdownAutoArmCmd);
  // m_xButton.WhenHeld(m_ploadToPhotoCmd);
  // m_xButton.WhenPressed(m_pdownClimbCmd);
  // m_xButton.WhenHeld(m_pShootSpeed);
@@ -172,7 +175,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   switch (GetDPDT())
   {
   default:
-    cmd = m_pPos1AutoCmd;
+    cmd = m_pmiddleAutoCmd;
     break;
     
   //case 2:
