@@ -273,7 +273,9 @@ DriveTrainSubsystem::DriveStyles DriveTrainSubsystem::GetDrive()
 // PI / VISION FUNCTIONS
 double DriveTrainSubsystem::GetPIAngle()
 {
+#ifndef NOHW
     return m_piAngle.GetDouble(-666);
+#endif
 }
 
 void DriveTrainSubsystem::VisionAllign(double speed, units::degree_t deadZone)
