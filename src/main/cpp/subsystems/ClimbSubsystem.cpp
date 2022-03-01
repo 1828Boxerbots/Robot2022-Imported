@@ -5,11 +5,16 @@
 #include "subsystems/ClimbSubsystem.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
-ClimbSubsystem::ClimbSubsystem()
-{ }
+ClimbSubsystem::ClimbSubsystem() 
+{
+    return;
+}
 
 // This method will be called once per scheduler run
-void ClimbSubsystem::Periodic() {}
+void ClimbSubsystem::Periodic() 
+{
+    return;
+}
 
 void ClimbSubsystem::Init()
 {
