@@ -25,6 +25,7 @@
 #include "subsystems/ClimbSubsystem.h"
 #include "commands/ClimbCommand.h"
 #include "commands/Pos1AutoCommand.h"
+#include "commands/LoadToShooterCommand.h"
 
 #include "commands/VisionAllignCommand.h"
 #include "commands/ShootSpeedCommand.h"
@@ -62,6 +63,7 @@ class RobotContainer
     ClimbSubsystem m_ClimbSub;
 
     LoadToPhotoCommand *m_ploadToPhotoCmd = nullptr;
+    LoadToShooterCommand *m_ploadToShooterCmd = nullptr;
     DriveCommand* m_pdriveCmd = nullptr;
     LoadInnerCommand* m_ploadInnerCmd = nullptr;
     LoadInnerCommand* m_pstopInnerCmd = nullptr;
@@ -76,9 +78,9 @@ class RobotContainer
     VisionAllignCommand* m_pVisionAllignCmd = nullptr;
 
     // AUTO TEST CMD
-    Pos1AutoCommand *m_pPos1AutoCmd = nullptr;
-    Pos1AutoCommand *m_pPos2AutoCmd = nullptr;
-    Pos1AutoCommand *m_pPos3AutoCmd = nullptr;
+    Pos1AutoCommand *m_pwallAutoCmd = nullptr;
+    Pos1AutoCommand *m_pmiddleAutoCmd = nullptr;
+    Pos1AutoCommand *m_paloneAutoCmd = nullptr;
 
     frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
     frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};

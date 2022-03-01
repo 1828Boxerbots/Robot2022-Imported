@@ -31,39 +31,44 @@ void Pos1AutoCommand::Execute()
   units::degree_t turnAngle = (units::degree_t) m_turnAngle;
   double turnSpeed = 0.2;
   units::degree_t turnDeadZone = (units::degree_t) 5.0;
-  double shooterSpeed = 0.7;
-
+  double shooterTargetSpeed = 70;
+/*
   //1. DropArm
-  //m_ploader->AutoArm(armSpeed);
+  m_ploader->AutoArm(armSpeed);
 
   //2. Turn on Intake 
   m_ploader->IntakeLoader(intakeSpeed);
 
   //3. Forward to Ball
   m_pdrive->ForwardInInch(distanceToBall, forwardSpeed);
-
+*/
   //4. Load Ball 1 to Photo
-  m_ploader->LoadToPhoto(innerSpeed);
-
-
+  m_ploader->LoadToPhoto(innerSpeed, true);
+/*
   //5. Turn Around 180 Towards Target
   m_pdrive->TurnAngleRelative(turnAngle, turnSpeed, turnDeadZone);
 
   //6. Allign Robot to Target to Prepare for Shooting
- // m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
+  m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
 
   //7. Shoot Ball 1 Towards Target
+  m_pshooter->SetShooterSpeed(shooterTargetSpeed);
+*/
+  //8. Load Ball 1 to Shooter
+  m_ploader->LoadToPhoto(innerSpeed, false);
+
+  //9. Load Ball 2 to Photo
+  m_ploader->LoadToPhoto(innerSpeed, true);
+/*
+  //10. Allign Robot to Target to Prepare for Shooting
+  m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
+
+  //11. Shoot Ball 2 Towards Target 
   m_pshooter->SetShooterSpeed(shooterSpeed);
 
-  //8. Load Ball 2 to Photo
-  m_ploader->LoadToPhoto(innerSpeed);
-
-  //9. Allign Robot to Target to Prepare for Shooting
-  //m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
-
-  //10. Shoot Ball 2 Towards Target
-  m_pshooter->SetShooterSpeed(shooterSpeed);
-
+  12. Load Ball 2 to Shooter
+  m_pLoader->LoadToPhoto(innerSpeed, false);
+*/
   m_IsFinished = true;
 }
 
