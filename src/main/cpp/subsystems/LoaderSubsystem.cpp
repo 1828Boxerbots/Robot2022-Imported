@@ -10,7 +10,7 @@ LoaderSubsystem::LoaderSubsystem() = default;
 // This method will be called once per scheduler run
 void LoaderSubsystem::Periodic() {}
 
-void LoaderSubsystem::Init() {};
+void LoaderSubsystem::Init() {}
 
 // MOTOR INTAKE FUNCTIONS
 
@@ -116,6 +116,7 @@ void LoaderSubsystem::LoadToPhoto(double speed, bool loadToShoot)
 
 void LoaderSubsystem::AutoArm(double speed)
 {
+#ifndef NOHW_SENSORS
  frc::SmartDashboard::PutString("AutoArmCommand", "Execute Start");
   MoveArm(0.0);
 
@@ -153,4 +154,5 @@ void LoaderSubsystem::AutoArm(double speed)
 
 
   MoveArm(0.0);
+#endif
 }

@@ -62,8 +62,7 @@ void RobotContainer::ConfigureButtonBindings()
 
 void RobotContainer::SetButtonB()
 {
-  m_bButton.WhenHeld(m_ploadToShooterCmd);
- // m_bButton.WhenHeld(m_pupAutoArmCmd);
+  m_bButton.WhenPressed(m_pdriveCmd);
  // m_bButton.WhenPressed(m_pupClimbCmd);
  // m_bButton.WhenHeld(m_ploadToPhotoCmd);
  // m_bButton.WhenReleased(m_pStopShoot);

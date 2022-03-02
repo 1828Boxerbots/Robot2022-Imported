@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/DriveTrainSubsystem.h"
-
+#include "Util.h"
 DriveTrainSubsystem::DriveTrainSubsystem(){}
 
 // This method will be called once per scheduler run
@@ -148,6 +148,15 @@ void DriveTrainSubsystem::MoveTank(double left, double right)
     SetMotorL(left);
     SetMotorR(right);
 }
+void DriveTrainSubsystem::ForwardInTime(double time, double speed)
+{
+    MoveTank(speed, speed);
+    Util::Log("My Code hTingy",time);
+    Util::DelayInSeconds((units::time::second_t) time);
+
+    //Stop
+    MoveTank(0.0, 0.0);
+}
 
 void DriveTrainSubsystem::MoveArcade(double X, double Y)
 {
@@ -213,6 +222,7 @@ void DriveTrainSubsystem::TurnAngleAbsolute(units::degree_t angle, double speed,
 // ENCODER AND DRIVE FUNCTIONS
 void DriveTrainSubsystem::ForwardInInch(double inch, double speed)
 {
+#ifndef NOHW_SENSORS
     double currentDistance;
     GetEncoderDistance(&currentDistance);
     double targetDistance = currentDistance + inch;
@@ -225,10 +235,12 @@ void DriveTrainSubsystem::ForwardInInch(double inch, double speed)
 
     //Stop
     MoveTank(0.0, 0.0);
+#endif
 }
 
 void DriveTrainSubsystem::ForwardInInchIMU(double inch, double correctionSpeed, units::degree_t deadZoneAngle, double baseSpeed)
 {
+    #ifndef NOHW_SENSORS
     double currentDistance;
     GetEncoderDistance(&currentDistance);
     double targetDistance = currentDistance + inch;
@@ -256,6 +268,7 @@ void DriveTrainSubsystem::ForwardInInchIMU(double inch, double correctionSpeed, 
     }
 
     MoveTank(0.0, 0.0);
+    #endif
 }
 
 // DRIVE STYLE FUNCTIONS

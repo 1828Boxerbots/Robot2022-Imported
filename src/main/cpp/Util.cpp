@@ -40,6 +40,7 @@ void Util::DelayInSeconds(units::time::second_t seconds)
     {
         //Gets current time and sends it to the smartdashboard for checking
         currentTime = timer.Get();
+        Log("Timer",(double) currentTime);
     }
     //Stops and resets timer used for driving forward
     timer.Stop();

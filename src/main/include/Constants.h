@@ -5,8 +5,8 @@
 #pragma once
 #define C418 
 //#define NOHW
- #define NOHW_CLIMB
-
+#define NOHW_CLIMB
+#define NOHW_SENSORS
 
 //PWM
 constexpr int PWM_LEFT                  = 1;

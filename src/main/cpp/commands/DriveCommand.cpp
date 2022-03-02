@@ -24,6 +24,7 @@ void DriveCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void DriveCommand::Execute()
 {
+  #ifdef REALCODE
   switch (m_pDriveTrain->GetDrive())
   {
     //Tank Drive
@@ -58,6 +59,10 @@ void DriveCommand::Execute()
       m_pDriveTrain->SetDrive(DriveTrainSubsystem::RC_STYLE);
       break;
   }
+    #else
+    m_pDriveTrain->ForwardInTime(5,0.25);
+    m_isFinished = true;
+    #endif
 }
 
 double DriveCommand::CheckDeadZone(double stickInput)
@@ -75,5 +80,5 @@ void DriveCommand::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool DriveCommand::IsFinished() {
-  return false;
+  return m_isFinished;
 }

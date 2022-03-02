@@ -100,7 +100,7 @@ class RobotContainer
     void SetLeftTrigger();
 
     frc2::Button m_aButton {[this] {return m_controllerOne.GetAButton();}};
-    frc2::Button m_bButton {[this] {return m_controllerOne.GetBButton();}};
+    frc2::Button  m_bButton {[this] {return m_controllerOne.GetBButton();}};
     frc2::Button m_xButton {[this] {return m_controllerOne.GetXButton();}};
     frc2::Button m_yButton {[this] {return m_controllerOne.GetYButton();}};
     frc2::Button m_rightBumper {[this] {return m_controllerOne.GetRightBumper();}};
