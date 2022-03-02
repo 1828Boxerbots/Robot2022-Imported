@@ -66,7 +66,7 @@ void Robot::TeleopInit() {
  */
 void Robot::TeleopPeriodic() 
 {
-
+ m_container.ClimbEncoder ();
   // m_container.EncoderValues();
   // m_container.TestPhoto();
 }
@@ -74,7 +74,9 @@ void Robot::TeleopPeriodic()
 /**
  * This function is called periodically during test mode.
  */
-void Robot::TestPeriodic() {}
+void Robot::TestPeriodic() {
+
+}
 
 #ifndef RUNNING_FRC_TESTS
 int main() {

@@ -24,7 +24,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   void IntakeLoader(double speed);
   void InnerLoader(double speed);
   // Photogate Functions
-  void LoadToPhoto(double speed);
+  void LoadToPhoto(double speed, bool loadToShoot);
   bool IsPhotoActive();
 
   // LimitSwitch Functions (For now, it is Halleffect)
@@ -40,7 +40,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   frc::Victor m_intake{PWM_LOADER_INTAKE};
   frc::Victor m_inner{PWM_LOADER_INNER};
   frc::Victor m_innerUp{PWM_LOADER_INTAKE_UPPER};
-  frc::Victor m_arm{PWM_SHOOTER};
+  frc::Victor m_arm{9};
 
   frc::DigitalInput m_photogate{DIO_PHOTOGATE};
   frc::DigitalInput m_limitSwitchLow{DIO_HALLEFFECT_LOWER};

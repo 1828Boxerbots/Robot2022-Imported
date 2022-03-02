@@ -95,7 +95,7 @@ bool LoaderSubsystem::IsHighLimitSwitchActive()
 #endif
 }
 
-void LoaderSubsystem::LoadToPhoto(double speed)
+void LoaderSubsystem::LoadToPhoto(double speed, bool loadToShoot)
 {
   IntakeLoader(speed);
   InnerLoader(-speed);
@@ -108,7 +108,7 @@ void LoaderSubsystem::LoadToPhoto(double speed)
 
     frc::SmartDashboard::PutNumber("LoadToPhotoCommand-Count", count++);
     frc::SmartDashboard::PutBoolean("LoadToPhotoCommand-Photo", photo);
-  } while (IsPhotoActive() == true);
+  } while (IsPhotoActive() == loadToShoot);
 
   IntakeLoader(0.0);
   InnerLoader(0.0);

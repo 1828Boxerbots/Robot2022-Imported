@@ -13,14 +13,15 @@ RobotContainer::RobotContainer()
   m_ploadInnerCmd = new LoadInnerCommand(&m_loaderSub, -1.0);
   m_ploadIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 1.0);
   m_ploadToPhotoCmd = new LoadToPhotoCommand(&m_loaderSub, 0.2);
+  m_ploadToShooterCmd = new LoadToShooterCommand(&m_loaderSub, 0.2);
   m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
-  m_pPos1AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
-  m_pPos2AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
-  m_pPos3AutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 170.0);
+  m_pwallAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
+  m_pmiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 175.0);
+  m_paloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 170.0);
 
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, 1);
@@ -69,7 +70,8 @@ void RobotContainer::SetButtonB()
 
 void RobotContainer::SetButtonX()
 {
-  m_xButton.WhenHeld(m_pdownAutoArmCmd);
+  m_xButton.WhenHeld(m_ploadToPhotoCmd);
+//  m_xButton.WhenHeld(m_pdownAutoArmCmd);
  // m_xButton.WhenHeld(m_ploadToPhotoCmd);
  // m_xButton.WhenPressed(m_pdownClimbCmd);
  // m_xButton.WhenHeld(m_pShootSpeed);
@@ -171,21 +173,21 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   frc::SmartDashboard::PutBoolean("Auto Status", true);
   switch (GetDPDT())
   {
-  case 1:
-    cmd = m_pPos1AutoCmd;
+  default:
+    cmd = m_pmiddleAutoCmd;
     break;
     
-  case 2:
-    cmd = m_pPos2AutoCmd;
-    break;
+  //case 2:
+   // cmd = m_pPos2AutoCmd;
+   // break;
 
-  case 3:
-    cmd = m_pPos3AutoCmd;
-    break;
+ // case 3:
+  //  cmd = m_pPos3AutoCmd;
+  //  break;
 
-  default:
-    cmd = nullptr;
-    break;
+ // default:
+  //  cmd = nullptr;
+   // break;
   }
   
   if(cmd == nullptr)
