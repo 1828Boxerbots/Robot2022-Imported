@@ -46,6 +46,8 @@ class DriveTrainSubsystem : public frc2::SubsystemBase {
   // Drive functions
   void MoveTank(double left, double right);
   void MoveArcade(double X, double Y);
+  void ForwardInTime(double time, double speed);
+
 
   // Drive styles
   void SetDrive(DriveStyles style);
