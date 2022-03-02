@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "commands/Pos1AutoCommand.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 Pos1AutoCommand::Pos1AutoCommand(DriveTrainSubsystem *pdrive, LoaderSubsystem *pload, ShooterSubsystem *pshoot, double turnAngle) 
 {
@@ -32,43 +33,49 @@ void Pos1AutoCommand::Execute()
   double turnSpeed = 0.2;
   units::degree_t turnDeadZone = (units::degree_t) 5.0;
   double shooterTargetSpeed = 70;
-/*
+  double shooterStopSpeed = 0.0;
+
   //1. DropArm
-  m_ploader->AutoArm(armSpeed);
+  //m_ploader->AutoArm(armSpeed);
 
   //2. Turn on Intake 
   m_ploader->IntakeLoader(intakeSpeed);
-
+  frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 2");
   //3. Forward to Ball
   m_pdrive->ForwardInInch(distanceToBall, forwardSpeed);
-*/
+    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 3");
+
   //4. Load Ball 1 to Photo
   m_ploader->LoadToPhoto(innerSpeed, true);
-/*
+    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 4");
+
   //5. Turn Around 180 Towards Target
   m_pdrive->TurnAngleRelative(turnAngle, turnSpeed, turnDeadZone);
 
   //6. Allign Robot to Target to Prepare for Shooting
-  m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
+  //m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
 
   //7. Shoot Ball 1 Towards Target
   m_pshooter->SetShooterSpeed(shooterTargetSpeed);
-*/
+
   //8. Load Ball 1 to Shooter
   m_ploader->LoadToPhoto(innerSpeed, false);
 
   //9. Load Ball 2 to Photo
   m_ploader->LoadToPhoto(innerSpeed, true);
-/*
+
   //10. Allign Robot to Target to Prepare for Shooting
-  m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
+  //m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
 
   //11. Shoot Ball 2 Towards Target 
-  m_pshooter->SetShooterSpeed(shooterSpeed);
+  m_pshooter->SetShooterSpeed(shooterTargetSpeed);
 
-  12. Load Ball 2 to Shooter
-  m_pLoader->LoadToPhoto(innerSpeed, false);
-*/
+  //12. Load Ball 2 to Shooter
+  m_ploader->LoadToPhoto(innerSpeed, false);
+
+  //13. Stop Shooter Motor
+  m_pshooter->SetShooterSpeed(shooterStopSpeed);
+
   m_IsFinished = true;
 }
 

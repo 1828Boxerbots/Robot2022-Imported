@@ -4,8 +4,8 @@
 
 #pragma once
 #define C418 
-#define NOHW
-// #define NOHW_CLIMB
+//#define NOHW
+ #define NOHW_CLIMB
 
 
 //PWM
