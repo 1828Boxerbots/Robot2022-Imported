@@ -15,11 +15,9 @@ class ShooterSubsystem : public frc2::SubsystemBase {
  public:
   ShooterSubsystem();
 
-  /**
-   * Will be called periodically whenever the CommandScheduler runs.
-   */
-  void Periodic() override;
 
+  void Periodic() override;
+  void ShootToTimer(double time, double speed =1);
   void Init();
 
   // Encocder Functions
@@ -33,11 +31,10 @@ class ShooterSubsystem : public frc2::SubsystemBase {
   void ShootMotor(double speed);
 
  private:
- #ifndef NOHW
+ #ifndef NOHW_SENSORS
   frc::Encoder m_shooterEncoder{DIO_SHOOTER_ENCODER_A, DIO_SHOOTER_ENCODER_B};
-  frc::Victor m_shooterMotor{PWM_SHOOTER};
-
   #endif
+  frc::Victor m_shooterMotor{PWM_SHOOTER};
   // Halleffect
   //Equation: 1 / # of pulses per revolution (have to test)
   const double m_DISPULSE_SHOOT = 1.0/20.0;
