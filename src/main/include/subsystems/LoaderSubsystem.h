@@ -24,7 +24,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   // Photogate Functions
   void LoadToPhoto(double speed, bool loadToShoot);
   bool IsPhotoActive();
-  void LoadToTimer();
+  void LoadToTimer(double time, double speed = 1.0);
   // LimitSwitch Functions (For now, it is Halleffect)
   bool IsHighLimitSwitchActive();
   bool IsLowLimitSwitchActive();
