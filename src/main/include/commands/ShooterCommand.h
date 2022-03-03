@@ -8,7 +8,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "subsystems/ShooterSubsystem.h"
 /********************************************************************************
- * An example command.                                                          *
+ * Not an example command.                                                          *
  *                                                                              *
  * Note that this extends CommandHelper, rather extending CommandBase           *
  * directly; this is crucially important, or else the decorator functions in    *
