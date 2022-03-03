@@ -4,7 +4,7 @@
 
 #include "subsystems/LoaderSubsystem.h"
 #include <frc/smartdashboard/SmartDashboard.h>
-
+#include "Util.h"
 LoaderSubsystem::LoaderSubsystem() = default;
 
 // This method will be called once per scheduler run
@@ -20,7 +20,14 @@ void LoaderSubsystem::IntakeLoader(double speed)
     m_intake.Set(speed);
 #endif
 }
-
+void LoaderSubsystem::LoadToTimer(double time, double speed)
+{
+InnerLoader(speed);
+IntakeLoader(speed);
+Util::DelayInSeconds((units::time::second_t) time);
+InnerLoader(0.0);
+IntakeLoader(0.0);
+}
 void LoaderSubsystem::InnerLoader(double speed)
 {
 #ifndef NOHW
