@@ -61,7 +61,7 @@ class DriveTrainSubsystem : public frc2::SubsystemBase {
 
   // PI/Vision Functions
   double GetPIAngle();
-  void VisionAllign(double speed, units::degree_t deadZone);
+  bool VisionAllign(double speed, units::degree_t deadZone);
 
   // IMU and Drive Functions
   void TurnAngleRelative(units::degree_t angle, double speed = 0.5, units::degree_t deadZone = 1_deg);
