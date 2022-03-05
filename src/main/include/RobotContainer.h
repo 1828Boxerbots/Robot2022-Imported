@@ -79,7 +79,10 @@ class RobotContainer
     
 
     VisionAllignCommand* m_pVisionAllignCmd = nullptr;
-    VisionShootCommand* m_pVisionShootCmd = nullptr;
+    VisionShootCommand* m_p15ftShoot        = nullptr;
+    VisionShootCommand *m_p8ftShoot         = nullptr;
+    VisionShootCommand *m_p13ftShoot        = nullptr;
+    VisionShootCommand *m_p10ftShoot        = nullptr;
 
     // AUTO TEST CMD
     PosWallAutoCommand *m_pwallAutoCmd = nullptr;
@@ -127,10 +130,10 @@ class RobotContainer
 
     LoadInOne *m_ploader                = nullptr;
     LoadInOne *m_peject                 = nullptr;
-    LoadInOne *m_pnumberOneCallAFullStop= nullptr;
+    LoadInOne *m_pLoadStop= nullptr;
     
-    ArmCommand *m_pArmDown=nullptr;
-    ArmCommand *m_pArmStop=nullptr;
+    ArmCommand *m_pArmDown              = nullptr;
+    ArmCommand *m_pArmStop              = nullptr;
     ShootSpeedCommand *m_pShootSpeed = nullptr;
     ShooterCommand *m_pShoot = nullptr;
     ShooterCommand *m_pStopShoot = nullptr;

@@ -7,15 +7,15 @@ RobotContainer::RobotContainer()
 {
   // Initialize all of your commands and subsystems here
   m_pdriveCmd = new DriveCommand(&m_driveTrainSub, &m_controllerOne, DriveTrainSubsystem::RC_STYLE);
-  m_ploader = new LoadInOne(&m_loaderSub,1);
-  m_pnumberOneCallAFullStop= new LoadInOne(&m_loaderSub,0);
-  m_peject = new LoadInOne(&m_loaderSub,1);
-  m_ploadInnerCmd = new LoadInnerCommand(&m_loaderSub, -1.0);
-  m_ploadIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 1.0);
+  m_ploader = new LoadInOne(&m_loaderSub,1,&m_controllerTwo);
+  m_pLoadStop= new LoadInOne(&m_loaderSub,0,&m_controllerTwo);
+  m_peject = new LoadInOne(&m_loaderSub,1,&m_controllerTwo);
+  m_ploadInnerCmd = new LoadInnerCommand(&m_loaderSub, &m_controllerTwo,-1.0);
+  m_ploadIntakeCmd = new LoadIntakeCommand(&m_loaderSub, &m_controllerTwo, 1.0);
   m_ploadToPhotoCmd = new LoadToPhotoCommand(&m_loaderSub, 0.2);
   m_ploadToShooterCmd = new LoadToShooterCommand(&m_loaderSub, 0.2);
-  m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
-  m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
+  m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, &m_controllerTwo, 0.0);
+  m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, &m_controllerTwo, 0.0);
   m_pLonely = new TheLoneTimerAutonomus(&m_driveTrainSub,&m_loaderSub,&m_shootSub,170.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
@@ -28,7 +28,12 @@ RobotContainer::RobotContainer()
   m_pShoot = new ShooterCommand(&m_shootSub, 1);
   m_pStopShoot = new ShooterCommand(&m_shootSub, 0.0);
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub);
-  m_pVisionShootCmd = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 30);
+  m_pArmDown = new ArmCommand(&m_loaderSub,0.3,&m_controllerTwo);
+  m_pArmStop = new ArmCommand(&m_loaderSub,0,&m_controllerTwo);
+  m_p8ftShoot = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 25.8);
+  m_p13ftShoot = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 29.8);
+  m_p10ftShoot = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 27.4);
+  m_p15ftShoot = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 31.3);
 
   // Configure the button bindings
   ConfigureButtonBindings();
@@ -63,29 +68,31 @@ void RobotContainer::ConfigureButtonBindings()
 
 void RobotContainer::SetButtonB()
 {
-  m_bButton.WhenPressed(m_pVisionAllignCmd/*Vision 18ft*/);
-  m_bButton2.WhenHeld(m_ploader);
-  m_bButton2.WhenReleased(m_pnumberOneCallAFullStop);
+  m_bButton.WhenPressed(m_p13ftShoot);
+  m_bButton2.WhileHeld(m_ploader);      
+  m_bButton2.WhenReleased(m_pLoadStop); 
 }
 
 void RobotContainer::SetButtonX()
 {
-  m_xButton.WhenPressed(m_pShoot);
-  m_xButton2.WhenHeld(m_pArmDown);
+  m_xButton.WhenPressed(m_p8ftShoot);
+  m_xButton2.WhileHeld(m_pArmDown);
   m_xButton2.WhenReleased(m_pArmStop);
-//  m_xButton.WhenHeld(m_pdownAutoArmCmd);
- // m_xButton.WhenHeld(m_ploadToPhotoCmd);
- // m_xButton.WhenPressed(m_pdownClimbCmd);
- // m_xButton.WhenHeld(m_pShootSpeed);
-  //m_xButton.WhenReleased(m_pStopShoot);
+
 }
 
-void RobotContainer::SetRightTrigger()
+void RobotContainer::SetButtonY()
 {
+  m_yButton.WhenPressed(m_p15ftShoot);
+  m_yButton2.WhileHeld(m_ploadInnerCmd);
+  m_yButton2.WhenReleased(m_pLoadStop);
 }
 
-void RobotContainer::SetLeftTrigger()
+void RobotContainer::SetButtonA()
 {
+  m_aButton.WhenPressed(m_pVisionAllignCmd);
+  m_aButton2.WhileHeld(m_ploadIntakeCmd);
+  m_aButton2.WhenReleased(m_pLoadStop);
 }
 
 void RobotContainer::SetRightBumper()
@@ -95,23 +102,16 @@ void RobotContainer::SetRightBumper()
 
 void RobotContainer::SetLeftBumper()
 {
-  m_leftBumper.WhenHeld(m_ploadToPhotoCmd);
+  m_leftBumper2.WhileHeld(m_ploadToPhotoCmd);
 }
 
-
-void RobotContainer::SetButtonY()
+void RobotContainer::SetRightTrigger()
 {
-  m_yButton.WhenHeld(m_pShoot);
-  m_yButton.WhenReleased(m_pStopShoot);
+  m_rightTrigger2.WhileHeld(m_pShoot);
+  m_rightTrigger2.WhenReleased(m_pStopShoot);
 }
 
-void RobotContainer::SetButtonA()
-{
-  //Load, Because the loader is near the drive train on the bottom.
-  // m_aButton.WhenHeld(m_pShoot);
-  // m_aButton.WhenReleased(m_pStopShoot);
-  m_aButton.WhenPressed(m_pVisionShootCmd);
-}
+void RobotContainer::SetLeftTrigger(){}
 
 void RobotContainer::ClimbEncoder()
 {

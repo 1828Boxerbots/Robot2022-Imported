@@ -4,11 +4,12 @@
 
 #include "commands/LoadIntakeCommand.h"
 
-LoadIntakeCommand::LoadIntakeCommand(LoaderSubsystem* pLoader, double speed) 
+LoadIntakeCommand::LoadIntakeCommand(LoaderSubsystem* pLoader, frc::XboxController *pControll, double speed) 
 {
   // Use addRequirements() here to declare subsystem dependencies.
   m_pLoader = pLoader;
   m_speed = speed;
+  m_pControll = pControll;
   AddRequirements(pLoader);
 }
 
@@ -18,7 +19,13 @@ void LoadIntakeCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void LoadIntakeCommand::Execute()
 {
-  m_pLoader->IntakeLoader(m_speed);
+  if(!m_pControll->GetLeftBumper()){
+    m_pLoader->IntakeLoader(m_speed);
+  }
+  else
+  {
+    m_pLoader->IntakeLoader(-m_speed);
+  }
 }
 
 // Called once the command ends or is interrupted.

@@ -4,11 +4,12 @@
 
 #include "commands/ArmCommand.h"
 
-ArmCommand::ArmCommand(LoaderSubsystem *pLoader, double speed)
+ArmCommand::ArmCommand(LoaderSubsystem *pLoader, double speed, frc::XboxController *pbox)
 {
   // Use addRequirements() here to declare subsystem dependencies.
   m_pLoader = pLoader;
   m_speed = speed;
+
   AddRequirements(pLoader); 
 }
 

@@ -6,20 +6,20 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
+#include <frc/XboxController.h>
 #include "subsystems/LoaderSubsystem.h"
 
 /**
  * An example command.
  *
- * <p>Note that this extends CommandHelper, rather extending CommandBase
+ * Note that this extends CommandHelper, rather extending CommandBase
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
 class ArmCommand
     : public frc2::CommandHelper<frc2::CommandBase, ArmCommand> {
  public:
-  ArmCommand(LoaderSubsystem *pLoader, double speed);
+  ArmCommand(LoaderSubsystem *pLoader, double speed, frc::XboxController*pbox);
 
   void Initialize() override;
 
@@ -33,6 +33,6 @@ class ArmCommand
   LoaderSubsystem *m_pLoader;
 
   double m_speed = 0;
-
+  frc::XboxController *m_pBox;
   bool m_isFinished = false;
 };
