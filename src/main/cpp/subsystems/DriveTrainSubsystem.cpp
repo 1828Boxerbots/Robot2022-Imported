@@ -291,12 +291,17 @@ double DriveTrainSubsystem::GetPIAngle()
 #endif
 }
 
-void DriveTrainSubsystem::VisionAllign(double speed, units::degree_t deadZone)
+bool DriveTrainSubsystem::VisionAllign(double speed, units::degree_t deadZone)
 {
     double turnAngle = -GetPIAngle();
     frc::SmartDashboard::PutNumber("PiAngle", turnAngle);
-    if(turnAngle != -666)
+    if(turnAngle != 666)
     {
         TurnAngleRelative((units::degree_t)turnAngle, speed, deadZone);
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
