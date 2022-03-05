@@ -99,9 +99,7 @@ void RobotContainer::SetLeftBumper()
 
 void RobotContainer::SetButtonY()
 {
-//Shoot, because the shooter is at the peak of the robot.
-m_yButton.WhenHeld(m_pShoot);
-m_yButton.WhenReleased(m_pStopShoot);
+m_yButton.WhenPressed(m_ploader);
 }
 
 void RobotContainer::SetButtonA()
