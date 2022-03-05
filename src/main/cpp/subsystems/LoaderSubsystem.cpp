@@ -102,8 +102,13 @@ bool LoaderSubsystem::IsHighLimitSwitchActive()
 #endif
 }
 
-void LoaderSubsystem::LoadToPhoto(double speed, bool loadToShoot)
+void LoaderSubsystem::LoadToPhoto(double speed, bool loadToShoot, double timeOut)
 {
+  m_timer.Reset();
+  m_timer.Start();
+
+  double startTime = (double) m_timer.Get();
+
   IntakeLoader(speed);
   InnerLoader(-speed);
 
@@ -112,13 +117,24 @@ void LoaderSubsystem::LoadToPhoto(double speed, bool loadToShoot)
   do 
   {
     bool photo = IsPhotoActive();
+    double currentTime = (double) m_timer.Get() - startTime;
 
     frc::SmartDashboard::PutNumber("LoadToPhotoCommand-Count", count++);
     frc::SmartDashboard::PutBoolean("LoadToPhotoCommand-Photo", photo);
+    frc::SmartDashboard::PutNumber("LoadToPhotoCommand-Timer", currentTime);
+    frc::SmartDashboard::PutNumber("LoadToPhotoCommand-StartTime", startTime);
+
+    if (currentTime < timeOut)
+    {
+      break;
+    }
+
   } while (IsPhotoActive() == loadToShoot);
 
   IntakeLoader(0.0);
   InnerLoader(0.0);
+
+  m_timer.Stop();
 }
 
 void LoaderSubsystem::AutoArm(double speed)
@@ -138,6 +154,7 @@ void LoaderSubsystem::AutoArm(double speed)
       MoveArm(fabsf(speed));
       bool HigherLimitSwitch = IsHighLimitSwitchActive();
       frc::SmartDashboard::PutNumber("AutoArmCommand-Count", count++);
+      frc::SmartDashboard::PutNumber("LoaderSubsystem-HigherLimitSwitch", HigherLimitSwitch);
     } 
   }
 
@@ -150,6 +167,7 @@ void LoaderSubsystem::AutoArm(double speed)
       MoveArm(-fabsf(speed));
       bool LowerLimitSwitch = IsLowLimitSwitchActive();
       frc::SmartDashboard::PutNumber("AutoArmCommand-Count", count++);
+      frc::SmartDashboard::PutNumber("LoaderSubsystem-LowerLimitSwitch", LowerLimitSwitch);
     } 
   } 
   else

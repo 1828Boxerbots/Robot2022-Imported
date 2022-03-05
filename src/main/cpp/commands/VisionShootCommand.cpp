@@ -26,7 +26,7 @@ void VisionShootCommand::Initialize()
 void VisionShootCommand::Execute()
 {
   // LoadToPhoto
-  m_pLoader->LoadToPhoto(m_loadSpeed, true);
+  m_pLoader->LoadToPhoto(m_loadSpeed, true, 4.0);
   // Vision Allign
   m_pDrive->VisionAllign(m_driveSpeed, m_deadZone);
 

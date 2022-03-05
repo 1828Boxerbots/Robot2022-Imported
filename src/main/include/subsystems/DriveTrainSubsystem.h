@@ -69,6 +69,7 @@ class DriveTrainSubsystem : public frc2::SubsystemBase {
 
   // Encoder and Drive Functions
   void ForwardInInch(double inch, double speed = 0.5);
+  void BackwardInInch(double inch, double speed = 0.5);
   void ForwardInInchIMU(double inch, double correctionSpeed = 0.1, units::degree_t deadZoneAngle = 1.0_deg, double speed = 0.5);
 
  private:

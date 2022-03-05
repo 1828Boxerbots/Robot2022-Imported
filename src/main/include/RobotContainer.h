@@ -26,7 +26,7 @@
 #include "commands/ClimbCommand.h"
 #include "commands/Pos1AutoCommand.h"
 #include "commands/LoadToShooterCommand.h"
-
+#include "commands/PosWallAutoCommand.h"
 #include "commands/VisionAllignCommand.h"
 #include "commands/ShootSpeedCommand.h"
 
@@ -78,7 +78,7 @@ class RobotContainer
     VisionAllignCommand* m_pVisionAllignCmd = nullptr;
 
     // AUTO TEST CMD
-    Pos1AutoCommand *m_pwallAutoCmd = nullptr;
+    PosWallAutoCommand *m_pwallAutoCmd = nullptr;
     Pos1AutoCommand *m_pmiddleAutoCmd = nullptr;
     Pos1AutoCommand *m_paloneAutoCmd = nullptr;
 

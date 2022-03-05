@@ -22,7 +22,7 @@ void LoadToPhotoCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void LoadToPhotoCommand::Execute() 
 {
- m_pLoader->LoadToPhoto(m_speed, true);
+ m_pLoader->LoadToPhoto(m_speed, true, 4.0);
 
   m_isFinished = true;
 }
