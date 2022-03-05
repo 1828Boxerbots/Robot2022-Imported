@@ -18,8 +18,8 @@ void LoadInOne::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void LoadInOne::Execute() 
 {
-  m_pLoader->LoadToTimer(3.5,0.5);
-  m_isFinished = true;
+  m_pLoader->IntakeLoader(m_speed);
+  m_pLoader->InnerLoader(m_speed);
 }
 
 // Called once the command ends or is interrupted.

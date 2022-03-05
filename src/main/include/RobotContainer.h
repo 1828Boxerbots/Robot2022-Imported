@@ -7,7 +7,8 @@
 #include <frc2/command/button/Button.h>
 #include <frc2/command/Command.h>
 #include <frc/XboxController.h>
-//
+
+#include "commands/ArmCommand.h"
 #include "commands/TheLoneTimerAutonomus.h"
 #include "commands/ShooterCommand.h"
 #include "commands/LoadInOne.h"
@@ -103,18 +104,33 @@ class RobotContainer
     void SetLeftTrigger();
 
     frc2::Button m_aButton {[this] {return m_controllerOne.GetAButton();}};
-    frc2::Button  m_bButton {[this] {return m_controllerOne.GetBButton();}};
+    frc2::Button m_bButton {[this] {return m_controllerOne.GetBButton();}};
     frc2::Button m_xButton {[this] {return m_controllerOne.GetXButton();}};
     frc2::Button m_yButton {[this] {return m_controllerOne.GetYButton();}};
     frc2::Button m_rightBumper {[this] {return m_controllerOne.GetRightBumper();}};
     frc2::Button m_leftBumper {[this] {return m_controllerOne.GetLeftBumper();}};
     frc2::Button m_rightTrigger {[this] {return m_controllerOne.GetRightTriggerAxis();}};
     frc2::Button m_leftTrigger {[this] {return m_controllerOne.GetLeftTriggerAxis();}};
+    frc2::Button m_BackButton {[this]{return m_controllerOne.GetBackButton();}};
+    frc2::Button m_StartButton {[this]{return m_controllerOne.GetStartButton();}};
     
+    frc2::Button m_aButton2 {[this]{return m_controllerTwo.GetAButton();}};    
+    frc2::Button m_bButton2 {[this]{return m_controllerTwo.GetBButton();}};    
+    frc2::Button m_xButton2 {[this]{return m_controllerTwo.GetXButton();}};    
+    frc2::Button m_yButton2 {[this]{return m_controllerTwo.GetYButton();}};    
+    frc2::Button m_rightBumper2 {[this]{return m_controllerTwo.GetRightBumper();}};    
+    frc2::Button m_leftBumper2 {[this]{return m_controllerTwo.GetLeftBumper();}};    
+    frc2::Button m_leftTrigger2 {[this]{return m_controllerTwo.GetLeftTriggerAxis();}};    
+    frc2::Button m_rightTrigger2 {[this]{return m_controllerTwo.GetRightTriggerAxis();}};
+    frc2::Button m_BackButton2 {[this]{return m_controllerTwo.GetBackButton();}};
+    frc2::Button m_StartButton2 {[this]{return m_controllerTwo.GetStartButton();}};
+
     LoadInOne *m_ploader                = nullptr;
     LoadInOne *m_peject                 = nullptr;
     LoadInOne *m_pnumberOneCallAFullStop= nullptr;
-
+    
+    ArmCommand *m_pArmDown=nullptr;
+    ArmCommand *m_pArmStop=nullptr;
     ShootSpeedCommand *m_pShootSpeed = nullptr;
     ShooterCommand *m_pShoot = nullptr;
     ShooterCommand *m_pStopShoot = nullptr;
