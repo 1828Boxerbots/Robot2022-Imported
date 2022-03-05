@@ -16,6 +16,7 @@ RobotContainer::RobotContainer()
   m_ploadToShooterCmd = new LoadToShooterCommand(&m_loaderSub, 0.2);
   m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
+  m_pLonely = new TheLoneTimerAutonomus(&m_driveTrainSub,&m_loaderSub,&m_shootSub,180.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
@@ -104,9 +105,6 @@ m_yButton.WhenPressed(m_ploader);
 
 void RobotContainer::SetButtonA()
 {
-  //Load, Because the loader is near the drive train on the bottom.
-  m_aButton.WhenHeld(m_pShoot);
-  m_aButton.WhenReleased(m_pStopShoot);
 }
 
 void RobotContainer::ClimbEncoder()
@@ -169,10 +167,11 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
 {
   frc2::Command* cmd = nullptr;
   frc::SmartDashboard::PutBoolean("Auto Status", true);
+#pragma region
   switch (GetDPDT())
   {
   default:
-    cmd = m_pmiddleAutoCmd;
+    cmd = m_pLonely;
     break;
     
   //case 2:
@@ -187,7 +186,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   //  cmd = nullptr;
    // break;
   }
-  
+#pragma endregion
   if(cmd == nullptr)
   {
     frc::SmartDashboard::PutBoolean("Auto Status", false);

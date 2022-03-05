@@ -7,7 +7,8 @@
 #include <frc2/command/button/Button.h>
 #include <frc2/command/Command.h>
 #include <frc/XboxController.h>
-
+//
+#include "commands/TheLoneTimerAutonomus.h"
 #include "commands/ShooterCommand.h"
 #include "commands/LoadInOne.h"
 
@@ -39,7 +40,7 @@
  * scheduler calls).  Instead, the structure of the robot (including subsystems,
  * commands, and button mappings) should be declared here.
  */
-class RobotContainer 
+class RobotContainer
 {
  public:
   RobotContainer();
@@ -81,7 +82,7 @@ class RobotContainer
     Pos1AutoCommand *m_pwallAutoCmd = nullptr;
     Pos1AutoCommand *m_pmiddleAutoCmd = nullptr;
     Pos1AutoCommand *m_paloneAutoCmd = nullptr;
-
+    TheLoneTimerAutonomus *m_pLonely = nullptr;
     frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
     frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};
 
