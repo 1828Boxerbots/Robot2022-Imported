@@ -28,6 +28,7 @@
 #include "commands/LoadToShooterCommand.h"
 
 #include "commands/VisionAllignCommand.h"
+#include "commands/VisionShootCommand.h"
 #include "commands/ShootSpeedCommand.h"
 
 #include <frc/DigitalInput.h>
@@ -76,6 +77,7 @@ class RobotContainer
     
 
     VisionAllignCommand* m_pVisionAllignCmd = nullptr;
+    VisionShootCommand* m_pVisionShootCmd = nullptr;
 
     // AUTO TEST CMD
     Pos1AutoCommand *m_pwallAutoCmd = nullptr;

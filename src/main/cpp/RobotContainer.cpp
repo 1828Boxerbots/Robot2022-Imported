@@ -28,6 +28,7 @@ RobotContainer::RobotContainer()
   m_pStopShoot = new ShooterCommand(&m_shootSub, 0.0);
 
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub);
+  m_pVisionShootCmd = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 0.3, 0.7, 2_deg);
 
   // Configure the button bindings
   ConfigureButtonBindings();
@@ -105,8 +106,9 @@ m_yButton.WhenPressed(m_ploader);
 void RobotContainer::SetButtonA()
 {
   //Load, Because the loader is near the drive train on the bottom.
-  m_aButton.WhenHeld(m_pShoot);
-  m_aButton.WhenReleased(m_pStopShoot);
+  // m_aButton.WhenHeld(m_pShoot);
+  // m_aButton.WhenReleased(m_pStopShoot);
+  m_aButton.WhenPressed(m_pVisionShootCmd);
 }
 
 void RobotContainer::ClimbEncoder()

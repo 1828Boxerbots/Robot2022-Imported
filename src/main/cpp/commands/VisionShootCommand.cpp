@@ -25,15 +25,19 @@ void VisionShootCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void VisionShootCommand::Execute()
 {
-  // LoadToPhoto
-  m_pLoader->LoadToPhoto(m_loadSpeed, true);
   // Vision Allign
-  m_pDrive->VisionAllign(m_driveSpeed, m_deadZone);
+  if(m_pDrive->VisionAllign(m_driveSpeed, m_deadZone))
+  {
 
-  //Calculate the speed of the shooter needed
+    //Calculate the speed of the shooter needed
 
-  // ShootSpeed
-  m_pShooter->SetShooterSpeed(50);
+    // ShootSpeed
+    m_pShooter->SetShooterSpeed(34);
+
+    m_pLoader->LoadToTimer(1, m_loadSpeed);
+
+    m_pShooter->ShootMotor(0.0);
+  }
 
   m_isFinished = true;
 }
