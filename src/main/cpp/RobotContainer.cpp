@@ -28,7 +28,7 @@ RobotContainer::RobotContainer()
   m_pStopShoot = new ShooterCommand(&m_shootSub, 0.0);
 
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub);
-  m_pVisionShootCmd = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 0.3, 0.7, 2_deg);
+  m_pVisionShootCmd = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 30);
 
   // Configure the button bindings
   ConfigureButtonBindings();
