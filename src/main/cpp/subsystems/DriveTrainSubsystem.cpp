@@ -66,9 +66,6 @@ void DriveTrainSubsystem::GetEncoderDistance(double* pLeft, double* pRight)
     double left = m_leftEncoder.GetDistance(); 
     double right = m_rightEncoder.GetDistance();
 
-    frc::SmartDashboard::PutNumber("Left Encoder Distance", left);
-    frc::SmartDashboard::PutNumber("Right Encoder Distance", right);
-
     if(pLeft != nullptr)
     {
         *pLeft = left;
@@ -77,6 +74,8 @@ void DriveTrainSubsystem::GetEncoderDistance(double* pLeft, double* pRight)
     {   
         *pRight = -right;
     }
+    frc::SmartDashboard::PutNumber("Left Encoder Distance", left);
+    frc::SmartDashboard::PutNumber("Right Encoder Distance", right);
 
 #endif
 }
@@ -177,6 +176,12 @@ void DriveTrainSubsystem::TurnAngleRelative(units::degree_t angle, double speed,
     units::degree_t highAngle = targetAngle + deadZone;
 
     frc::SmartDashboard::PutNumber("TargetAngle-Relative", (double)targetAngle);
+    frc::SmartDashboard::PutNumber("TargetAngle-Anglex", (double)GetAngleX());
+    frc::SmartDashboard::PutNumber("TargetAngle-Angley", (double)GetAngleY());
+    frc::SmartDashboard::PutNumber("TargetAngle-Anglez", (double)GetAngleZ());
+    frc::SmartDashboard::PutNumber("TargetAngle-Angle", (double)angle);
+    frc::SmartDashboard::PutNumber("TargetAngle-DeadZone", (double)deadZone);
+    frc::SmartDashboard::PutNumber("TargetAngle-speed", (double)speed);
 
     while(currentAngle > highAngle or currentAngle < lowAngle)
     {
@@ -226,7 +231,7 @@ void DriveTrainSubsystem::ForwardInInch(double inch, double speed)
 {
 #ifndef NOHW_SENSORS
     double currentDistance;
-    GetEncoderDistance(&currentDistance);
+    GetEncoderDistance(nullptr,&currentDistance);
     double targetDistance = currentDistance + inch;
 
     while(currentDistance < targetDistance)
@@ -244,10 +249,10 @@ void DriveTrainSubsystem::BackwardInInch(double inch, double speed)
 {
 #ifndef NOHW_SENSORS
     double currentDistance;
-    GetEncoderDistance(&currentDistance);
-    double targetDistance = fabsf(currentDistance) + fabs(inch);
+    GetEncoderDistance(nullptr, &currentDistance);
+    double targetDistance = currentDistance - fabsf(inch);
 
-    while(-fabsf(currentDistance) > -fabsf(targetDistance))
+    while(currentDistance > targetDistance)
     {
         MoveTank(-fabsf(speed), -fabsf(speed));
         GetEncoderDistance(nullptr,&currentDistance);

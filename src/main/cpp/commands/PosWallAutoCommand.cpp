@@ -12,6 +12,7 @@ double turnAngleToShoot, double distanceBack, double turnAngleToLeave)
   m_pShooterSub = pShoot;
   m_pDriveSub = pDrive;
   m_turnAngleToShoot = turnAngleToShoot;
+  m_turnAngleToLeave = turnAngleToLeave;
   m_distanceBack = distanceBack;
 
   // Use addRequirements() here to declare subsystem dependencies.
@@ -31,10 +32,9 @@ void PosWallAutoCommand::Execute()
   double intakeSpeed = 0.8;
   double distanceToBall = 42.0;
   double distanceToLeave = 60.0;
-  double backwardDistance = -30.0;
-  double forwardSpeed = 0.2; // Set back to 0.4 when done testing.
-  double backwardSpeed = 0.2; // Set back to 0.4 when done testing.
-  double innerSpeed = 0.5;
+  double backwardDistance = 30.0;
+  double driveTrainSpeed = 0.4; 
+  double innerSpeed = 0.25;
   double innerTime = 0.0;
   units::degree_t turnAngleToShoot = (units::degree_t) m_turnAngleToShoot;
   units::degree_t turnAngleToLeave = (units::degree_t) m_turnAngleToLeave;
@@ -42,69 +42,77 @@ void PosWallAutoCommand::Execute()
   units::degree_t turnDeadZone = (units::degree_t) 5.0;
   double shooterTargetSpeed = 70;
   double shooterStopSpeed = 0.0;
-  double timeLimit = 4.0;
+  double timeLimit = 8.0;
 
 
   //1. Drop arm.
   //m_pLoaderSub->IntakeLoader(armSpeed);
   frc::SmartDashboard::PutString("Pos1AutoCommand-WallSteps", "step 1");
-/*
+
   //2. Turn on intake loader.
   m_pLoaderSub->IntakeLoader(intakeSpeed);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 2");
 
   //3. Move forward to ball.
-  m_pDriveSub->ForwardInInch(distanceToBall, forwardSpeed);
+  m_pDriveSub->ForwardInInch(distanceToBall, driveTrainSpeed);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 3");
-*/
-  //4. Move backwards.
-  m_pDriveSub->BackwardInInch(backwardDistance, backwardDistance);
+
+  //4. Stop intake.
+  m_pLoaderSub->IntakeLoader(0.0);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 4");
-/*
-  //5. Turn 180 degrees to shoot.
-  m_pDriveSub->TurnAngleRelative(turnAngleToShoot, turnSpeed, turnDeadZone);
+
+  //5. Move backwards.
+  m_pDriveSub->BackwardInInch(backwardDistance, driveTrainSpeed);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 5");
 
-  //6. VisionAllign.
-  //m_pDriveSub->VisionAllign(turnSpeed, turnDeadZone);
+  //6. Turn 180 degrees to shoot.
+  m_pDriveSub->TurnAngleRelative(turnAngleToShoot, turnSpeed, turnDeadZone);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 6");
 
-  //7. Load to Photo Ball 1.
-  m_pLoaderSub->LoadToPhoto(intakeSpeed, true, timeLimit);
+  //7. VisionAllign.
+  //m_pDriveSub->VisionAllign(turnSpeed, turnDeadZone);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 7");
 
-  //8. Turn on Shooter.
-  m_pShooterSub->SetShooterSpeed(shooterTargetSpeed);
+  //8. Load to Photo Ball 1.
+  m_pLoaderSub->LoadToPhoto(innerSpeed, true, timeLimit);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 8");
 
-  //9. Load to Shoot Ball 1.
-  m_pLoaderSub->LoadToPhoto(intakeSpeed, false, timeLimit);
+  //9. Turn on Shooter.
+  m_pShooterSub->SetShooterSpeed(shooterTargetSpeed);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 9");
 
-  //10. VisionAllign.
-  //m_pDriveSub->VisionAllign(turnSpeed, turnDeadZone);
+  //10. Load to Shoot Ball 1.
+  m_pLoaderSub->LoadToPhoto(innerSpeed, false, timeLimit);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 10");
 
-  //11. Load to Photo Ball 2.
-  m_pLoaderSub->LoadToPhoto(intakeSpeed, true, timeLimit);
+  //11. VisionAllign.
+  //m_pDriveSub->VisionAllign(turnSpeed, turnDeadZone);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 11");
 
-  //12. Load to Shoot Ball 2.
-  m_pLoaderSub->LoadToPhoto(intakeSpeed, false, timeLimit);
+  //12. Load to Photo Ball 2.
+  m_pLoaderSub->LoadToPhoto(innerSpeed, true, timeLimit);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 12");
 
-  //13. Turn off Shooter.
-  m_pShooterSub->SetShooterSpeed(shooterStopSpeed);
+  //13. Turn on Shooter.
+  m_pShooterSub->SetShooterSpeed(shooterTargetSpeed);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 13");
 
-  //14. Turn 90 degrees to leave tarmac.
-  m_pDriveSub->TurnAngleRelative(turnAngleToLeave);
+  //14. Load to Shoot Ball 2.
+  m_pLoaderSub->LoadToPhoto(innerSpeed, false, timeLimit);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 14");
 
-  //15. Move forward to leave tarmac.
-  m_pDriveSub->ForwardInInch(distanceToLeave, forwardSpeed);
+  //15. Turn off Shooter.
+  m_pShooterSub->SetShooterSpeed(shooterStopSpeed);
   frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 15");
-  */
+
+  //16. Turn 90 degrees to leave tarmac.
+  m_pDriveSub->TurnAngleRelative(turnAngleToLeave, turnSpeed, turnDeadZone);
+  frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 16");
+
+  //17. Move forward to leave tarmac.
+  m_pDriveSub->ForwardInInch(distanceToLeave, driveTrainSpeed);
+  frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 17");
+  
  
  m_isFinished = true;
 }
