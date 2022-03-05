@@ -151,7 +151,8 @@ void DriveTrainSubsystem::MoveTank(double left, double right)
 void DriveTrainSubsystem::ForwardInTime(double time, double speed)
 {
     MoveTank(speed, speed);
-    Util::Log("My Code hTingy",time);
+    Util::Log("ForwardInTime Speed",speed);
+    Util::Log("ForwardInTime Time",time);
     Util::DelayInSeconds((units::time::second_t) time);
 
     //Stop

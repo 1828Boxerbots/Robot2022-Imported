@@ -24,7 +24,8 @@
 class VisionShootCommand
     : public frc2::CommandHelper<frc2::CommandBase, VisionShootCommand> {
  public:
-  VisionShootCommand(DriveTrainSubsystem* pDrive, ShooterSubsystem* pShooter, LoaderSubsystem* pLoader, double driveSpeed, double loadSpeed, units::degree_t deadZone);
+  VisionShootCommand(DriveTrainSubsystem* pDrive, ShooterSubsystem* pShooter, LoaderSubsystem* pLoader, double targetSpeed, double driveSpeed = 0.2, 
+                      double loadSpeed = 1.0, double loadTime = 1, units::degree_t deadZone = 1_deg);
 
   void Initialize() override;
 
@@ -39,8 +40,10 @@ class VisionShootCommand
   DriveTrainSubsystem* m_pDrive;
   ShooterSubsystem* m_pShooter;
   LoaderSubsystem* m_pLoader;
+  double m_targetSpeed;
   double m_driveSpeed;
   double m_loadSpeed;
+  double m_loadTime;
   units::degree_t m_deadZone;
 
   bool m_isFinished = false;

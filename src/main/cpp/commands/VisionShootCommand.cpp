@@ -4,13 +4,16 @@
 
 #include "commands/VisionShootCommand.h"
 
-VisionShootCommand::VisionShootCommand(DriveTrainSubsystem* pDrive, ShooterSubsystem* pShooter, LoaderSubsystem* pLoader, double driveSpeed, double loadSpeed, units::degree_t deadZone)
+VisionShootCommand::VisionShootCommand(DriveTrainSubsystem* pDrive, ShooterSubsystem* pShooter, LoaderSubsystem* pLoader, double targetSpeed, double driveSpeed, 
+                      double loadSpeed, double loadTime, units::degree_t deadZone)
 {
   m_pDrive = pDrive;
   m_pShooter = pShooter;
   m_pLoader = pLoader;
+  m_targetSpeed = targetSpeed;
   m_driveSpeed = driveSpeed;
   m_loadSpeed = loadSpeed;
+  m_loadTime = loadTime;
   m_deadZone = deadZone;
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements(m_pDrive);
@@ -34,9 +37,9 @@ void VisionShootCommand::Execute()
     //Calculate the speed of the shooter needed
 
     // ShootSpeed
-    m_pShooter->SetShooterSpeed(34);
+    m_pShooter->SetShooterSpeed(m_targetSpeed);
 
-    m_pLoader->LoadToTimer(1, m_loadSpeed);
+    m_pLoader->LoadToTimer(m_loadTime, m_loadSpeed);
 
     m_pShooter->ShootMotor(0.0);
   }
