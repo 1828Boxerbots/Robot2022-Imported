@@ -5,6 +5,8 @@
 #include "commands/TheLoneTimerAutonomus.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
+#include "Util.h"
+
 TheLoneTimerAutonomus::TheLoneTimerAutonomus(DriveTrainSubsystem *pdrive, LoaderSubsystem *pload, ShooterSubsystem *pshoot, double turnAngle) 
 {
   m_pdrive = pdrive;
@@ -30,9 +32,9 @@ void TheLoneTimerAutonomus::Execute()
   double forwardSpeed = 0.6;
   double innerSpeed = 0.5;
   units::degree_t turnAngle = (units::degree_t) m_turnAngle;
-  double turnSpeed = 0.1;
-  units::degree_t turnDeadZone = (units::degree_t) 5.0;
-  double shooterTargetSpeed = 70;
+  double turnSpeed = 0.15;
+  units::degree_t turnDeadZone = (units::degree_t) 2.0;
+  double shooterTargetSpeed = 74.0;
   double shooterStopSpeed = 0.0;
 
   //1. DropArm
@@ -42,52 +44,37 @@ void TheLoneTimerAutonomus::Execute()
   //2. Turn on Intake 
   m_ploader->IntakeLoader(intakeSpeed);
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 2");
+  
   //3. Forward to Ball
   m_pdrive->ForwardInTime(0.76, forwardSpeed);
-    frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 3");
-
-  //4. Load Ball 1 to Photo
-  m_ploader->LoadToTimer(3.5,innerSpeed);
-  m_ploader->IntakeLoader(0);
-  frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 4");
+  frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 3");
 
   //5. Turn Around 180 Towards Target
   m_pdrive->TurnAngleRelative(turnAngle, turnSpeed, turnDeadZone);
+  m_ploader->IntakeLoader(0);
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 5");
 
-  //6. Allign Robot to Target to Prepare for Shooting
-  //m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
+  // 6. Allign Robot to Target to Prepare for Shooting
+  // m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 6");
 
-  //7. Shoot Ball 1 Towards Target
+  // 7-8. Shoot Ball 1 Towards Target
   m_pshooter->SetShooterSpeed(shooterTargetSpeed);
-  m_ploader->LoadToTimer(1,0);
-  m_ploader->LoadToTimer(1);
-  frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 7");
+  Util::Log("TheLoneTimerAutonomus-Steps","step 7");
+  m_ploader->LoadToTimer(1.5,0.6);
+  frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 8");
 
-  // //8. Load Ball 1 to Shooter
-  // m_ploader->LoadToPhoto(innerSpeed, false);
-  //   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 8");
+  //10. Allign Robot to Target to Prepare for Shooting
+  //m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
+    frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 10");
 
-  // //9. Load Ball 2 to Photo
-  // m_ploader->LoadToPhoto(innerSpeed, true);
-  //   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 9");
+  //11. Shoot Ball 2 Towards Target 
+  m_pshooter->SetShooterSpeed(shooterTargetSpeed);
+    frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 11");
 
-  // //10. Allign Robot to Target to Prepare for Shooting
-  // //m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
-  //   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 10");
-
-  // //11. Shoot Ball 2 Towards Target 
-  // m_pshooter->SetShooterSpeed(shooterTargetSpeed);
-  //   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 11");
-
-  // //12. Load Ball 2 to Shooter
-  // m_ploader->LoadToPhoto(innerSpeed, false);
-  //   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 12");
-
-  // //13. Stop Shooter Motor
-  // m_pshooter->SetShooterSpeed(shooterStopSpeed);
-  //   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 13");
+  //12. Load Ball 2 to Shooter  
+  m_ploader->LoadToTimer(3,innerSpeed);
+  m_pshooter->ShootMotor(0.0);
 
   m_IsFinished = true;
 }
