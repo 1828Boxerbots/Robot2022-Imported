@@ -25,6 +25,8 @@ void VisionShootCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void VisionShootCommand::Execute()
 {
+  // LoadToPhoto
+  m_pLoader->LoadToPhoto(m_loadSpeed, true, 4.0);
   // Vision Allign
   if(m_pDrive->VisionAllign(m_driveSpeed, m_deadZone))
   {

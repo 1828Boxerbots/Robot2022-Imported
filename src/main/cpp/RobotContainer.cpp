@@ -22,7 +22,7 @@ RobotContainer::RobotContainer()
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
   m_pmiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
   m_paloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
-  m_pwallAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 170.0);
+  m_pwallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 180.0, 30.0, 90.0);
 
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, 1);

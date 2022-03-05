@@ -19,7 +19,7 @@ void LoadToShooterCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void LoadToShooterCommand::Execute() 
 {
-   m_pLoader->LoadToPhoto(m_speed, false);
+   m_pLoader->LoadToPhoto(m_speed, false, 4.0);
 
   m_isFinished = true;
 }

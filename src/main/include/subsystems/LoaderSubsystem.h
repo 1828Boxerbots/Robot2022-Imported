@@ -6,6 +6,7 @@
 #include <frc/motorcontrol/Victor.h>
 #include "Constants.h"
 #include <frc/DigitalInput.h>
+#include <frc/Timer.h>
 
 class LoaderSubsystem : public frc2::SubsystemBase {
  public:
@@ -22,7 +23,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   void IntakeLoader(double speed);
   void InnerLoader(double speed);
   // Photogate Functions
-  void LoadToPhoto(double speed, bool loadToShoot);
+  void LoadToPhoto(double speed, bool loadToShoot, double timeOut);
   bool IsPhotoActive();
   void LoadToTimer(double time, double speed = 1.0);
   // LimitSwitch Functions (For now, it is Halleffect)
@@ -43,6 +44,8 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   frc::DigitalInput m_photogate{DIO_PHOTOGATE};
   frc::DigitalInput m_limitSwitchLow{DIO_HALLEFFECT_LOWER};
   frc::DigitalInput m_limitSwitchHigh{DIO_HALLEFFECT_HIGHER};
+
+  frc::Timer m_timer;
 
  #endif
   // Photogate
