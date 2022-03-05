@@ -6,7 +6,7 @@
 RobotContainer::RobotContainer() 
 {
   // Initialize all of your commands and subsystems here
-  m_pdriveCmd = new DriveCommand(&m_driveTrainSub, &m_controllerOne, DriveTrainSubsystem::TANK_STYLE);
+  m_pdriveCmd = new DriveCommand(&m_driveTrainSub, &m_controllerOne, DriveTrainSubsystem::RC_STYLE);
   m_ploader = new LoadInOne(&m_loaderSub,1);
   m_pnumberOneCallAFullStop= new LoadInOne(&m_loaderSub,0);
   m_peject = new LoadInOne(&m_loaderSub,1);
@@ -22,12 +22,11 @@ RobotContainer::RobotContainer()
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
   m_pmiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
   m_paloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
-  m_pwallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 180.0, 30.0, 90.0);
+  m_pwallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 30.0, 80.0);
 
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, 1);
   m_pStopShoot = new ShooterCommand(&m_shootSub, 0.0);
-
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub);
   m_pVisionShootCmd = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 30);
 
@@ -64,15 +63,16 @@ void RobotContainer::ConfigureButtonBindings()
 
 void RobotContainer::SetButtonB()
 {
-  m_bButton.WhenPressed(m_pdriveCmd);
- // m_bButton.WhenPressed(m_pupClimbCmd);
- // m_bButton.WhenHeld(m_ploadToPhotoCmd);
- // m_bButton.WhenReleased(m_pStopShoot);
+  m_bButton.WhenPressed(m_pVisionAllignCmd/*Vision 18ft*/);
+  m_bButton2.WhenHeld(m_ploader);
+  m_bButton2.WhenReleased(m_pnumberOneCallAFullStop);
 }
 
 void RobotContainer::SetButtonX()
 {
   m_xButton.WhenPressed(m_pShoot);
+  m_xButton2.WhenHeld(m_pArmDown);
+  m_xButton2.WhenReleased(m_pArmStop);
 //  m_xButton.WhenHeld(m_pdownAutoArmCmd);
  // m_xButton.WhenHeld(m_ploadToPhotoCmd);
  // m_xButton.WhenPressed(m_pdownClimbCmd);
@@ -101,7 +101,8 @@ void RobotContainer::SetLeftBumper()
 
 void RobotContainer::SetButtonY()
 {
-m_yButton.WhenPressed(m_ploader);
+  m_yButton.WhenHeld(m_pShoot);
+  m_yButton.WhenReleased(m_pStopShoot);
 }
 
 void RobotContainer::SetButtonA()
@@ -176,7 +177,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   switch (GetDPDT())
   {
   default:
-    cmd = m_pLonely;
+    cmd = m_pwallAutoCmd;
     break;
     
   //case 2:

@@ -124,7 +124,7 @@ void LoaderSubsystem::LoadToPhoto(double speed, bool loadToShoot, double timeOut
     frc::SmartDashboard::PutNumber("LoadToPhotoCommand-Timer", currentTime);
     frc::SmartDashboard::PutNumber("LoadToPhotoCommand-StartTime", startTime);
 
-    if (currentTime < timeOut)
+    if(currentTime > timeOut)
     {
       break;
     }

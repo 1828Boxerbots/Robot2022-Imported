@@ -66,9 +66,9 @@ void Robot::TeleopInit() {
  */
 void Robot::TeleopPeriodic() 
 {
- m_container.ClimbEncoder ();
+ //m_container.ClimbEncoder ();
   // m_container.EncoderValues();
-  // m_container.TestPhoto();
+   m_container.TestPhoto();
 }
 
 /**
