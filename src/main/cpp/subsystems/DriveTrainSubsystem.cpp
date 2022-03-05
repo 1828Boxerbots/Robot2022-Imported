@@ -4,6 +4,7 @@
 
 #include "subsystems/DriveTrainSubsystem.h"
 #include "Util.h"
+#include <cmath>
 DriveTrainSubsystem::DriveTrainSubsystem(){}
 
 // This method will be called once per scheduler run
@@ -151,7 +152,8 @@ void DriveTrainSubsystem::MoveTank(double left, double right)
 void DriveTrainSubsystem::ForwardInTime(double time, double speed)
 {
     MoveTank(speed, speed);
-    Util::Log("My Code hTingy",time);
+    Util::Log("ForwardInTime Speed",speed);
+    Util::Log("ForwardInTime Time",time);
     Util::DelayInSeconds((units::time::second_t) time);
 
     //Stop
@@ -230,6 +232,24 @@ void DriveTrainSubsystem::ForwardInInch(double inch, double speed)
     while(currentDistance < targetDistance)
     {
         MoveTank(speed, speed);
+        GetEncoderDistance(nullptr,&currentDistance);
+    }
+
+    //Stop
+    MoveTank(0.0, 0.0);
+#endif
+}
+
+void DriveTrainSubsystem::BackwardInInch(double inch, double speed)
+{
+#ifndef NOHW_SENSORS
+    double currentDistance;
+    GetEncoderDistance(&currentDistance);
+    double targetDistance = fabsf(currentDistance) + fabs(inch);
+
+    while(-fabsf(currentDistance) > -fabsf(targetDistance))
+    {
+        MoveTank(-fabsf(speed), -fabsf(speed));
         GetEncoderDistance(nullptr,&currentDistance);
     }
 

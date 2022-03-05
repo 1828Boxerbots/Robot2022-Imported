@@ -16,12 +16,13 @@ RobotContainer::RobotContainer()
   m_ploadToShooterCmd = new LoadToShooterCommand(&m_loaderSub, 0.2);
   m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, 0.0);
   m_pstopInnerCmd = new LoadInnerCommand(&m_loaderSub, 0.0);
+  m_pLonely = new TheLoneTimerAutonomus(&m_driveTrainSub,&m_loaderSub,&m_shootSub,170.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
   m_pmiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
   m_paloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
-  m_pwallAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 170.0);
+  m_pwallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 180.0, 30.0, 90.0);
 
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, 1);
@@ -171,10 +172,11 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
 {
   frc2::Command* cmd = nullptr;
   frc::SmartDashboard::PutBoolean("Auto Status", true);
+#pragma region
   switch (GetDPDT())
   {
   default:
-    cmd = m_pmiddleAutoCmd;
+    cmd = m_pLonely;
     break;
     
   //case 2:
@@ -189,7 +191,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   //  cmd = nullptr;
    // break;
   }
-  
+#pragma endregion
   if(cmd == nullptr)
   {
     frc::SmartDashboard::PutBoolean("Auto Status", false);
