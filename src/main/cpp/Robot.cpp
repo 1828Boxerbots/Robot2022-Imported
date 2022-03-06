@@ -45,7 +45,10 @@ void Robot::AutonomousInit() {
   }
 }
 
-void Robot::AutonomousPeriodic() {}
+void Robot::AutonomousPeriodic() 
+{
+  m_container.EncoderValues();
+}
 
 void Robot::TeleopInit() {
   // This makes sure that the autonomous stops running when
@@ -56,7 +59,6 @@ void Robot::TeleopInit() {
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;
   }
-
   // m_container.RunDrive();
   // m_container.ClimbEncoder();
 }
@@ -67,8 +69,8 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() 
 {
  //m_container.ClimbEncoder ();
-  // m_container.EncoderValues();
-   m_container.TestPhoto();
+  m_container.EncoderValues();
+   //m_container.TestPhoto();
 }
 
 /**

@@ -23,7 +23,7 @@ RobotContainer::RobotContainer()
   m_pmiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
   m_paloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
   m_pwallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 30.0, 80.0);
-
+  m_pWallTimeAutoCmd = new PosWallTimerAutoCommand (&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 80.0);
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, 1);
   m_pStopShoot = new ShooterCommand(&m_shootSub, 0.0);
@@ -159,10 +159,10 @@ void RobotContainer::EncoderValues()
   m_driveTrainSub .GetEncoderRaw(&rawLeft, &rawRight);
   units::degree_t angle = m_driveTrainSub .GetADIAngle();
 
-  frc::SmartDashboard::PutNumber("Left E Dis", disLeft);
-  frc::SmartDashboard::PutNumber("Right E Dis", disRight);
-  frc::SmartDashboard::PutNumber("Left E Raw", rawLeft);
-  frc::SmartDashboard::PutNumber("Right E Raw", rawRight);
+  frc::SmartDashboard::PutNumber("EncoderValues-Left E Dis", disLeft);
+  frc::SmartDashboard::PutNumber("EncoderValues-Right E Dis", disRight);
+  frc::SmartDashboard::PutNumber("EncoderValues-Left E Raw", rawLeft);
+  frc::SmartDashboard::PutNumber("EncoderValues-Right E Raw", rawRight);
 
   m_shootSub.GetShootDistance();
 
@@ -177,7 +177,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   switch (GetDPDT())
   {
   default:
-    cmd = m_pwallAutoCmd;
+    cmd = m_pWallTimeAutoCmd;
     break;
     
   //case 2:
