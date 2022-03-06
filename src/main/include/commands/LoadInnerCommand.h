@@ -6,7 +6,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
+#include <frc/XboxController.h>
 #include "subsystems/LoaderSubsystem.h"
 /**
  * An example command.
@@ -18,20 +18,22 @@
 class LoadInnerCommand
     : public frc2::CommandHelper<frc2::CommandBase, LoadInnerCommand> {
  public:
-  LoadInnerCommand(LoaderSubsystem* pLoader, double speed = 0.5);
-
+  LoadInnerCommand(LoaderSubsystem* pLoader,frc::XboxController *box, double speed = 0.5);
+  
   void Initialize() override;
-
+  
   void Execute() override;
-
+  
   void End(bool interrupted) override;
-
+  
   bool IsFinished() override;
-
+  
  private:
   LoaderSubsystem* m_pLoader;
-
+  
   double m_speed = 0.5;
-
+  
   bool m_isFinished = false;
+
+  frc::XboxController *m_pxBox=nullptr;
 };

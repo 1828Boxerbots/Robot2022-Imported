@@ -4,10 +4,11 @@
 #include "subsystems/LoaderSubsystem.h"
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc/XboxController.h>
 class LoadInOne : public frc2::CommandHelper<frc2::CommandBase, LoadInOne> {
  public:
 
-  LoadInOne( LoaderSubsystem* pLoader,double speed);
+  LoadInOne( LoaderSubsystem* pLoader,double speed, frc::XboxController *pController);
 
   void Initialize() override;
 
@@ -19,6 +20,7 @@ class LoadInOne : public frc2::CommandHelper<frc2::CommandBase, LoadInOne> {
 
  private: 
 
+  frc::XboxController *m_pController =nullptr; 
   LoaderSubsystem* m_pLoader=nullptr;
   bool m_isFinished=false;
   double m_speed;

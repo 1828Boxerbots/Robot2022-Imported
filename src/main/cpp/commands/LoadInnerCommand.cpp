@@ -4,11 +4,12 @@
 
 #include "commands/LoadInnerCommand.h"
 #include "constants.h"
-LoadInnerCommand::LoadInnerCommand(LoaderSubsystem* pLoader, double speed) 
+LoadInnerCommand::LoadInnerCommand(LoaderSubsystem* pLoader,frc::XboxController *box, double speed) 
 {
   // Use addRequirements() here to declare subsystem dependencies.
   m_pLoader = pLoader;
   m_speed = speed;
+  m_pxBox = box;
   AddRequirements(pLoader);
 }
 
@@ -18,7 +19,14 @@ void LoadInnerCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void LoadInnerCommand::Execute()
 {
-  m_pLoader->InnerLoader(m_speed);
+  if(m_pxBox!=nullptr&&m_pxBox->GetLeftBumper())
+  {
+    m_pLoader->InnerLoader(-m_speed);
+  }
+  else
+  {
+    m_pLoader->InnerLoader(m_speed);
+  }
 }
 
 // Called once the command ends or is interrupted.

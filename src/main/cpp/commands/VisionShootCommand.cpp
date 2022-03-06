@@ -4,13 +4,13 @@
 
 #include "commands/VisionShootCommand.h"
 
-VisionShootCommand::VisionShootCommand(DriveTrainSubsystem* pDrive, ShooterSubsystem* pShooter, LoaderSubsystem* pLoader, double targetSpeed, double driveSpeed, 
+VisionShootCommand::VisionShootCommand(DriveTrainSubsystem* pDrive, ShooterSubsystem* pShooter, LoaderSubsystem* pLoader, double distance, double driveSpeed, 
                       double loadSpeed, double loadTime, units::degree_t deadZone)
 {
   m_pDrive = pDrive;
   m_pShooter = pShooter;
   m_pLoader = pLoader;
-  m_targetSpeed = targetSpeed;
+  m_distance = distance;
   m_driveSpeed = driveSpeed;
   m_loadSpeed = loadSpeed;
   m_loadTime = loadTime;
@@ -28,16 +28,17 @@ void VisionShootCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void VisionShootCommand::Execute()
 {
-  // LoadToPhoto
-  m_pLoader->LoadToPhoto(m_loadSpeed, true, 4.0);
   // Vision Allign
   if(m_pDrive->VisionAllign(m_driveSpeed, m_deadZone))
   {
 
     //Calculate the speed of the shooter needed
+    // rev/s = 0.74*distance + 20.1
+    // y = 0.74x + 20.1
+    double targetSpeed = (0.74*m_distance) + 20.1;
 
     // ShootSpeed
-    m_pShooter->SetShooterSpeed(m_targetSpeed);
+    m_pShooter->SetShooterSpeed(targetSpeed);
 
     m_pLoader->LoadToTimer(m_loadTime, m_loadSpeed);
 

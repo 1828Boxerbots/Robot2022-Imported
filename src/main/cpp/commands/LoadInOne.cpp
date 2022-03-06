@@ -4,11 +4,12 @@
 
 #include "commands/LoadInOne.h"
 
-LoadInOne::LoadInOne( LoaderSubsystem *pLoader, double speed)
+LoadInOne::LoadInOne( LoaderSubsystem *pLoader, double speed,frc::XboxController *pController)
 {
   m_speed = speed;
   // Use AddRequirements() here to declare subsystem dependencies.
   m_pLoader = pLoader;
+  m_pController = pController;
   AddRequirements(m_pLoader);
 }
 
@@ -18,8 +19,16 @@ void LoadInOne::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void LoadInOne::Execute() 
 {
-  m_pLoader->IntakeLoader(m_speed);
-  m_pLoader->InnerLoader(m_speed);
+  if(m_pController->GetLeftBumper()&&m_pController != nullptr)
+  {
+    m_pLoader->IntakeLoader(-m_speed);
+    m_pLoader->InnerLoader(-m_speed);  
+  }
+  else
+  {
+    m_pLoader->IntakeLoader(m_speed);
+    m_pLoader->InnerLoader(m_speed);
+  }
 }
 
 // Called once the command ends or is interrupted.
