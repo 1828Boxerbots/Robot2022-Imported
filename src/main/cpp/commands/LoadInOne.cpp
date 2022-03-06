@@ -22,12 +22,12 @@ void LoadInOne::Execute()
   if(m_pController->GetLeftBumper()&&m_pController != nullptr)
   {
     m_pLoader->IntakeLoader(-m_speed);
-    m_pLoader->InnerLoader(-m_speed);  
+    m_pLoader->InnerLoader(m_speed);  
   }
   else
   {
     m_pLoader->IntakeLoader(m_speed);
-    m_pLoader->InnerLoader(m_speed);
+    m_pLoader->InnerLoader(-m_speed);
   }
 }
 

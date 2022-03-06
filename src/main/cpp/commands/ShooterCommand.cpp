@@ -18,7 +18,7 @@ void ShooterCommand::Initialize() {}
 void ShooterCommand::Execute() 
 {
   frc::SmartDashboard::PutNumber("Shooter Speed: RPS ", m_pShooter->GetShooterSpeed());
-  m_pShooter->SetShooterSpeed(m_speed);
+  m_pShooter->ShootMotor(m_speed);
   m_isFinished = true;
 }
 

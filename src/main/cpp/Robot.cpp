@@ -57,7 +57,7 @@ void Robot::TeleopInit() {
     m_autonomousCommand = nullptr;
   }
 
-  // m_container.RunDrive();
+  m_container.RunDrive();
   // m_container.ClimbEncoder();
 }
 

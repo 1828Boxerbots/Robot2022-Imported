@@ -25,7 +25,7 @@ RobotContainer::RobotContainer()
   m_pwallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 30.0, 80.0);
 
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
-  m_pShoot = new ShooterCommand(&m_shootSub, 1);
+  m_pShoot = new ShooterCommand(&m_shootSub, -1);
   m_pStopShoot = new ShooterCommand(&m_shootSub, 0.0);
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub);
   m_pArmDown = new ArmCommand(&m_loaderSub,0.3,&m_controllerTwo);
@@ -97,17 +97,15 @@ void RobotContainer::SetButtonA()
 
 void RobotContainer::SetRightBumper()
 {
-
+  // m_rightBumper2.WhenHeld(m_pShoot);
+  // m_rightBumper2.WhenReleased(m_pStopShoot);
 }
 
-void RobotContainer::SetLeftBumper()
-{
-  m_leftBumper2.WhileHeld(m_ploadToPhotoCmd);
-}
+void RobotContainer::SetLeftBumper(){}
 
 void RobotContainer::SetRightTrigger()
 {
-  m_rightTrigger2.WhileHeld(m_pShoot);
+  m_rightTrigger2.WhenPressed(m_pShoot);
   m_rightTrigger2.WhenReleased(m_pStopShoot);
 }
 
