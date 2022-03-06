@@ -32,6 +32,7 @@
 #include "commands/VisionAllignCommand.h"
 #include "commands/VisionShootCommand.h"
 #include "commands/ShootSpeedCommand.h"
+#include "commands/PosWallTimerAutoCommand.h"
 
 #include <frc/DigitalInput.h>
 
@@ -88,6 +89,7 @@ class RobotContainer
     PosWallAutoCommand *m_pwallAutoCmd = nullptr;
     Pos1AutoCommand *m_pmiddleAutoCmd = nullptr;
     Pos1AutoCommand *m_paloneAutoCmd = nullptr;
+    PosWallTimerAutoCommand *m_pWallTimeAutoCmd = nullptr;
     TheLoneTimerAutonomus *m_pLonely = nullptr;
     frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
     frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};

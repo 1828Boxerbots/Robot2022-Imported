@@ -22,11 +22,11 @@ void LoaderSubsystem::IntakeLoader(double speed)
 }
 void LoaderSubsystem::LoadToTimer(double time, double speed)
 {
-InnerLoader(-speed);
-// IntakeLoader(speed);
-Util::DelayInSeconds((units::time::second_t) time);
-InnerLoader(0.0);
-// IntakeLoader(0.0);
+    InnerLoader(-speed);
+    // IntakeLoader(speed);
+    Util::DelayInSeconds((units::time::second_t) time);
+    InnerLoader(0.0);
+    // IntakeLoader(0.0);
 }
 void LoaderSubsystem::InnerLoader(double speed)
 {
