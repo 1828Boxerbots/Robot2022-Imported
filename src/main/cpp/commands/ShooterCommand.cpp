@@ -4,11 +4,11 @@
 
 #include "commands/ShooterCommand.h"
 
-ShooterCommand::ShooterCommand(ShooterSubsystem * pShoot,double speed)
+ShooterCommand::ShooterCommand(ShooterSubsystem * pShoot, double speed)
 {
-m_pShooter = pShoot;
-AddRequirements(pShoot);
-m_speed=speed;
+  m_pShooter = pShoot;
+  AddRequirements(pShoot);
+  m_speed=speed;
 }
 
 // Called when the command is initially scheduled.

@@ -6,7 +6,7 @@
 RobotContainer::RobotContainer() 
 {
   // Initialize all of your commands and subsystems here
-  m_pdriveCmd = new DriveCommand(&m_driveTrainSub, &m_controllerOne, DriveTrainSubsystem::RC_STYLE);
+  m_pdriveCmd = new DriveCommand(&m_driveTrainSub, &m_controllerTwo, DriveTrainSubsystem::RC_STYLE);
   m_ploader = new LoadInOne(&m_loaderSub,1,&m_controllerTwo);
   m_pLoadStop= new LoadInOne(&m_loaderSub,0,&m_controllerTwo);
   m_peject = new LoadInOne(&m_loaderSub,1,&m_controllerTwo);
@@ -26,6 +26,7 @@ RobotContainer::RobotContainer()
   m_pWallTimeAutoCmd = new PosWallTimerAutoCommand (&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 80.0);
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, -1);
+  m_pShootTrigger = new ShootTriggerController(&m_shootSub, &m_controllerTwo);
   m_pStopShoot = new ShooterCommand(&m_shootSub, 0.0);
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub);
   m_pArmDown = new ArmCommand(&m_loaderSub,0.3,&m_controllerTwo);
@@ -105,7 +106,7 @@ void RobotContainer::SetLeftBumper(){}
 
 void RobotContainer::SetRightTrigger()
 {
-  m_rightTrigger2.WhenPressed(m_pShoot);
+  m_rightTrigger2.WhenPressed(m_pShootTrigger);
   m_rightTrigger2.WhenReleased(m_pStopShoot);
 }
 

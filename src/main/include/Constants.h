@@ -37,8 +37,8 @@ constexpr int DIO_CLIMB_ENCODER_A       = 0; //Maybe
 constexpr int DIO_CLIMB_ENCODER_B       = 1; //Maybe
 
 
-constexpr int USB_CONTROLLER_ONE        = 0;
-constexpr int USB_CONTROLLER_TWO        = 1;
+constexpr int USB_CONTROLLER_ONE        = 1;
+constexpr int USB_CONTROLLER_TWO        = 0;
 
 /**
  * The Constants header provides a convenient place for teams to hold robot-wide

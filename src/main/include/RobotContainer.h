@@ -33,6 +33,7 @@
 #include "commands/VisionShootCommand.h"
 #include "commands/ShootSpeedCommand.h"
 #include "commands/PosWallTimerAutoCommand.h"
+#include "commands/ShootTriggerController.h"
 
 #include <frc/DigitalInput.h>
 
@@ -139,4 +140,5 @@ class RobotContainer
     ShootSpeedCommand *m_pShootSpeed = nullptr;
     ShooterCommand *m_pShoot = nullptr;
     ShooterCommand *m_pStopShoot = nullptr;
+    ShootTriggerController *m_pShootTrigger = nullptr;
 };

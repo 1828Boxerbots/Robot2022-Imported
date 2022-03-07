@@ -17,7 +17,7 @@
 class ShooterCommand
     : public frc2::CommandHelper<frc2::CommandBase, ShooterCommand> {
  public:
-  ShooterCommand(ShooterSubsystem * pShoot,double speed);
+  ShooterCommand(ShooterSubsystem * pShoot, double speed);
 
   void Initialize() override;
 
