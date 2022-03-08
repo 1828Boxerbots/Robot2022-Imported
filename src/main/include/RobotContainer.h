@@ -88,7 +88,7 @@ class RobotContainer
 
     // AUTO TEST CMD
     PosWallAutoCommand *m_pwallAutoCmd = nullptr;
-    Pos1AutoCommand *m_pmiddleAutoCmd = nullptr;
+    TheLoneTimerAutonomus *m_pmiddleAutoCmd = nullptr;
     Pos1AutoCommand *m_paloneAutoCmd = nullptr;
     PosWallTimerAutoCommand *m_pWallTimeAutoCmd = nullptr;
     TheLoneTimerAutonomus *m_pLonely = nullptr;

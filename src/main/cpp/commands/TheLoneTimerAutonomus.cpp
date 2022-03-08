@@ -29,16 +29,16 @@ void TheLoneTimerAutonomus::Execute()
   double armSpeed = 0.4;
   double intakeSpeed = 10.8;
   double distanceToBall = 45.0;
-  double forwardSpeed = 0.6;
+  double forwardSpeed = 0.4;
   double innerSpeed = 0.5;
   units::degree_t turnAngle = (units::degree_t) m_turnAngle;
-  double turnSpeed = 0.15;
+  double turnSpeed = 0.4;
   units::degree_t turnDeadZone = (units::degree_t) 2.0;
   double shooterTargetSpeed = 74.0;
   double shooterStopSpeed = 0.0;
 
   //1. DropArm
-  //m_ploader->AutoArm(armSpeed);
+  //m_ploader->AutoArmInTime(armSpeed, 0.4);
     frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 1");
 
   //2. Turn on Intake 
@@ -46,12 +46,11 @@ void TheLoneTimerAutonomus::Execute()
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 2");
   
   //3. Forward to Ball
-  m_pdrive->ForwardInTime(0.76, forwardSpeed);
+  m_pdrive->ForwardInTime(1.3, forwardSpeed);
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 3");
 
   //5. Turn Around 180 Towards Target
   m_pdrive->TurnAngleRelative(turnAngle, turnSpeed, turnDeadZone);
-  m_ploader->IntakeLoader(0);
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 5");
 
   // 6. Allign Robot to Target to Prepare for Shooting
@@ -75,6 +74,9 @@ void TheLoneTimerAutonomus::Execute()
   //12. Load Ball 2 to Shooter  
   m_ploader->LoadToTimer(3,innerSpeed);
   m_pshooter->ShootMotor(0.0);
+
+  //13. Turn off Intake.
+  m_ploader->IntakeLoader(0.0);
 
   m_IsFinished = true;
 }

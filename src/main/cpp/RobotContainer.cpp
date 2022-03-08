@@ -20,7 +20,7 @@ RobotContainer::RobotContainer()
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
-  m_pmiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
+  m_pmiddleAutoCmd = new TheLoneTimerAutonomus(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
   m_paloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
   m_pwallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 30.0, 80.0);
   m_pWallTimeAutoCmd = new PosWallTimerAutoCommand (&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 80.0);
@@ -176,7 +176,9 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   switch (GetDPDT())
   {
   default:
-    cmd = m_pWallTimeAutoCmd;
+   // cmd = m_pWallTimeAutoCmd;
+    //cmd = m_pLonely;
+    cmd = m_pmiddleAutoCmd;
     break;
     
   //case 2:

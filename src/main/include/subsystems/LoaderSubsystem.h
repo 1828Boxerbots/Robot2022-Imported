@@ -32,6 +32,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   //Arm Functions
   void AutoArm(double speed);
   void MoveArm(double speed);
+  void AutoArmInTime(double speed, double time);
 
  private:
  int m_heartBeat = 0;

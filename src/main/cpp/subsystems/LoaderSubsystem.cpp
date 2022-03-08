@@ -181,3 +181,14 @@ void LoaderSubsystem::AutoArm(double speed)
   MoveArm(0.0);
 #endif
 }
+
+void LoaderSubsystem::AutoArmInTime(double speed, double time)
+{
+  MoveArm(0.0);
+  MoveArm(speed);
+
+  Util::DelayInSeconds((units::time::second_t) time);
+
+  MoveArm(0.0);
+
+}
