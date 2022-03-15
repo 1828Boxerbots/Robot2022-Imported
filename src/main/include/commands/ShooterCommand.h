@@ -6,6 +6,7 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/XboxController.h>
 #include "subsystems/ShooterSubsystem.h"
 /********************************************************************************
  * Not an example command.                                                          *
@@ -17,7 +18,7 @@
 class ShooterCommand
     : public frc2::CommandHelper<frc2::CommandBase, ShooterCommand> {
  public:
-  ShooterCommand(ShooterSubsystem * pShoot, double speed);
+  ShooterCommand(ShooterSubsystem * pShoot, frc::XboxController *pxBox, double speed);
 
   void Initialize() override;
 
@@ -28,6 +29,7 @@ class ShooterCommand
   bool IsFinished() override;
 private:
 ShooterSubsystem* m_pShooter;
+frc::XboxController* m_pXBox;
 double m_speed;
 bool m_isFinished=false;
 };

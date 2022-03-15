@@ -50,7 +50,7 @@ void DriveCommand::Execute()
       m_right = m_pController->GetRightX();
       CheckDeadZone(m_left);
       CheckDeadZone(m_right);
-      m_pDriveTrain->MoveArcade(m_right * m_scale, m_left * m_scale);
+      m_pDriveTrain->MoveArcade(m_left * m_scale, m_right * m_scale);
       break;
 
     //Uh oh forgot to SetDrive()

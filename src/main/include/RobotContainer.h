@@ -34,6 +34,7 @@
 #include "commands/ShootSpeedCommand.h"
 #include "commands/PosWallTimerAutoCommand.h"
 #include "commands/ShootTriggerController.h"
+#include "commands/CompetitionCMD.h"
 
 #include <frc/DigitalInput.h>
 
@@ -79,6 +80,7 @@ class RobotContainer
     ClimbCommand *m_pupClimbCmd = nullptr;
     ClimbCommand *m_pdownClimbCmd = nullptr;
     
+    CompetitionCMD *m_plowHub = nullptr;
 
     VisionAllignCommand* m_pVisionAllignCmd = nullptr;
     VisionShootCommand* m_p15ftShoot        = nullptr;
@@ -88,10 +90,11 @@ class RobotContainer
 
     // AUTO TEST CMD
     PosWallAutoCommand *m_pwallAutoCmd = nullptr;
-    TheLoneTimerAutonomus *m_pmiddleAutoCmd = nullptr;
+    Pos1AutoCommand *m_pmiddleAutoCmd = nullptr;
     Pos1AutoCommand *m_paloneAutoCmd = nullptr;
     PosWallTimerAutoCommand *m_pWallTimeAutoCmd = nullptr;
-    TheLoneTimerAutonomus *m_pLonely = nullptr;
+    TheLoneTimerAutonomus *m_pLonelyTimer = nullptr;
+    TheLoneTimerAutonomus *m_pMiddleTimer = nullptr;
     frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
     frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};
 
@@ -139,6 +142,7 @@ class RobotContainer
     ArmCommand *m_pArmStop              = nullptr;
     ShootSpeedCommand *m_pShootSpeed = nullptr;
     ShooterCommand *m_pShoot = nullptr;
+    ShooterCommand *m_pLowShoot = nullptr;
     ShooterCommand *m_pStopShoot = nullptr;
     ShootTriggerController *m_pShootTrigger = nullptr;
 };

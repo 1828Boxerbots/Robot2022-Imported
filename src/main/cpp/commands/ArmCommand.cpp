@@ -8,6 +8,7 @@ ArmCommand::ArmCommand(LoaderSubsystem *pLoader, double speed, frc::XboxControll
 {
   // Use addRequirements() here to declare subsystem dependencies.
   m_pLoader = pLoader;
+  m_pBox = pbox;
   m_speed = speed;
 
   AddRequirements(pLoader); 
@@ -19,7 +20,14 @@ void ArmCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void ArmCommand::Execute() 
 {
-  m_pLoader->MoveArm(m_speed);
+  if(m_pBox->GetLeftBumper())
+  {
+    m_pLoader->MoveArm(-m_speed);
+  }
+  else
+  {
+    m_pLoader->MoveArm(m_speed);
+  }
 }
 
 // Called once the command ends or is interrupted.

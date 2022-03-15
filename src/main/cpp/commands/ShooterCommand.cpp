@@ -4,9 +4,10 @@
 
 #include "commands/ShooterCommand.h"
 
-ShooterCommand::ShooterCommand(ShooterSubsystem * pShoot, double speed)
+ShooterCommand::ShooterCommand(ShooterSubsystem * pShoot, frc::XboxController *pxBox, double speed)
 {
   m_pShooter = pShoot;
+  m_pXBox = pxBox;
   AddRequirements(pShoot);
   m_speed=speed;
 }
@@ -18,7 +19,14 @@ void ShooterCommand::Initialize() {}
 void ShooterCommand::Execute() 
 {
   frc::SmartDashboard::PutNumber("Shooter Speed: RPS ", m_pShooter->GetShooterSpeed());
-  m_pShooter->ShootMotor(m_speed);
+  if(m_pXBox->GetLeftBumper())
+  {
+    m_pShooter->ShootMotor(-m_speed);
+  }
+  else
+  {
+    m_pShooter->ShootMotor(m_speed);
+  }
   m_isFinished = true;
 }
 

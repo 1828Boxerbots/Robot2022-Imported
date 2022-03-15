@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-#define C418 
 //#define NOHW
 #define NOHW_CLIMB
 //#define NOHW_SENSORS
@@ -11,21 +10,21 @@
 //PWM
 constexpr int PWM_LEFT                  = 1;
 constexpr int PWM_RIGHT                 = 0;
-constexpr int PWM_ARM                   = 7;
-constexpr int PWM_LOADER_INTAKE         = 5;
-constexpr int PWM_LOADER_INTAKE_UPPER   = 6; //temperary - C418
+constexpr int PWM_ARM                   = 2;
+constexpr int PWM_LOADER_INTAKE         = 3;
+constexpr int PWM_LOADER_INTAKE_UPPER   = 5;
 constexpr int PWM_LOADER_INNER          = 4; 
-constexpr int PWM_SHOOTER               = 3;
+constexpr int PWM_SHOOTER               = 6;
 constexpr int PWM_CLIMB                 = 9; //Maybe
 constexpr int PWM_CAM_SERVO             = 8; //Maybe
 
 //DIO
 constexpr int DIO_DRIVE_LEFT_A          = 2;
 constexpr int DIO_DRIVE_LEFT_B          = 3;
-constexpr int DIO_DRIVE_RIGHT_A         = 0;
-constexpr int DIO_DRIVE_RIGHT_B         = 1;
-constexpr int DIO_SHOOTER_ENCODER_A     = 4;
-constexpr int DIO_SHOOTER_ENCODER_B     = 5;
+constexpr int DIO_DRIVE_RIGHT_A         = 5;
+constexpr int DIO_DRIVE_RIGHT_B         = 4;
+constexpr int DIO_SHOOTER_ENCODER_A     = 0;
+constexpr int DIO_SHOOTER_ENCODER_B     = 1;
 constexpr int DIO_DPDT_TOP              = 0;
 constexpr int DIO_DPDT_BOTTOM           = 0;
 constexpr int DIO_SPST                  = 0;
@@ -37,8 +36,8 @@ constexpr int DIO_CLIMB_ENCODER_A       = 0; //Maybe
 constexpr int DIO_CLIMB_ENCODER_B       = 1; //Maybe
 
 
-constexpr int USB_CONTROLLER_ONE        = 1;
-constexpr int USB_CONTROLLER_TWO        = 0;
+constexpr int USB_CONTROLLER_ONE        = 0;
+constexpr int USB_CONTROLLER_TWO        = 1;
 
 /**
  * The Constants header provides a convenient place for teams to hold robot-wide

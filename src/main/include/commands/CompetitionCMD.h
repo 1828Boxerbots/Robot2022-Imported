@@ -6,13 +6,12 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include <frc/smartdashboard/SmartDashboard.h>
-#include <networktables/NetworkTableEntry.h>
-#include <networktables/NetworkTableInstance.h>
 
 #include "subsystems/DriveTrainSubsystem.h"
-#include "subsystems/LoaderSubsystem.h"
 #include "subsystems/ShooterSubsystem.h"
+#include "subsystems/LoaderSubsystem.h"
+
+#include "../Util.h"
 
 /**
  * An example command.
@@ -21,10 +20,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class VisionAllignCommand
-    : public frc2::CommandHelper<frc2::CommandBase, VisionAllignCommand> {
+class CompetitionCMD
+    : public frc2::CommandHelper<frc2::CommandBase, CompetitionCMD> {
  public:
-  VisionAllignCommand(DriveTrainSubsystem *pDrive, LoaderSubsystem *pLoader, ShooterSubsystem *pShooter, double speed = 0.5, units::degree_t deadZone = 1.0_deg);
+  CompetitionCMD(DriveTrainSubsystem *pDrive, ShooterSubsystem *pShoot, LoaderSubsystem *pLoader, double shootSpeed, double driveSpeed, double driveTime);
 
   void Initialize() override;
 
@@ -33,12 +32,14 @@ class VisionAllignCommand
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+
  protected:
   DriveTrainSubsystem *m_pDrive;
+  ShooterSubsystem *m_pShoot;
   LoaderSubsystem *m_pLoader;
-  ShooterSubsystem *m_pShooter;
-  double m_speed;
-  units::degree_t m_deadZone;
+  double m_shootSpeed;
+  double m_driveSpeed;
+  double m_driveTime;
 
   bool m_isFinished = false;
 };

@@ -170,7 +170,7 @@ void DriveTrainSubsystem::MoveArcade(double X, double Y)
 // IMU AND DRIVE FUNCTIONS
 void DriveTrainSubsystem::TurnAngleRelative(units::degree_t angle, double speed, units::degree_t deadZone)
 {
-    units::degree_t currentAngle = GetAngleX();
+    units::degree_t currentAngle = GetADIAngle();
     units::degree_t targetAngle = currentAngle + angle;
     units::degree_t lowAngle = targetAngle - deadZone;
     units::degree_t highAngle = targetAngle + deadZone;
@@ -183,6 +183,11 @@ void DriveTrainSubsystem::TurnAngleRelative(units::degree_t angle, double speed,
     frc::SmartDashboard::PutNumber("TargetAngle-DeadZone", (double)deadZone);
     frc::SmartDashboard::PutNumber("TargetAngle-speed", (double)speed);
 
+    frc::Timer timer;
+    timer.Start();
+    units::second_t targetTime = timer.Get() + 3_s;
+    units::second_t currentTime = timer.Get();
+
     while(currentAngle > highAngle or currentAngle < lowAngle)
     {
         if(currentAngle > highAngle)
@@ -193,8 +198,13 @@ void DriveTrainSubsystem::TurnAngleRelative(units::degree_t angle, double speed,
         {
             MoveTank(-speed, speed);
         }
-        currentAngle = GetAngleX();
+        currentAngle = GetADIAngle();
+        currentTime = timer.Get();
         frc::SmartDashboard::PutNumber("CurrentAngle-Relative", (double)currentAngle);
+        if(currentTime >= targetTime)
+        {
+            break;
+        }
     }
 
     //Stop

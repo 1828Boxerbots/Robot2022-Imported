@@ -29,8 +29,8 @@ double ShooterSubsystem::GetShooterSpeed()
 {
 #ifndef NOHW_SENSORS
     //Units are distance PER SECOND as scaled by SetDistancePerPulse()
-    frc::SmartDashboard::PutNumber("ShooterSpeed", m_shooterEncoder.GetRate());
-    return m_shooterEncoder.GetRate();
+    frc::SmartDashboard::PutNumber("ShooterSpeed", -m_shooterEncoder.GetRate());
+    return -m_shooterEncoder.GetRate();
 #endif
 }
 
@@ -53,7 +53,7 @@ void ShooterSubsystem::SetShooterSpeed(double targetSpeed)
     // y=mx+b -> x= (y+b)/m
     double power = targetSpeed / 78;
 
-    ShootMotor(-power);
+    ShootMotor(power);
     while(GetShooterSpeed() < targetSpeed)
     {
         GetShooterSpeed();

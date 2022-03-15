@@ -36,7 +36,7 @@ class DriveCommand
     frc::XboxController* m_pController;
     DriveTrainSubsystem::DriveStyles m_style;
 bool m_isFinished = false;
-    double m_scale = 1.0;
+    double m_scale = .8;
     float m_deadZoneRange = 0.1f;
 
     double m_left = 0.0;

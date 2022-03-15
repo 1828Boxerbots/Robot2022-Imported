@@ -22,7 +22,7 @@
 class TheLoneTimerAutonomus
     : public frc2::CommandHelper<frc2::CommandBase, TheLoneTimerAutonomus> {
  public:
-  TheLoneTimerAutonomus(DriveTrainSubsystem *pdrive, LoaderSubsystem *pload, ShooterSubsystem *pshoot, double turnAngle);
+  TheLoneTimerAutonomus(DriveTrainSubsystem *pdrive, LoaderSubsystem *pload, ShooterSubsystem *pshoot, double speed, double turnAngle);
 
   void Initialize() override;
 
@@ -37,6 +37,8 @@ class TheLoneTimerAutonomus
   DriveTrainSubsystem *m_pdrive = nullptr;
   LoaderSubsystem *m_ploader = nullptr;
   ShooterSubsystem *m_pshooter = nullptr;
+
+  double forwardSpeed;
 
   bool m_IsFinished = false;
   double m_turnAngle = 0.0;

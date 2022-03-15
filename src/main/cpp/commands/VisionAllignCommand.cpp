@@ -4,9 +4,11 @@
 
 #include "commands/VisionAllignCommand.h"
 
-VisionAllignCommand::VisionAllignCommand(DriveTrainSubsystem *pDrive, double speed, units::degree_t deadZone)
+VisionAllignCommand::VisionAllignCommand(DriveTrainSubsystem *pDrive, LoaderSubsystem *pLoader, ShooterSubsystem *pShooter, double speed, units::degree_t deadZone)
 {
   m_pDrive = pDrive;
+  m_pLoader = pLoader;
+  m_pShooter = pShooter;
   m_speed = speed;
   m_deadZone = deadZone;
   // Use addRequirements() here to declare subsystem dependencies.
@@ -20,6 +22,10 @@ void VisionAllignCommand::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void VisionAllignCommand::Execute()
 {
+  m_pDrive->MoveTank(0.0, 0.0);
+  m_pLoader->InnerLoader(0.0);
+  m_pLoader->IntakeLoader(0.0);
+  m_pShooter->ShootMotor(0.0);
   m_pDrive->VisionAllign(m_speed, m_deadZone);
   m_isFinished = true;
 }

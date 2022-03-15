@@ -32,7 +32,6 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   //Arm Functions
   void AutoArm(double speed);
   void MoveArm(double speed);
-  void AutoArmInTime(double speed, double time);
 
  private:
  int m_heartBeat = 0;
@@ -40,7 +39,7 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   frc::Victor m_intake{PWM_LOADER_INTAKE};
   frc::Victor m_inner{PWM_LOADER_INNER};
   frc::Victor m_innerUp{PWM_LOADER_INTAKE_UPPER};
-  frc::Victor m_arm{9};
+  frc::Victor m_arm{PWM_ARM};
 
   frc::DigitalInput m_photogate{DIO_PHOTOGATE};
   frc::DigitalInput m_limitSwitchLow{DIO_HALLEFFECT_LOWER};

@@ -32,9 +32,7 @@ void LoaderSubsystem::InnerLoader(double speed)
 {
 #ifndef NOHW
     m_inner.Set(speed);
-    #ifdef C418
     m_innerUp.Set(-speed);
-    #endif
 #endif
 }
 
@@ -180,15 +178,4 @@ void LoaderSubsystem::AutoArm(double speed)
 
   MoveArm(0.0);
 #endif
-}
-
-void LoaderSubsystem::AutoArmInTime(double speed, double time)
-{
-  MoveArm(0.0);
-  MoveArm(speed);
-
-  Util::DelayInSeconds((units::time::second_t) time);
-
-  MoveArm(0.0);
-
 }
