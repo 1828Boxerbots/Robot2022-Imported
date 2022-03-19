@@ -53,8 +53,8 @@ void ShooterSubsystem::SetShooterSpeed(double targetSpeed)
     // y=mx+b -> x= (y+b)/m
     double power = targetSpeed / 78;
 
-    ShootMotor(power);
-    while(GetShooterSpeed() < targetSpeed)
+    ShootMotor(power);//set power to negative for C418.
+    while(GetShooterSpeed() < targetSpeed) //Set bothe GetShooterSpeed() and targetSpeed to absolute value for C418.
     {
         GetShooterSpeed();
     }

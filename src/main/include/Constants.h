@@ -10,7 +10,7 @@
 //PWM
 constexpr int PWM_LEFT                  = 1;
 constexpr int PWM_RIGHT                 = 0;
-constexpr int PWM_ARM                   = 2;
+constexpr int PWM_ARM                   = 2; 
 constexpr int PWM_LOADER_INTAKE         = 3;
 constexpr int PWM_LOADER_INTAKE_UPPER   = 5;
 constexpr int PWM_LOADER_INNER          = 4; 

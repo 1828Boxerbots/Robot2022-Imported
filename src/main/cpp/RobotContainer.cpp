@@ -21,10 +21,9 @@ RobotContainer::RobotContainer()
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
-  m_pmiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
-  m_paloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
-  m_pwallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 30.0, 80.0);
-  m_pWallTimeAutoCmd = new PosWallTimerAutoCommand (&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 80.0);
+  m_pMiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
+  m_pAloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
+  m_pWallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 70.0);
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.5);
   m_pLowShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.3);
@@ -192,9 +191,9 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   switch (GetDPDT())
   {
   default:
-    //cmd = m_pWallTimeAutoCmd;
-    cmd = m_plowHub;
-    //cmd = m_pmiddleAutoCmd;
+    cmd = m_pWallAutoCmd;
+    //cmd = m_pAloneAutoCmd;
+    //cmd = m_pMiddleAutoCmd;
     break;
     
   //case 2:

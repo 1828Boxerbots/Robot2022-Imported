@@ -23,7 +23,7 @@ class PosWallAutoCommand
  public:
   PosWallAutoCommand
   (LoaderSubsystem *pLoader, ShooterSubsystem *pShoot, DriveTrainSubsystem *pDrive,
-  double turnAngle, double distanceBack, double turnAngleToLeave);
+  double turnAngle, double turnAngleToLeave);
 
   void Initialize() override;
 

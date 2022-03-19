@@ -89,9 +89,9 @@ class RobotContainer
     VisionShootCommand *m_p10ftShoot        = nullptr;
 
     // AUTO TEST CMD
-    PosWallAutoCommand *m_pwallAutoCmd = nullptr;
-    Pos1AutoCommand *m_pmiddleAutoCmd = nullptr;
-    Pos1AutoCommand *m_paloneAutoCmd = nullptr;
+    Pos1AutoCommand *m_pMiddleAutoCmd = nullptr;
+    Pos1AutoCommand *m_pAloneAutoCmd = nullptr;
+    PosWallAutoCommand *m_pWallAutoCmd = nullptr;
     PosWallTimerAutoCommand *m_pWallTimeAutoCmd = nullptr;
     TheLoneTimerAutonomus *m_pLonelyTimer = nullptr;
     TheLoneTimerAutonomus *m_pMiddleTimer = nullptr;

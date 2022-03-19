@@ -32,7 +32,7 @@ void LoaderSubsystem::InnerLoader(double speed)
 {
 #ifndef NOHW
     m_inner.Set(speed);
-    m_innerUp.Set(speed);
+    m_innerUp.Set(-speed);//set this to a positive after test
 #endif
 }
 

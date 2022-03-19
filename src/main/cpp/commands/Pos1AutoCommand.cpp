@@ -24,67 +24,55 @@ void Pos1AutoCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void Pos1AutoCommand::Execute() 
 {
+  // Variables.
   double armSpeed = 0.4;
   double intakeSpeed = 0.8;
   double distanceToBall = 45.0;
   double forwardSpeed = 0.6;
-  double innerSpeed = 0.5;
+  double innerSpeed = 0.8;
   units::degree_t turnAngle = (units::degree_t) m_turnAngle;
   double turnSpeed = 0.2;
   units::degree_t turnDeadZone = (units::degree_t) 5.0;
   double shooterTargetSpeed = 70;
-  double shooterStopSpeed = 0.0;
-  double TimeLimit = 4.0;
+  double StopSpeed = 0.0;
 
-  //1. DropArm
+
+  //1. Drop Arm.
   //m_ploader->AutoArm(armSpeed);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 1");
+  frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 1");
 
-  //2. Turn on Intake 
+  //2. Turn on Intake.
   m_ploader->IntakeLoader(intakeSpeed);
-  frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 2");
-  //3. Forward to Ball
+  frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 2");
+
+  //3. Move Forward 45 inches.
   m_pdrive->ForwardInInch(distanceToBall, forwardSpeed);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 3");
+  frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 3");
 
-  //4. Load Ball 1 to Photo
-  m_ploader->LoadToPhoto(innerSpeed, true, TimeLimit);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 4");
-
-  //5. Turn Around 180 Towards Target
+  //4. Turn 180 degrees.
   m_pdrive->TurnAngleRelative(turnAngle, turnSpeed, turnDeadZone);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 5");
-  //6. Allign Robot to Target to Prepare for Shooting
+  frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 4");
+
+  //5. Vision Align.
   //m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 6");
+  frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 5");
 
-  //7. Shoot Ball 1 Towards Target
+  //6. Turn on shooter.
   m_pshooter->SetShooterSpeed(shooterTargetSpeed);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 7");
+  frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 6");
 
-  //8. Load Ball 1 to Shooter
-  m_ploader->LoadToPhoto(innerSpeed, false, TimeLimit);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 8");
 
-  //9. Load Ball 2 to Photo
-  m_ploader->LoadToPhoto(innerSpeed, true, TimeLimit);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 9");
+  //7. Load in Seconds to Shoot.
+  m_ploader->LoadToTimer(3.0, innerSpeed);
+  frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 7");
 
-  //10. Allign Robot to Target to Prepare for Shooting
-  //m_pdrive->VisionAllign(turnSpeed, turnDeadZone);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 10");
+  //8. Turn off Intake.
+  m_ploader->IntakeLoader(StopSpeed);
+  frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 8");
 
-  //11. Shoot Ball 2 Towards Target 
-  m_pshooter->SetShooterSpeed(shooterTargetSpeed);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 11");
-
-  //12. Load Ball 2 to Shooter
-  m_ploader->LoadToPhoto(innerSpeed, false, TimeLimit);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 12");
-
-  //13. Stop Shooter Motor
-  m_pshooter->SetShooterSpeed(shooterStopSpeed);
-    frc::SmartDashboard::PutString("Pos1AutoCommand-Steps", "step 13");
+  //9. Turn off Shooter
+  m_pshooter->SetShooterSpeed(StopSpeed);
+  frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 9");
 
   m_IsFinished = true;
 }
