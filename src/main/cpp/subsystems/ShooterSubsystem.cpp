@@ -74,5 +74,6 @@ void ShooterSubsystem::ShootMotor(double speed)
 {
 #ifndef NOHW_SENSORS
     m_shooterMotor.Set(speed);
+    frc::SmartDashboard::PutNumber("ShootMotor-Speed",speed);
 #endif
 }

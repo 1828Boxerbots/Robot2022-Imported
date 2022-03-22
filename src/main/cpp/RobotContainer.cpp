@@ -27,6 +27,11 @@ RobotContainer::RobotContainer()
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.5);
   m_pLowShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.3);
+  m_pShootTest1 = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.1);
+  m_pShootTest2 = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.2);
+  m_pShootTest3 = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.3);
+  m_pShootTest4 = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.4);
+  m_pShootStop = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.0);
   m_pShootTrigger = new ShootTriggerController(&m_shootSub, &m_controllerTwo);
   m_pStopShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.0);
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub);
@@ -72,44 +77,56 @@ void RobotContainer::ConfigureButtonBindings()
 
 void RobotContainer::SetButtonB()
 { 
+  m_bButton.WhileHeld(m_pShootTest1);
+  m_bButton.WhenReleased(m_pShootStop);
 
-  m_bButton.WhileHeld(m_ploadInnerCmd);
-  m_bButton.WhenReleased(m_pLoadStop);
-  m_bButton2.WhileHeld(m_ploadInnerCmd);
-  m_bButton2.WhenReleased(m_pLoadStop);
+  //m_bButton.WhileHeld(m_ploadInnerCmd);
+  //m_bButton.WhenReleased(m_pLoadStop);
+  //m_bButton2.WhileHeld(m_ploadInnerCmd);
+  //m_bButton2.WhenReleased(m_pLoadStop);
 }
 
 void RobotContainer::SetButtonX()
 {
-  // m_xButton.WhenPressed(m_p8ftShoot);
-  m_xButton2.WhileHeld(m_pArmDown);
-  m_xButton2.WhenReleased(m_pArmStop);
+  m_xButton.WhileHeld(m_pShootTest3);
+  m_xButton.WhenReleased(m_pShootStop);
+  //m_xButton.WhenPressed(m_p8ftShoot);
+  //m_xButton2.WhileHeld(m_pArmDown);
+  //m_xButton2.WhenReleased(m_pArmStop);
 
 }
 
 void RobotContainer::SetButtonY()
 {
+  m_yButton.WhileHeld(m_pShootTest4);
+  m_yButton.WhenReleased(m_pShootStop);
   //m_yButton.WhenPressed(m_p15ftShoot);
-  m_yButton.WhileHeld(m_ploader);
-  m_yButton.WhenReleased(m_pLoadStop);
-  m_yButton2.WhileHeld(m_ploader);      
-  m_yButton2.WhenReleased(m_pLoadStop);
+  //m_yButton.WhileHeld(m_ploader);
+  //m_yButton.WhenReleased(m_pLoadStop);
+  //m_yButton2.WhileHeld(m_ploader);      
+  //m_yButton2.WhenReleased(m_pLoadStop);
 }
 
 void RobotContainer::SetButtonA()
 {
-  m_aButton.WhenPressed(m_pVisionAllignCmd);
-  m_aButton2.WhileHeld(m_ploadIntakeCmd);
-  m_aButton2.WhenReleased(m_pLoadStop);
+  m_aButton.WhileHeld(m_pShootTest2);
+  m_aButton.WhenReleased(m_pShootStop);
+  //m_aButton.WhenPressed(m_pVisionAllignCmd);
+  //m_aButton2.WhileHeld(m_ploadIntakeCmd);
+  //m_aButton2.WhenReleased(m_pLoadStop);
 }
 
 void RobotContainer::SetRightBumper()
 {
+
   // m_rightBumper2.WhenHeld(m_pShoot);
   // m_rightBumper2.WhenReleased(m_pStopShoot);
 }
 
-void RobotContainer::SetLeftBumper(){}
+void RobotContainer::SetLeftBumper()
+{
+
+}
 
 void RobotContainer::SetRightTrigger()
 {
@@ -177,7 +194,8 @@ void RobotContainer::EncoderValues()
   frc::SmartDashboard::PutNumber("EncoderValues-Right E Raw", rawRight);
 
   m_shootSub.GetShootDistance();
-
+  m_shootSub.GetShooterSpeed();
+  
   frc::SmartDashboard::PutNumber("ADI Angle", (double)angle);
   frc::SmartDashboard::PutNumber("ADI X", (double)m_driveTrainSub.GetAngleX());
   frc::SmartDashboard::PutNumber("ADI Y", (double)m_driveTrainSub.GetAngleY());
