@@ -176,7 +176,8 @@ void RobotContainer::EncoderValues()
   frc::SmartDashboard::PutNumber("EncoderValues-Left E Raw", rawLeft);
   frc::SmartDashboard::PutNumber("EncoderValues-Right E Raw", rawRight);
 
-  m_shootSub.GetShootDistance();
+    m_shootSub.GetShooterSpeed();
+    m_shootSub.GetShootDistance();
 
   frc::SmartDashboard::PutNumber("ADI Angle", (double)angle);
   frc::SmartDashboard::PutNumber("ADI X", (double)m_driveTrainSub.GetAngleX());
