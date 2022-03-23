@@ -8,6 +8,8 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/XboxController.h>
 #include "subsystems/ShooterSubsystem.h"
+#include "subsystems/LoaderSubsystem.h"
+
 /********************************************************************************
  * Not an example command.                                                          *
  *                                                                              *
@@ -31,5 +33,6 @@ private:
 ShooterSubsystem* m_pShooter;
 frc::XboxController* m_pXBox;
 double m_speed;
+
 bool m_isFinished=false;
 };
