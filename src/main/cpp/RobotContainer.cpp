@@ -20,7 +20,8 @@ RobotContainer::RobotContainer()
   m_pMiddleTimer = new TheLoneTimerAutonomus(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 0.6,-135.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
-  m_pdownClimbCmd = new ClimbCommand(&m_ClimbSub, -0.2, 340);
+  m_pUpClimbCmd = new ClimbCommand(&m_ClimbSub);
+  m_pDownClimbCmd = new ClimbCommand (&m_ClimbSub);
   m_pMiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
   m_pAloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
   m_pWallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 70.0);
@@ -85,6 +86,7 @@ void RobotContainer::SetButtonB()
 
 void RobotContainer::SetButtonX()
 {
+  m_xButton.WhenPressed(m_pUpClimbCmd);
   //m_xButton.WhenPressed(m_p8ftShoot);
   //m_xButton2.WhileHeld(m_pArmDown);
   //m_xButton2.WhenReleased(m_pArmStop);
@@ -199,9 +201,10 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   switch (GetDPDT())
   {
   default:
-    cmd = m_pWallAutoCmd;
-    //cmd = m_pAloneAutoCmd;
+    //cmd = m_pWallAutoCmd;
+    cmd = m_pAloneAutoCmd;
     //cmd = m_pMiddleAutoCmd;
+  
     break;
     
   //case 2:

@@ -77,8 +77,8 @@ class RobotContainer
     LoadIntakeCommand* m_pstopIntakeCmd = nullptr;
     AutoArmCommand *m_pupAutoArmCmd = nullptr;
     AutoArmCommand *m_pdownAutoArmCmd = nullptr;
-    ClimbCommand *m_pupClimbCmd = nullptr;
-    ClimbCommand *m_pdownClimbCmd = nullptr;
+    ClimbCommand *m_pUpClimbCmd = nullptr;
+    ClimbCommand *m_pDownClimbCmd = nullptr;
     
     CompetitionCMD *m_plowHub = nullptr;
 

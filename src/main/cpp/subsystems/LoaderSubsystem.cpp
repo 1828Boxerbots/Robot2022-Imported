@@ -22,11 +22,13 @@ void LoaderSubsystem::IntakeLoader(double speed)
 }
 void LoaderSubsystem::LoadToTimer(double time, double speed)
 {
+  #ifndef NOHW
     InnerLoader(-speed);
     // IntakeLoader(speed);
     Util::DelayInSeconds((units::time::second_t) time);
     InnerLoader(0.0);
     // IntakeLoader(0.0);
+    #endif
 }
 void LoaderSubsystem::InnerLoader(double speed)
 {
@@ -102,6 +104,7 @@ bool LoaderSubsystem::IsHighLimitSwitchActive()
 
 void LoaderSubsystem::LoadToPhoto(double speed, bool loadToShoot, double timeOut)
 {
+  #ifndef NOHW
   m_timer.Reset();
   m_timer.Start();
 
@@ -133,6 +136,7 @@ void LoaderSubsystem::LoadToPhoto(double speed, bool loadToShoot, double timeOut
   InnerLoader(0.0);
 
   m_timer.Stop();
+  #endif
 }
 
 void LoaderSubsystem::AutoArm(double speed)

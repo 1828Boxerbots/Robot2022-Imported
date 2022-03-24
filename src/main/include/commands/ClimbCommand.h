@@ -20,7 +20,7 @@ class ClimbCommand
     : public frc2::CommandHelper<frc2::CommandBase, ClimbCommand> 
   {
  public:
-  ClimbCommand(ClimbSubsystem *pClimb, double speed, double distance);
+  ClimbCommand(ClimbSubsystem *pClimb);
 
   void Initialize() override;
 
@@ -32,9 +32,6 @@ class ClimbCommand
 
   private:
   ClimbSubsystem *m_pClimb;
-  
-  double m_speed = 0.0;
-  double m_distance = 0.0;
 
   bool m_IsFinished = false;
 };

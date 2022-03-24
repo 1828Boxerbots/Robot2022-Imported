@@ -4,13 +4,12 @@
 
 #include "commands/ClimbCommand.h"
 #include "cmath"
+#include "Util.h"
 
 // The distance is inches.
-ClimbCommand::ClimbCommand(ClimbSubsystem *pClimb, double speed, double distance) 
+ClimbCommand::ClimbCommand(ClimbSubsystem *pClimb) 
 {
   m_pClimb = pClimb;
-  m_speed = speed;
-  m_distance = distance;
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements(m_pClimb);
 }
@@ -25,9 +24,13 @@ void ClimbCommand::Execute()
   double downDistance = 1.0;
   double upDistance = 1.0;
   double climbSpeed = 0.2;
+  double secondsDelay = 2.0;
 
   //Steps:
   m_pClimb->ClimbUpInInch(upDistance, climbSpeed);
+  Util::DelayInSeconds((units::time::second_t)secondsDelay);
+  m_pClimb->ClimbDownInInch(downDistance, climbSpeed);
+
 
  m_IsFinished = true;
 }
