@@ -60,6 +60,42 @@ void ClimbSubsystem::ClimbMotor(double speed)
 #endif
 }
 
+void ClimbSubsystem::ClimbUpInInch(double inch, double speed)
+{
+    #ifndef NOHW_ClIMB
+    double currentDistance;
+    GetDistance();
+    double targetDistance = currentDistance + inch;
+
+    while(currentDistance < targetDistance)
+    {
+        ClimbMotor(fabsf(speed));
+        currentDistance = GetDistance();
+    }
+
+    //Stop
+    ClimbMotor(0.0);
+#endif
+}
+
+void ClimbSubsystem::ClimbDownInInch(double inch, double speed)
+{
+    #ifndef NOHW_CLIMB
+    double currentDistance;
+    currentDistance = GetDistance();
+    double targetDistance = currentDistance - fabsf(inch);
+
+    while(currentDistance > targetDistance)
+    {
+        ClimbMotor(-fabsf(speed));
+        currentDistance = GetDistance();
+    }
+
+    //Stop
+    ClimbMotor(0.0);
+#endif
+}
+
 void ClimbSubsystem::EncoderTest()
 {
     #ifndef NOHW_CLIMB

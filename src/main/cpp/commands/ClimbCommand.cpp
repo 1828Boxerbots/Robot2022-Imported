@@ -21,42 +21,13 @@ void ClimbCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void ClimbCommand::Execute() 
 {
-  double CurrentClimbDistance = 0;
-  m_pClimb->ClimbMotor(0.0);
-  double StartingClimbPosition = m_pClimb->GetDistance();
+  //Variables:
+  double downDistance = 1.0;
+  double upDistance = 1.0;
+  double climbSpeed = 0.2;
 
-  frc::SmartDashboard::PutNumber("ClimbCommand-ClimbStart", StartingClimbPosition);
-  frc::SmartDashboard::PutNumber("ClimbCommand-ClimbSpeed", m_speed);
-
- if (m_speed > 0)
- {
-  while(CurrentClimbDistance < fabsf(m_distance))
-    {
-      m_pClimb->ClimbMotor(-fabsf(m_speed));
-      double CurrentClimbPosition = m_pClimb->GetDistance();
-
-
-      frc::SmartDashboard::PutNumber("ClimbCommand-CurrentClimbDistance", CurrentClimbDistance);
-      frc::SmartDashboard::PutNumber("ClimbCommand-CurrentClimbPosition+", CurrentClimbPosition);
-      
-       CurrentClimbDistance = CurrentClimbPosition - StartingClimbPosition;
-      } 
- }
- else if (m_speed < 0)
- {
-  while(CurrentClimbDistance < -fabsf(m_distance))
-    {
-      m_pClimb->ClimbMotor(fabsf(m_speed));
-      double CurrentClimbPosition = m_pClimb->GetDistance();
-
-      frc::SmartDashboard::PutNumber("ClimbCommand-CurrentClimbDistance", CurrentClimbDistance);
-      frc::SmartDashboard::PutNumber("ClimbCommand-CurrentClimbPosition-", CurrentClimbPosition);     
-
-      CurrentClimbDistance = CurrentClimbPosition - StartingClimbPosition;
-      } 
- }
- 
- m_pClimb->ClimbMotor(0.0);
+  //Steps:
+  m_pClimb->ClimbUpInInch(upDistance, climbSpeed);
 
  m_IsFinished = true;
 }

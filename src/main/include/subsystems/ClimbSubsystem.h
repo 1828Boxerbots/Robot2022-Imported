@@ -30,6 +30,8 @@ class ClimbSubsystem : public frc2::SubsystemBase {
 
   // MOTOR FUNCTIONS
   void ClimbMotor(double speed);
+  void ClimbUpInInch(double inch, double speed);
+  void ClimbDownInInch(double inch, double speed);
 
  private:
  #ifndef NOHW_CLIMB
