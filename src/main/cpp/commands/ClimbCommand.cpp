@@ -24,7 +24,9 @@ void ClimbCommand::Execute()
 {
   if (m_dist>=0)
   {
+    m_pClimb->SetRatchet(false);
     m_pClimb->ClimbUpInInch(fabsf(m_dist),m_speed);
+    m_pClimb->SetRatchet(true);
   }
   else
   {

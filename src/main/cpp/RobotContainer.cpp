@@ -57,6 +57,12 @@ void RobotContainer::Init()
   m_shootSub.Init();
 }
 
+void RobotContainer::TeleopPeriodic()
+{
+  EncoderValues();
+  m_ClimbSub.PeriodicRatchet();
+}
+
 void RobotContainer::TestPhoto()
 {
   m_loaderSub.IsPhotoActive();

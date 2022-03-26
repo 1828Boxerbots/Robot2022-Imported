@@ -4,7 +4,7 @@
 
 #pragma once
 //#define NOHW
-#define NOHW_CLIMB
+//#define NOHW_CLIMB
 //#define NOHW_SENSORS
 
 //PWM
@@ -16,7 +16,7 @@ constexpr int PWM_LOADER_INTAKE_UPPER   = 5;
 constexpr int PWM_LOADER_INNER          = 4; 
 constexpr int PWM_SHOOTER               = 6;
 constexpr int PWM_CLIMB                 = 9; //Maybe 
-constexpr int PWM_CAM_SERVO             = 8; //Maybe
+constexpr int PWM_CLIMB_SERVO           = 8; //Maybe
 
 //DIO
 constexpr int DIO_DRIVE_LEFT_A          = 2;

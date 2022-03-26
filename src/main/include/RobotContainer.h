@@ -59,6 +59,7 @@ class RobotContainer
   frc2::Command* GetAutonomousCommand(); 
   void RunDrive();
   int GetDPDT();
+  void TeleopPeriodic();
   void EncoderValues();
 
  private:

@@ -126,3 +126,21 @@ void ClimbSubsystem::EncoderTest()
     frc::SmartDashboard::PutBoolean("ClimbSub::GetDirection", GetDirection);
 #endif
 }
+
+void ClimbSubsystem::SetRatchet(bool isEngaged)
+{
+    m_isEngaged = isEngaged;
+    if(isEngaged == true)
+    {
+        m_servo.SetAngle(0.0);
+    }
+    else
+    {
+        m_servo.SetAngle(180.0);
+    }
+}
+
+void ClimbSubsystem::PeriodicRatchet()
+{
+    SetRatchet(m_isEngaged);
+}
