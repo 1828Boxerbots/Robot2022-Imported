@@ -239,7 +239,7 @@ void DriveTrainSubsystem::TurnAngleAbsolute(units::degree_t angle, double speed,
 // ENCODER AND DRIVE FUNCTIONS
 void DriveTrainSubsystem::ForwardInInch(double inch, double speed)
 {
-#ifndef NOHW_SENSORS
+#ifndef NOHW
     double currentDistance;
     GetEncoderDistance(nullptr,&currentDistance);
     double targetDistance = currentDistance + inch;
@@ -257,7 +257,7 @@ void DriveTrainSubsystem::ForwardInInch(double inch, double speed)
 
 void DriveTrainSubsystem::BackwardInInch(double inch, double speed)
 {
-#ifndef NOHW_SENSORS
+#ifndef NOHW
     double currentDistance;
     GetEncoderDistance(nullptr, &currentDistance);
     double targetDistance = currentDistance - fabsf(inch);
@@ -275,7 +275,7 @@ void DriveTrainSubsystem::BackwardInInch(double inch, double speed)
 
 void DriveTrainSubsystem::ForwardInInchIMU(double inch, double correctionSpeed, units::degree_t deadZoneAngle, double baseSpeed)
 {
-    #ifndef NOHW_SENSORS
+  #ifndef NOHW
     double currentDistance;
     GetEncoderDistance(&currentDistance);
     double targetDistance = currentDistance + inch;

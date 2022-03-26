@@ -15,7 +15,7 @@ constexpr int PWM_LOADER_INTAKE         = 3;
 constexpr int PWM_LOADER_INTAKE_UPPER   = 5;
 constexpr int PWM_LOADER_INNER          = 4; 
 constexpr int PWM_SHOOTER               = 6;
-constexpr int PWM_CLIMB                 = 9; //Maybe
+constexpr int PWM_CLIMB                 = 9; //Maybe 
 constexpr int PWM_CAM_SERVO             = 8; //Maybe
 
 //DIO
@@ -29,10 +29,10 @@ constexpr int DIO_DPDT_TOP              = 0;
 constexpr int DIO_DPDT_BOTTOM           = 0;
 constexpr int DIO_SPST                  = 0;
 constexpr int DIO_PHOTOGATE             = 8;
-constexpr int DIO_HALLEFFECT_LOWER       = 6;
+constexpr int DIO_HALLEFFECT_LOWER      = 6;
 constexpr int DIO_HALLEFFECT_HIGHER     = 7;
 
-constexpr int DIO_CLIMB_ENCODER_A       = 0; //Maybe
+constexpr int DIO_CLIMB_ENCODER_A       = 0; //Maybe 
 constexpr int DIO_CLIMB_ENCODER_B       = 1; //Maybe
 
 

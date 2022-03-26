@@ -28,21 +28,17 @@ void PosWallAutoCommand::Initialize() {}
 void PosWallAutoCommand::Execute() 
 {
   // Variables.
-  double armSpeed = 0.4;
   double intakeSpeed = 0.8;
   double distanceToBall = 33.0;
   double distanceToLeave = 40.0;
   double backwardDistance = 27.0;
-  double driveTrainSpeed = 0.4; 
   double innerSpeed = 0.8;
-  double innerTime = 3.0;
   units::degree_t turnAngleToShoot = (units::degree_t) m_turnAngleToShoot;
   units::degree_t turnAngleToLeave = (units::degree_t) m_turnAngleToLeave;
   double turnSpeed = 0.2;
   units::degree_t turnDeadZone = (units::degree_t) 5.0;
   double shooterTargetSpeed = 70.0;
   double stopSpeed = 0.0;
-  double timeLimit = 8.0;
 
 
   //1. Drop Arm.

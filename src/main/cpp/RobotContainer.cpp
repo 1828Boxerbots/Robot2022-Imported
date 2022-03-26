@@ -20,8 +20,8 @@ RobotContainer::RobotContainer()
   m_pMiddleTimer = new TheLoneTimerAutonomus(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 0.6,-135.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
-  m_pUpClimbCmd = new ClimbCommand(&m_ClimbSub);
-  m_pDownClimbCmd = new ClimbCommand (&m_ClimbSub);
+  m_pUpClimbCmd = new ClimbCommand(&m_ClimbSub,25,0.4);
+  m_pDownClimbCmd = new ClimbCommand (&m_ClimbSub,-25,0.4);
   m_pMiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
   m_pAloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
   m_pWallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 70.0);
@@ -95,8 +95,7 @@ void RobotContainer::SetButtonX()
 
 void RobotContainer::SetButtonY()
 {
-  m_yButton.WhenPressed(m_p15ftShoot);
-  m_yButton.WhileHeld(m_ploader);
+  m_yButton.WhenPressed(m_pUpClimbCmd);
   //m_yButton.WhenReleased(m_pLoadStop);
   //m_yButton2.WhileHeld(m_ploader);      
   //m_yButton2.WhenReleased(m_pLoadStop);
@@ -104,7 +103,7 @@ void RobotContainer::SetButtonY()
 
 void RobotContainer::SetButtonA()
 {
-  //m_aButton.WhenPressed(m_pVisionAllignCmd);
+  m_aButton.WhenPressed(m_pDownClimbCmd);
   //m_aButton2.WhileHeld(m_ploadIntakeCmd);
   //m_aButton2.WhenReleased(m_pLoadStop);
 }

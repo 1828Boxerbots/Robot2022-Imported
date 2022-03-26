@@ -31,10 +31,10 @@ class ShooterSubsystem : public frc2::SubsystemBase {
   void ShootMotor(double speed);
 
  private:
- #ifndef NOHW_SENSORS
+ #ifndef NOHW
   frc::Encoder m_shooterEncoder{DIO_SHOOTER_ENCODER_A, DIO_SHOOTER_ENCODER_B};
-  #endif
   frc::Victor m_shooterMotor{PWM_SHOOTER};
+  #endif
   // Halleffect
   //Equation: 1 / # of pulses per revolution (have to test)
   const double m_DISPULSE_SHOOT = 1.0/20.0;

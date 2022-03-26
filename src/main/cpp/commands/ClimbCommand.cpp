@@ -7,11 +7,13 @@
 #include "Util.h"
 
 // The distance is inches.
-ClimbCommand::ClimbCommand(ClimbSubsystem *pClimb) 
+ClimbCommand::ClimbCommand(ClimbSubsystem *pClimb,double distance, double speed) 
 {
   m_pClimb = pClimb;
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements(m_pClimb);
+  m_dist = distance;
+  m_speed = speed;
 }
 
 // Called when the command is initially scheduled.
@@ -20,17 +22,14 @@ void ClimbCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void ClimbCommand::Execute() 
 {
-  //Variables:
-  double downDistance = 1.0;
-  double upDistance = 1.0;
-  double climbSpeed = 0.2;
-  double secondsDelay = 2.0;
-
-  //Steps:
-  m_pClimb->ClimbUpInInch(upDistance, climbSpeed);
-  Util::DelayInSeconds((units::time::second_t)secondsDelay);
-  m_pClimb->ClimbDownInInch(downDistance, climbSpeed);
-
+  if (m_dist>=0)
+  {
+    m_pClimb->ClimbUpInInch(fabsf(m_dist),m_speed);
+  }
+  else
+  {
+    m_pClimb->ClimbDownInInch(fabsf(m_dist),m_speed);
+  }
 
  m_IsFinished = true;
 }

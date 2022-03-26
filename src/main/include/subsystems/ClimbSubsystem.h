@@ -35,7 +35,7 @@ class ClimbSubsystem : public frc2::SubsystemBase {
 
  private:
  #ifndef NOHW_CLIMB
-  frc::Victor m_climb{PWM_RIGHT};
+  frc::Victor m_climb{PWM_CLIMB};
 
   frc::Encoder m_climbEncoder{DIO_CLIMB_ENCODER_A, DIO_CLIMB_ENCODER_B};
  #endif

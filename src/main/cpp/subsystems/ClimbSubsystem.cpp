@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
+#include <frc/Timer.h>
 #include "subsystems/ClimbSubsystem.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
@@ -35,20 +35,22 @@ void ClimbSubsystem::ResetEncoder()
 
 double ClimbSubsystem::GetDistance()
 {
+    double dist = 0.0;
 #ifndef NOHW_CLIMB
-    return m_climbEncoder.GetDistance();
-#else
-    return 0.0;
+    dist = -m_climbEncoder.GetDistance();
 #endif
+    frc::SmartDashboard::PutNumber("ClimbSub::GetDistance", dist);
+    return dist;
 }
 
 int ClimbSubsystem::GetRaw()
 {
+    int raw = 0;
 #ifndef NOHW_CLIMB
-    return m_climbEncoder.GetRaw();
-#else
-    return 0;
+    raw = m_climbEncoder.GetRaw();
 #endif
+    frc::SmartDashboard::PutNumber("ClimbSub::GetRaw", raw);
+    return raw;
 }
 
 // MOTOR FUNCTIONS
@@ -62,15 +64,22 @@ void ClimbSubsystem::ClimbMotor(double speed)
 
 void ClimbSubsystem::ClimbUpInInch(double inch, double speed)
 {
-    #ifndef NOHW_ClIMB
-    double currentDistance;
-    GetDistance();
-    double targetDistance = currentDistance + inch;
+#ifndef NOHW_ClIMB
+    frc::Timer timer;
+    timer.Start();
+    units::second_t targetTime = timer.Get() + 3_s;
+    
+    double currentDistance = GetDistance();
+    double targetDistance = currentDistance + fabsf(inch);
 
     while(currentDistance < targetDistance)
     {
         ClimbMotor(fabsf(speed));
         currentDistance = GetDistance();
+        if(timer.Get()>=targetTime)
+        {
+            break;
+        }
     }
 
     //Stop
@@ -80,15 +89,22 @@ void ClimbSubsystem::ClimbUpInInch(double inch, double speed)
 
 void ClimbSubsystem::ClimbDownInInch(double inch, double speed)
 {
-    #ifndef NOHW_CLIMB
-    double currentDistance;
-    currentDistance = GetDistance();
+#ifndef NOHW_CLIMB
+    frc::Timer timer;
+    timer.Start();
+    units::second_t targetTime = timer.Get() + 3_s;
+
+    double currentDistance = GetDistance();
     double targetDistance = currentDistance - fabsf(inch);
 
     while(currentDistance > targetDistance)
     {
         ClimbMotor(-fabsf(speed));
         currentDistance = GetDistance();
+        if(timer.Get()>=targetTime)
+        {
+            break;
+        }
     }
 
     //Stop
@@ -98,15 +114,15 @@ void ClimbSubsystem::ClimbDownInInch(double inch, double speed)
 
 void ClimbSubsystem::EncoderTest()
 {
-    #ifndef NOHW_CLIMB
-  int GetRaw = m_climbEncoder.GetRaw();
-  double GetDistancePerPulse = m_climbEncoder.GetDistancePerPulse();
-  double GetDistance = m_climbEncoder.GetDistance();
-  bool GetDirection = m_climbEncoder.GetDirection();
+#ifndef NOHW_CLIMB
+    int GetRaw = m_climbEncoder.GetRaw();
+    double GetDistancePerPulse = m_climbEncoder.GetDistancePerPulse();
+    double GetDistance = m_climbEncoder.GetDistance();
+    bool GetDirection = m_climbEncoder.GetDirection();
 
-    frc::SmartDashboard::PutNumber("ClimbSubsystem-GetRaw", GetRaw);
-    frc::SmartDashboard::PutNumber("ClimbSubsystem-GetDistancePerPulse", GetDistancePerPulse);
-    frc::SmartDashboard::PutNumber("ClimbSubsystem-GetDistance", GetDistance);
-    frc::SmartDashboard::PutBoolean("ClimbSubsystem-GetDirection", GetDirection);
-    #endif
+    frc::SmartDashboard::PutNumber("ClimbSub::GetRaw", GetRaw);
+    frc::SmartDashboard::PutNumber("ClimbSub::GetDistancePerPulse", GetDistancePerPulse);
+    frc::SmartDashboard::PutNumber("ClimbSub::GetDistance", GetDistance);
+    frc::SmartDashboard::PutBoolean("ClimbSub::GetDirection", GetDirection);
+#endif
 }
