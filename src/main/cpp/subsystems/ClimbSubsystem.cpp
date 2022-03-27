@@ -67,14 +67,18 @@ void ClimbSubsystem::ClimbUpInInch(double inch, double speed)
 #ifndef NOHW_ClIMB
     frc::Timer timer;
     timer.Start();
-    units::second_t targetTime = timer.Get() + 3_s;
+    units::second_t targetTime = timer.Get() + 5_s;
     
     double currentDistance = GetDistance();
-    double targetDistance = currentDistance + fabsf(inch);
+    //double targetDistance = currentDistance + fabsf(inch);
 
-    while(currentDistance < targetDistance)
+    if(currentDistance < inch)
     {
         ClimbMotor(fabsf(speed));
+    }
+    while(currentDistance < inch)
+    {
+        SetRatchet(false);
         currentDistance = GetDistance();
         if(timer.Get()>=targetTime)
         {
@@ -92,14 +96,17 @@ void ClimbSubsystem::ClimbDownInInch(double inch, double speed)
 #ifndef NOHW_CLIMB
     frc::Timer timer;
     timer.Start();
-    units::second_t targetTime = timer.Get() + 3_s;
+    units::second_t targetTime = timer.Get() + 5_s;
 
     double currentDistance = GetDistance();
-    double targetDistance = currentDistance - fabsf(inch);
+    //double targetDistance = currentDistance - fabsf(inch);
 
-    while(currentDistance > targetDistance)
+    if(currentDistance > fabsf(inch))
     {
         ClimbMotor(-fabsf(speed));
+    }
+    while(currentDistance > fabsf(inch))
+    {
         currentDistance = GetDistance();
         if(timer.Get()>=targetTime)
         {
@@ -129,7 +136,6 @@ void ClimbSubsystem::EncoderTest()
 
 void ClimbSubsystem::SetRatchet(bool isEngaged)
 {
-    m_isEngaged = isEngaged;
     if(isEngaged == true)
     {
         m_servo.SetAngle(0.0);
@@ -138,9 +144,44 @@ void ClimbSubsystem::SetRatchet(bool isEngaged)
     {
         m_servo.SetAngle(180.0);
     }
+
+    m_isEngaged = isEngaged;
+    frc::SmartDashboard::PutBoolean("ClimbSub::PeriodicRatchet isEngaged", m_isEngaged);
 }
 
-void ClimbSubsystem::PeriodicRatchet()
+void ClimbSubsystem::PeriodicRatchet(){}
+
+void ClimbSubsystem::ClimbDistance(double dist, double controllerValueY, double controllerValueX, double speed)
 {
-    SetRatchet(m_isEngaged);
+    if(controllerValueY > 0.5 || controllerValueY < -0.5)
+    {
+        if (controllerValueY>=0.5 && m_isTop == false)
+        {
+            m_isTop = true;
+            SetRatchet(false);
+            Util::DelayInSeconds(0.5_s);
+            //ClimbUpInInch(fabsf(dist), fabsf(speed));
+            ClimbUpInInch(25, fabsf(speed));
+            SetRatchet(true);
+        }
+        else if(controllerValueY<=-0.5 && m_isTop == true)
+        {
+            //ClimbDownInInch(fabsf(dist), fabsf(speed));
+            ClimbDownInInch(0, fabsf(speed));
+            m_isTop = false;
+        }
+    }
+    else
+    {
+        GetDistance();
+        if(controllerValueX > 0.5)
+        {
+            SetRatchet(false);
+        }
+        else if(controllerValueX < -0.5)
+        {
+            SetRatchet(true);
+        }
+        ClimbMotor(controllerValueX * 0.5);
+    }
 }

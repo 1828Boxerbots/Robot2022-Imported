@@ -11,6 +11,7 @@
 #include <frc/motorcontrol/Victor.h>
 
 #include "Constants.h"
+#include "Util.h"
 
 class ClimbSubsystem : public frc2::SubsystemBase {
  public:
@@ -37,6 +38,7 @@ class ClimbSubsystem : public frc2::SubsystemBase {
   //Servo
   void PeriodicRatchet();
   void SetRatchet(bool isEngaged = true);
+  void ClimbDistance(double dist, double controllerValueY, double controllerValueX, double speed);
 
  private:
  #ifndef NOHW_CLIMB
@@ -44,9 +46,9 @@ class ClimbSubsystem : public frc2::SubsystemBase {
   frc::Servo m_servo{PWM_CLIMB_SERVO};
   frc::Encoder m_climbEncoder{DIO_CLIMB_ENCODER_A, DIO_CLIMB_ENCODER_B};
  #endif
-  
-  bool m_isEngaged = true;
-
+  bool m_isTop = false;
+  bool m_isEngaged = false;
+  int m_heartbeat = 0;
   //Equation: circumfrence (pi*d) / pulses_per_revolution (have to test)
   const double m_DISPULSE_CLIMB = (6*3.14159)/360;
   // Components (e.g. motor controllers and sensors) should generally be

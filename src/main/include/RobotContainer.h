@@ -143,10 +143,6 @@ class RobotContainer
     ArmCommand *m_pArmStop              = nullptr;
     ShootSpeedCommand *m_pShootSpeed = nullptr;
     ShooterCommand *m_pShoot = nullptr;
-    ShooterCommand *m_pShootTest1 = nullptr;
-    ShooterCommand *m_pShootTest2 = nullptr;
-    ShooterCommand *m_pShootTest3 = nullptr;
-    ShooterCommand *m_pShootTest4 = nullptr;
     ShooterCommand *m_pShootStop = nullptr;
     ShooterCommand *m_pLowShoot = nullptr;
     ShooterCommand *m_pStopShoot = nullptr;
