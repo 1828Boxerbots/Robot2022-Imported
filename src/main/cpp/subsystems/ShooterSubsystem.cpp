@@ -54,6 +54,7 @@ void ShooterSubsystem::ShootToTimer(double time, double speed)
     m_shooterMotor.Set(0.00000);
 #endif
 }
+
 void ShooterSubsystem::SetShooterSpeed(double targetSpeed)
 {
     #ifndef NOHW
@@ -64,9 +65,20 @@ void ShooterSubsystem::SetShooterSpeed(double targetSpeed)
     // y=mx+b -> x= (y+b)/m
     double power = targetSpeed / 78;
 
-    ShootMotor(power);//set power to negative for C418.
+    ShootMotor(power); //set power to negative for C418.
+
+    frc::Timer timer;
+    timer.Start();
+    units::second_t currentTime = timer.Get();
+    units::second_t targetTime = timer.Get() + 3_s;
+
     while(GetShooterSpeed() < targetSpeed) //Set bothe GetShooterSpeed() and targetSpeed to absolute value for C418.
     {
+        if(currentTime >= targetTime)
+        {
+            break;
+        }
+        currentTime = timer.Get();
         GetShooterSpeed();
         if(timer.Get()>=targetTime)
         {

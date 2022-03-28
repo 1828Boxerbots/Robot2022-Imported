@@ -8,6 +8,7 @@
 #include <frc/Encoder.h>
 #include <frc/motorcontrol/Victor.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/Timer.h>
 
 #include "Constants.h"
 

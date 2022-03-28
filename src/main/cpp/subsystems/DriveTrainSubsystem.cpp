@@ -148,6 +148,7 @@ void DriveTrainSubsystem::MoveTank(double left, double right)
     SetMotorL(left);
     SetMotorR(right);
 }
+
 void DriveTrainSubsystem::ForwardInTime(double time, double speed)
 {
     MoveTank(speed, speed);
@@ -330,8 +331,9 @@ bool DriveTrainSubsystem::VisionAllign(double speed, units::degree_t deadZone)
 {
     double turnAngle = -GetPIAngle();
     frc::SmartDashboard::PutNumber("PiAngle", turnAngle);
-    if(turnAngle != 666)
+    if(turnAngle != 666 || m_previousAngle == turnAngle || turnAngle == 0)
     {
+        m_previousAngle = turnAngle;
         TurnAngleRelative((units::degree_t)turnAngle, speed, deadZone);
         return true;
     }

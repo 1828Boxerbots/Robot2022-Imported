@@ -96,6 +96,8 @@ class DriveTrainSubsystem : public frc2::SubsystemBase {
   double pulsesPerRev = 363;
   const double m_DISPULSE_LEFT = (pi * diameter) / pulsesPerRev;
   const double m_DISPULSE_RIGHT = (pi * diameter) / pulsesPerRev;
+
+  double m_previousAngle;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };
