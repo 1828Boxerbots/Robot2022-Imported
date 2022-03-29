@@ -46,9 +46,9 @@ bool LoaderSubsystem::IsPhotoActive()
         frc::SmartDashboard::PutNumber("LoaderSubsystem-HeartBeat", m_heartBeat++);
 
 #ifndef NOHW
-    frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsPhotoActive", m_photogate.Get());
+    frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsPhotoActive", false);
 
-    return m_photogate.Get();
+    return false;
 #else
     return false;
 #endif
@@ -70,9 +70,7 @@ bool LoaderSubsystem::IsLowLimitSwitchActive()
     bool Low= false;
   
    #ifndef NOHW
-    bool High = m_limitSwitchHigh.Get();
-    Low= m_limitSwitchLow.Get();
-
+    bool High = false;
 
     frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsHighLimitSwitchActive", High);
     frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsLowLimitSwitchActive", Low);
@@ -90,9 +88,7 @@ bool LoaderSubsystem::IsHighLimitSwitchActive()
     bool High= false;
   
    #ifndef NOHW
-    bool Low = m_limitSwitchLow.Get();
-    High= m_limitSwitchHigh.Get();
-
+    bool Low = false;
 
     frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsHighLimitSwitchActive", High);
     frc::SmartDashboard::PutBoolean("LoaderSubsystem-IsLowLimitSwitchActive", Low);

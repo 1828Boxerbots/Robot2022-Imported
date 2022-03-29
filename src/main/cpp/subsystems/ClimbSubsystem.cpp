@@ -40,6 +40,7 @@ double ClimbSubsystem::GetDistance()
     dist = -m_climbEncoder.GetDistance();
 #endif
     frc::SmartDashboard::PutNumber("ClimbSub::GetDistance", dist);
+    frc::SmartDashboard::PutNumber("ClimbSub::GetDistance RAW", m_climbEncoder.GetRaw());
     return dist;
 }
 

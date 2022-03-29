@@ -41,10 +41,6 @@ class LoaderSubsystem : public frc2::SubsystemBase {
   frc::Victor m_innerUp{PWM_LOADER_INTAKE_UPPER};
   frc::Victor m_arm{PWM_ARM};
 
-  frc::DigitalInput m_photogate{DIO_PHOTOGATE};
-  frc::DigitalInput m_limitSwitchLow{DIO_HALLEFFECT_LOWER};
-  frc::DigitalInput m_limitSwitchHigh{DIO_HALLEFFECT_HIGHER};
-
   frc::Timer m_timer;
 
  #endif

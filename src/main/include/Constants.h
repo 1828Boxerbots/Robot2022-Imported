@@ -3,10 +3,10 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-// #define NOHW
-// #define NOHW_CLIMB
-#define NOHW_SERVO
-#define NOHW_LIMIT
+//#define NOHW
+//#define NOHW_CLIMB
+//#define NOHW_SERVO
+//#define NOHW_LIMIT
 
 //PWM
 constexpr int PWM_LEFT                  = 1;
@@ -16,7 +16,7 @@ constexpr int PWM_LOADER_INTAKE         = 3;
 constexpr int PWM_LOADER_INTAKE_UPPER   = 5;
 constexpr int PWM_LOADER_INNER          = 4; 
 constexpr int PWM_SHOOTER               = 6;
-constexpr int PWM_CLIMB                 = 8;
+constexpr int PWM_CLIMB                 = 7;
 constexpr int PWM_CLIMB_SERVO           = 9; 
 
 //DIO
@@ -26,15 +26,11 @@ constexpr int DIO_DRIVE_RIGHT_A         = 5;
 constexpr int DIO_DRIVE_RIGHT_B         = 4;
 constexpr int DIO_SHOOTER_ENCODER_A     = 0;
 constexpr int DIO_SHOOTER_ENCODER_B     = 1;
-constexpr int DIO_DPDT_TOP              = 0;
-constexpr int DIO_DPDT_BOTTOM           = 0;
-constexpr int DIO_SPST                  = 0;
-constexpr int DIO_PHOTOGATE             = 8;
-constexpr int DIO_HALLEFFECT_LOWER      = 6;
-constexpr int DIO_HALLEFFECT_HIGHER     = 7;
+constexpr int DIO_DPDT_TOP              = 9;
+constexpr int DIO_DPDT_BOTTOM           = 8;
 
-constexpr int DIO_CLIMB_ENCODER_A       = 0; //Maybe 
-constexpr int DIO_CLIMB_ENCODER_B       = 1; //Maybe
+constexpr int DIO_CLIMB_ENCODER_A       = 6; 
+constexpr int DIO_CLIMB_ENCODER_B       = 7;
 
 
 constexpr int USB_CONTROLLER_ONE        = 0;

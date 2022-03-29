@@ -22,9 +22,6 @@ RobotContainer::RobotContainer()
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pUpClimbCmd = new ClimbCommand(&m_ClimbSub,25,0.4);
   m_pDownClimbCmd = new ClimbCommand (&m_ClimbSub,-25,0.4);
-  m_pMiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
-  m_pAloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
-  m_pWallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 70.0);
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.39);
   m_pLowShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.2);
@@ -34,11 +31,11 @@ RobotContainer::RobotContainer()
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub);
   m_pArmDown = new ArmCommand(&m_loaderSub,0.65,&m_controllerTwo);
   m_pArmStop = new ArmCommand(&m_loaderSub,0,&m_controllerTwo);
-  m_p8ftShoot = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 25.8);
-  m_p13ftShoot = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 29.8);
-  m_p10ftShoot = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 27.4);
-  m_p15ftShoot = new VisionShootCommand(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 31.3);
 
+  //Auto
+  m_pAloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
+  m_pMiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
+  m_pWallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 70.0);
   m_plowHub = new CompetitionCMD(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 0.3, 0.6, 1.2);
 
   // Configure the button bindings
@@ -165,11 +162,11 @@ int RobotContainer::GetDPDT()
   }
   else if(isBottom)
   {
-    value = 2;
+    value = 3;
   }
   else
   {
-    value = 3;
+    value = 2;
   }
 
   frc::SmartDashboard::PutNumber("DPDT Value", value);
@@ -204,28 +201,34 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   frc::SmartDashboard::PutBoolean("Auto Status", true);
   switch (GetDPDT())
   {
-  default:
-    //cmd = m_pWallAutoCmd;
-    cmd = m_pAloneAutoCmd;
-    //cmd = m_pMiddleAutoCmd;
-  
-    break;
-    
-  //case 2:
-   // cmd = m_pPos2AutoCmd;
-   // break;
+    case 1:
+      //For Pos 1 AND 2
+      cmd = m_pAloneAutoCmd;
+      frc::SmartDashboard::PutString("AutoCMD String", "m_pAloneAutoCmd");
+      break;
+      
+    case 2:
+      //When facing toward wall
+      cmd = m_pWallAutoCmd;
+      frc::SmartDashboard::PutString("AutoCMD String", "m_pWallAutoCmd");
+      break;
 
- // case 3:
-  //  cmd = m_pPos3AutoCmd;
-  //  break;
+    case 3:
+      //AZ North Auto
+      cmd = m_plowHub;
+      frc::SmartDashboard::PutString("AutoCMD String", "m_plowHub");
+      break;
 
- // default:
-  //  cmd = nullptr;
-   // break;
+    default:
+      cmd = nullptr;
   }
+
+
   if(cmd == nullptr)
   {
     frc::SmartDashboard::PutBoolean("Auto Status", false);
+    frc::SmartDashboard::PutString("AutoCMD String", "nullptr");
   }
-  return cmd;
+
+  return nullptr;
 }

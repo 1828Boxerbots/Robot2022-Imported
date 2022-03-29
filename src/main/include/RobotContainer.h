@@ -99,8 +99,8 @@ class RobotContainer
     frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
     frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};
 
-    // frc::DigitalInput m_topSwitch{DIO_DPDT_TOP};
-    // frc::DigitalInput m_bottomSwitch{DIO_DPDT_BOTTOM};
+    //frc::DigitalInput m_topSwitch{DIO_DPDT_TOP};
+    //frc::DigitalInput m_bottomSwitch{DIO_DPDT_BOTTOM};
 
     void ConfigureButtonBindings();
     //Buttons
