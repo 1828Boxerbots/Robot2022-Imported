@@ -43,8 +43,10 @@ class ClimbSubsystem : public frc2::SubsystemBase {
  private:
  #ifndef NOHW_CLIMB
   frc::Victor m_climb{PWM_CLIMB};
-  frc::Servo m_servo{PWM_CLIMB_SERVO};
   frc::Encoder m_climbEncoder{DIO_CLIMB_ENCODER_A, DIO_CLIMB_ENCODER_B};
+#ifndef NOHW_SERVO
+  frc::Servo m_servo{PWM_CLIMB_SERVO};
+ #endif
  #endif
   bool m_isTop = false;
   bool m_isEngaged = false;

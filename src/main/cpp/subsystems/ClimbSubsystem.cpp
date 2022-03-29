@@ -136,6 +136,7 @@ void ClimbSubsystem::EncoderTest()
 
 void ClimbSubsystem::SetRatchet(bool isEngaged)
 {
+    #ifndef NOHW_SERVO
     if(isEngaged == true)
     {
         m_servo.SetAngle(0.0);
@@ -144,8 +145,8 @@ void ClimbSubsystem::SetRatchet(bool isEngaged)
     {
         m_servo.SetAngle(180.0);
     }
-
     m_isEngaged = isEngaged;
+    #endif
     frc::SmartDashboard::PutBoolean("ClimbSub::PeriodicRatchet isEngaged", m_isEngaged);
 }
 

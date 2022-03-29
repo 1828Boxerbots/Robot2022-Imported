@@ -58,9 +58,6 @@ void ShooterSubsystem::ShootToTimer(double time, double speed)
 void ShooterSubsystem::SetShooterSpeed(double targetSpeed)
 {
     #ifndef NOHW
-    frc::Timer timer;
-    timer.Start();
-    units::second_t targetTime = timer.Get() + 3_s;
     //Using a linear function speed= (78)power + 0 (found testing different powers and graphing their speeds)
     // y=mx+b -> x= (y+b)/m
     double power = targetSpeed / 78;

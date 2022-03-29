@@ -101,8 +101,8 @@ void RobotContainer::SetButtonY()
 {
   m_yButton.WhenHeld(m_ploader);
   m_yButton.WhenReleased(m_pLoadStop);
-  //m_yButton2.WhileHeld(m_ploader);      
-  //m_yButton2.WhenReleased(m_pLoadStop);
+  m_yButton2.WhileHeld(m_ploader);      
+  m_yButton2.WhenReleased(m_pLoadStop);
 }
 
 void RobotContainer::SetButtonA()

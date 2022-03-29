@@ -142,7 +142,7 @@ void LoaderSubsystem::LoadToPhoto(double speed, bool loadToShoot, double timeOut
 
 void LoaderSubsystem::AutoArm(double speed)
 {
-#ifndef NOHW_SENSORS
+#ifndef NOHW_LIMIT
  frc::SmartDashboard::PutString("AutoArmCommand", "Execute Start");
   MoveArm(0.0);
 

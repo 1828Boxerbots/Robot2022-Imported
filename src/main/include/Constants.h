@@ -3,9 +3,10 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-#define NOHW
-//#define NOHW_CLIMB
-#define NOHW_SENSORS
+// #define NOHW
+// #define NOHW_CLIMB
+#define NOHW_SERVO
+#define NOHW_LIMIT
 
 //PWM
 constexpr int PWM_LEFT                  = 1;
@@ -15,7 +16,7 @@ constexpr int PWM_LOADER_INTAKE         = 3;
 constexpr int PWM_LOADER_INTAKE_UPPER   = 5;
 constexpr int PWM_LOADER_INNER          = 4; 
 constexpr int PWM_SHOOTER               = 6;
-constexpr int PWM_CLIMB                 = 1; //8
+constexpr int PWM_CLIMB                 = 8;
 constexpr int PWM_CLIMB_SERVO           = 9; 
 
 //DIO
@@ -32,8 +33,8 @@ constexpr int DIO_PHOTOGATE             = 8;
 constexpr int DIO_HALLEFFECT_LOWER      = 6;
 constexpr int DIO_HALLEFFECT_HIGHER     = 7;
 
-constexpr int DIO_CLIMB_ENCODER_A       = 2; //0; //Maybe 
-constexpr int DIO_CLIMB_ENCODER_B       = 3; //1; //Maybe
+constexpr int DIO_CLIMB_ENCODER_A       = 0; //Maybe 
+constexpr int DIO_CLIMB_ENCODER_B       = 1; //Maybe
 
 
 constexpr int USB_CONTROLLER_ONE        = 0;
