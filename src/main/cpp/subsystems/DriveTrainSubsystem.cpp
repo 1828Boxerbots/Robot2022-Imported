@@ -244,13 +244,16 @@ void DriveTrainSubsystem::ForwardInInch(double inch, double speed)
 {
 #ifndef NOHW
     double currentDistance;
-    GetEncoderDistance(nullptr,&currentDistance);
+    GetEncoderDistance(&currentDistance);
+    // Reverse Dir
+    currentDistance = -currentDistance;
     double targetDistance = currentDistance + inch;
 
     while(currentDistance < targetDistance)
     {
         MoveTank(speed, speed);
-        GetEncoderDistance(nullptr,&currentDistance);
+        GetEncoderDistance(&currentDistance);
+        Util::Log("ForwardInInch.currentDistance", currentDistance);
     }
 
     //Stop
@@ -262,13 +265,15 @@ void DriveTrainSubsystem::BackwardInInch(double inch, double speed)
 {
 #ifndef NOHW
     double currentDistance;
-    GetEncoderDistance(nullptr, &currentDistance);
+    GetEncoderDistance(&currentDistance);
+    // Reverse Dir
+    currentDistance = -currentDistance;
     double targetDistance = currentDistance - fabsf(inch);
 
     while(currentDistance > targetDistance)
     {
         MoveTank(-fabsf(speed), -fabsf(speed));
-        GetEncoderDistance(nullptr,&currentDistance);
+        GetEncoderDistance(&currentDistance);
     }
 
     //Stop

@@ -60,9 +60,9 @@ void RobotContainer::Init()
 void RobotContainer::TeleopPeriodic()
 {
   EncoderValues();
-  m_ClimbSub.PeriodicRatchet();
+  //m_ClimbSub.PeriodicRatchet();
 
-  m_ClimbSub.ClimbDistance(25, -m_controllerTwo.GetLeftY(), m_controllerTwo.GetLeftX(), 0.5);
+  //m_ClimbSub.ClimbDistance(25, -m_controllerTwo.GetLeftY(), m_controllerTwo.GetLeftX(), 0.5);
   //m_ClimbSub.ClimbMotor(m_controllerTwo.GetLeftX() * 0.5);
 }
 
@@ -242,7 +242,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
       
     case 2:
       //When facing toward wall
-      cmd = m_pWallAutoCmd;
+      cmd = nullptr;//m_pWallAutoCmd;
       frc::SmartDashboard::PutString("AutoCMD String", "m_pWallAutoCmd");
       break;
 
