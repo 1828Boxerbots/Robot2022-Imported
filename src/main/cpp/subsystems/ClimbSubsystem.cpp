@@ -144,7 +144,7 @@ void ClimbSubsystem::SetRatchet(bool isEngaged)
     }
     else
     {
-        m_servo.SetAngle(180.0);
+        m_servo.SetAngle(45.0);
     }
     m_isEngaged = isEngaged;
     #endif
@@ -176,14 +176,23 @@ void ClimbSubsystem::ClimbDistance(double dist, double controllerValueY, double 
     else
     {
         GetDistance();
-        if(controllerValueX > 0.5)
+
+        if(controllerValueX > -0.5 && controllerValueX < 0.5)
         {
-            SetRatchet(false);
-        }
-        else if(controllerValueX < -0.5)
-        {
+            ClimbMotor(0.0);
             SetRatchet(true);
         }
-        ClimbMotor(controllerValueX * 0.5);
+        else if(controllerValueX < 0.5)
+        {
+            SetRatchet(true);
+            Util::DelayInSeconds(0.3_s);
+            ClimbMotor(-controllerValueX * 0.5);
+        }
+        else if(controllerValueX > 0.5)
+        {
+            SetRatchet(false);
+            Util::DelayInSeconds(0.3_s);
+            ClimbMotor(-controllerValueX * 0.5);
+        }
     }
 }
