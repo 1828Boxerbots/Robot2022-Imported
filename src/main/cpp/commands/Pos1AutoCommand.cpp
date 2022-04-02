@@ -4,6 +4,7 @@
 
 #include "commands/Pos1AutoCommand.h"
 #include <frc/smartdashboard/SmartDashboard.h>
+#include "Util.h"
 
 Pos1AutoCommand::Pos1AutoCommand(DriveTrainSubsystem *pdrive, LoaderSubsystem *pload, ShooterSubsystem *pshoot, double turnAngle) 
 {
@@ -39,6 +40,12 @@ void Pos1AutoCommand::Execute()
 
   //1. Drop Arm.
   //m_ploader->AutoArm(armSpeed);
+  //Move Arm
+  m_ploader->MoveArm(0.2);
+  Util::DelayInSeconds(0.5_s);
+  m_ploader->MoveArm(0.00125);
+  Util::DelayInSeconds(0.1_s);
+  m_ploader->MoveArm(0.0);
   frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 1");
 
   //2. Turn on Intake.

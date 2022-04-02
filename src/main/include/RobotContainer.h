@@ -155,5 +155,6 @@ class RobotContainer
     ShooterCommand *m_pShootStop = nullptr;
     ShooterCommand *m_pLowShoot = nullptr;
     ShooterCommand *m_pStopShoot = nullptr;
+    ShooterCommand *m_pAdjSpeed = nullptr;
     ShootTriggerController *m_pShootTrigger = nullptr;
 };

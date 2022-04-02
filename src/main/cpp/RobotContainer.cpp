@@ -10,8 +10,8 @@ RobotContainer::RobotContainer()
   m_ploader = new LoadInOne(&m_loaderSub,0.5,&m_controllerTwo);
   m_pLoadStop= new LoadInOne(&m_loaderSub,0,&m_controllerTwo);
   m_peject = new LoadInOne(&m_loaderSub,1,&m_controllerTwo);
-  m_ploadInnerCmd = new LoadInnerCommand(&m_loaderSub, &m_controllerTwo,-.5);
-  m_ploadIntakeCmd = new LoadIntakeCommand(&m_loaderSub, &m_controllerTwo, 1.0);
+  m_ploadInnerCmd = new LoadInnerCommand(&m_loaderSub, &m_controllerTwo,-.35);
+  m_ploadIntakeCmd = new LoadIntakeCommand(&m_loaderSub, &m_controllerTwo, 0.75);
   m_ploadToPhotoCmd = new LoadToPhotoCommand(&m_loaderSub, 0.2);
   m_ploadToShooterCmd = new LoadToShooterCommand(&m_loaderSub, 0.2);
   m_pstopIntakeCmd = new LoadIntakeCommand(&m_loaderSub, &m_controllerTwo, 0.0);
@@ -22,12 +22,15 @@ RobotContainer::RobotContainer()
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   m_pUpClimbCmd = new ClimbCommand(&m_ClimbSub,25,0.4);
   m_pDownClimbCmd = new ClimbCommand (&m_ClimbSub,-25,0.4);
+  //Shoot
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.39);
   m_pLowShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.2);
   m_pShootStop = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.0);
   m_pShootTrigger = new ShootTriggerController(&m_shootSub, &m_controllerTwo);
   m_pStopShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.0);
+  m_pAdjSpeed = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.45);
+
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub);
   m_pArmDown = new ArmCommand(&m_loaderSub,0.65,&m_controllerTwo);
   m_pArmStop = new ArmCommand(&m_loaderSub,0,&m_controllerTwo);
@@ -117,29 +120,29 @@ void RobotContainer::SetButtonA()
 
 void RobotContainer::SetDpadUp()
 {
-  m_POVup.WhenHeld(m_ploader);
-  m_POVup.WhenReleased(m_pLoadStop);
+  // m_POVup.WhenHeld(m_ploader);
+  // m_POVup.WhenReleased(m_pLoadStop);
 }
 void RobotContainer::SetDpadDown()
 {
-  m_POVdown.WhenHeld(m_ploadIntakeCmd);
-  m_POVdown.WhenReleased(m_pLoadStop);
+  // m_POVdown.WhenHeld(m_ploadIntakeCmd);
+  // m_POVdown.WhenReleased(m_pLoadStop);
 }
 void RobotContainer::SetDpadLeft()
 {
-  m_POVleft.WhenHeld(m_ploadInnerCmd);
-  m_POVleft.WhenReleased(m_pLoadStop);
+  // m_POVleft.WhenHeld(m_ploadInnerCmd);
+  // m_POVleft.WhenReleased(m_pLoadStop);
 }
 void RobotContainer::SetDpadRight()
 {
-  m_POVright.WhenHeld(m_pShoot);
-  m_POVright.WhenReleased(m_pShootStop);
+  // m_POVright.WhenHeld(m_pShoot);
+  // m_POVright.WhenReleased(m_pShootStop);
 }
 
 void RobotContainer::SetRightBumper()
 {
-  // m_rightBumper2.WhenHeld(m_pShoot);
-  // m_rightBumper2.WhenReleased(m_pStopShoot);
+  m_rightBumper2.WhenHeld(m_pAdjSpeed);
+  m_rightBumper2.WhenReleased(m_pShootStop);
 }
 
 void RobotContainer::SetLeftBumper()
@@ -256,5 +259,5 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
     frc::SmartDashboard::PutString("AutoCMD String", "nullptr");
   }
 
-  return nullptr;
+  return cmd;
 }
