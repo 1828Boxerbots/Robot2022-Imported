@@ -76,6 +76,11 @@ void RobotContainer::ConfigureButtonBindings()
   SetLeftBumper();
   SetRightTrigger();
   SetLeftTrigger();
+
+  SetDpadUp();
+  SetDpadDown();
+  SetDpadLeft();
+  SetDpadRight();
 }
 
 void RobotContainer::SetButtonB()
@@ -110,6 +115,27 @@ void RobotContainer::SetButtonA()
   m_aButton2.WhenReleased(m_pLoadStop);
 }
 
+void RobotContainer::SetDpadUp()
+{
+  m_POVup.WhenHeld(m_ploader);
+  m_POVup.WhenReleased(m_pLoadStop);
+}
+void RobotContainer::SetDpadDown()
+{
+  m_POVdown.WhenHeld(m_ploadIntakeCmd);
+  m_POVdown.WhenReleased(m_pLoadStop);
+}
+void RobotContainer::SetDpadLeft()
+{
+  m_POVleft.WhenHeld(m_ploadInnerCmd);
+  m_POVleft.WhenReleased(m_pLoadStop);
+}
+void RobotContainer::SetDpadRight()
+{
+  m_POVright.WhenHeld(m_pShoot);
+  m_POVright.WhenReleased(m_pShootStop);
+}
+
 void RobotContainer::SetRightBumper()
 {
   // m_rightBumper2.WhenHeld(m_pShoot);
@@ -118,7 +144,7 @@ void RobotContainer::SetRightBumper()
 
 void RobotContainer::SetLeftBumper()
 {
-  
+
 }
 
 void RobotContainer::SetRightTrigger()
@@ -148,21 +174,21 @@ void RobotContainer::RunDrive()
 
 int RobotContainer::GetDPDT()
 {
-  // bool isTop = !m_topSwitch.Get();
-  // bool isBottom = !m_bottomSwitch.Get();
-  bool isTop = false;
-  bool isBottom = false;
+  bool isTop = !m_topSwitch.Get();
+  bool isBottom = !m_bottomSwitch.Get();
+  // bool isTop = false;
+  // bool isBottom = false;
   frc::SmartDashboard::PutBoolean("TopSwitch", isTop);
   frc::SmartDashboard::PutBoolean("BottomSwitch", isBottom);
   
   int value = -1;
   if(isTop)
   {
-    value = 1;
+    value = 3;
   }
   else if(isBottom)
   {
-    value = 3;
+    value = 1;
   }
   else
   {

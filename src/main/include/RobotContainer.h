@@ -36,6 +36,7 @@
 #include "commands/ShootTriggerController.h"
 #include "commands/CompetitionCMD.h"
 
+#include <frc2/command/button/POVButton.h>
 #include <frc/DigitalInput.h>
 
 /**
@@ -99,8 +100,8 @@ class RobotContainer
     frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
     frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};
 
-    //frc::DigitalInput m_topSwitch{DIO_DPDT_TOP};
-    //frc::DigitalInput m_bottomSwitch{DIO_DPDT_BOTTOM};
+    frc::DigitalInput m_topSwitch{DIO_DPDT_TOP};
+    frc::DigitalInput m_bottomSwitch{DIO_DPDT_BOTTOM};
 
     void ConfigureButtonBindings();
     //Buttons
@@ -112,6 +113,10 @@ class RobotContainer
     void SetLeftBumper();
     void SetRightTrigger();
     void SetLeftTrigger();
+    void SetDpadUp();
+    void SetDpadDown();
+    void SetDpadLeft();
+    void SetDpadRight();
 
     frc2::Button m_aButton {[this] {return m_controllerOne.GetAButton();}};
     frc2::Button m_bButton {[this] {return m_controllerOne.GetBButton();}};
@@ -123,7 +128,7 @@ class RobotContainer
     frc2::Button m_leftTrigger {[this] {return m_controllerOne.GetLeftTriggerAxis();}};
     frc2::Button m_BackButton {[this]{return m_controllerOne.GetBackButton();}};
     frc2::Button m_StartButton {[this]{return m_controllerOne.GetStartButton();}};
-    
+
     frc2::Button m_aButton2 {[this]{return m_controllerTwo.GetAButton();}};    
     frc2::Button m_bButton2 {[this]{return m_controllerTwo.GetBButton();}};    
     frc2::Button m_xButton2 {[this]{return m_controllerTwo.GetXButton();}};    
@@ -134,6 +139,10 @@ class RobotContainer
     frc2::Button m_rightTrigger2 {[this]{return m_controllerTwo.GetRightTriggerAxis();}};
     frc2::Button m_BackButton2 {[this]{return m_controllerTwo.GetBackButton();}};
     frc2::Button m_StartButton2 {[this]{return m_controllerTwo.GetStartButton();}};
+    frc2::POVButton m_POVup{&m_controllerTwo,0};
+    frc2::POVButton m_POVdown{&m_controllerTwo,180};
+    frc2::POVButton m_POVleft{&m_controllerTwo,270};
+    frc2::POVButton m_POVright{&m_controllerTwo,90};
 
     LoadInOne *m_ploader                = nullptr;
     LoadInOne *m_peject                 = nullptr;

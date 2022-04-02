@@ -24,8 +24,8 @@ constexpr int DIO_DRIVE_LEFT_A          = 2;
 constexpr int DIO_DRIVE_LEFT_B          = 3;
 constexpr int DIO_DRIVE_RIGHT_A         = 5;
 constexpr int DIO_DRIVE_RIGHT_B         = 4;
-constexpr int DIO_SHOOTER_ENCODER_A     = 0;
-constexpr int DIO_SHOOTER_ENCODER_B     = 1;
+constexpr int DIO_SHOOTER_ENCODER_A     = 1;
+constexpr int DIO_SHOOTER_ENCODER_B     = 0;
 constexpr int DIO_DPDT_TOP              = 9;
 constexpr int DIO_DPDT_BOTTOM           = 8;
 

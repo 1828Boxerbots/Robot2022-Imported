@@ -51,7 +51,7 @@ class ClimbSubsystem : public frc2::SubsystemBase {
   bool m_isTop = false;
   bool m_isEngaged = false;
   int m_heartbeat = 0;
-  //Equation: circumfrence (pi*d) / pulses_per_revolution (have to test)
+
   const double m_DISPULSE_CLIMB = (6*3.14159)/360;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
