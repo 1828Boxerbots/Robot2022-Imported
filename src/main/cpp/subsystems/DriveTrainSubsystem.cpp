@@ -193,11 +193,13 @@ void DriveTrainSubsystem::TurnAngleRelative(units::degree_t angle, double speed,
     {
         if(currentAngle > highAngle)
         {
-            MoveTank(speed, -speed);
+            // Turning Left
+            MoveTank(-speed, speed);
         }
         else if(currentAngle < lowAngle)
         {
-            MoveTank(-speed, speed);
+            //Turning Right
+            MoveTank(speed, -speed);
         }
         currentAngle = GetADIAngle();//Change to GetAngleX() for C418.
         currentTime = timer.Get();
@@ -329,9 +331,9 @@ double DriveTrainSubsystem::GetPIAngle()
 
 bool DriveTrainSubsystem::VisionAllign(double speed, units::degree_t deadZone)
 {
-    double turnAngle = -GetPIAngle();
+    double turnAngle = GetPIAngle();
     frc::SmartDashboard::PutNumber("PiAngle", turnAngle);
-    if(turnAngle != 666 || m_previousAngle == turnAngle || turnAngle == 0)
+    if(turnAngle != -666 || m_previousAngle == turnAngle || turnAngle == 0)
     {
         m_previousAngle = turnAngle;
         TurnAngleRelative((units::degree_t)turnAngle, speed, deadZone);
