@@ -35,6 +35,7 @@
 #include "commands/PosWallTimerAutoCommand.h"
 #include "commands/ShootTriggerController.h"
 #include "commands/CompetitionCMD.h"
+#include "commands/ManualClimbCommand.h"
 
 #include <frc2/command/button/POVButton.h>
 #include <frc/DigitalInput.h>
@@ -79,8 +80,11 @@ class RobotContainer
     LoadIntakeCommand* m_pstopIntakeCmd = nullptr;
     AutoArmCommand *m_pupAutoArmCmd = nullptr;
     AutoArmCommand *m_pdownAutoArmCmd = nullptr;
-    ClimbCommand *m_pUpClimbCmd = nullptr;
-    ClimbCommand *m_pDownClimbCmd = nullptr;
+    ClimbCommand *m_pAutoUpClimbCmd = nullptr;
+    ClimbCommand *m_pAutoDownClimbCmd = nullptr;
+    ManualClimbCommand *m_pManualUpClimbCmd = nullptr;
+    ManualClimbCommand *m_pManualDownClimbCmd = nullptr;
+    ManualClimbCommand *m_pManualStopClimbCmd = nullptr;
     
     CompetitionCMD *m_plowHub = nullptr;
 

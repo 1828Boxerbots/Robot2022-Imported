@@ -20,8 +20,6 @@ RobotContainer::RobotContainer()
   m_pMiddleTimer = new TheLoneTimerAutonomus(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 0.6,-135.0);
   m_pupAutoArmCmd = new AutoArmCommand(&m_loaderSub, 0.25);
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
-  m_pUpClimbCmd = new ClimbCommand(&m_ClimbSub,25,0.4);
-  m_pDownClimbCmd = new ClimbCommand (&m_ClimbSub,-25,0.4);
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
   m_pShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.39);
   m_pLowShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.2);
@@ -31,6 +29,12 @@ RobotContainer::RobotContainer()
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub);
   m_pArmDown = new ArmCommand(&m_loaderSub,0.65,&m_controllerTwo);
   m_pArmStop = new ArmCommand(&m_loaderSub,0,&m_controllerTwo);
+
+  m_pAutoUpClimbCmd = new ClimbCommand(&m_ClimbSub,25.0,0.4);
+  m_pAutoDownClimbCmd = new ClimbCommand (&m_ClimbSub,0.0,0.4);
+  m_pManualUpClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.5);
+  m_pManualDownClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.5);
+  m_pManualStopClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.0);
 
   //Auto
   m_pAloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
@@ -117,23 +121,23 @@ void RobotContainer::SetButtonA()
 
 void RobotContainer::SetDpadUp()
 {
-  m_POVup.WhenHeld(m_ploader);
-  m_POVup.WhenReleased(m_pLoadStop);
+  m_POVup.WhenHeld(m_pAutoUpClimbCmd);
+  m_POVup.WhenReleased(m_pManualStopClimbCmd);
 }
 void RobotContainer::SetDpadDown()
 {
-  m_POVdown.WhenHeld(m_ploadIntakeCmd);
-  m_POVdown.WhenReleased(m_pLoadStop);
+  m_POVdown.WhenHeld(m_pAutoDownClimbCmd);
+  m_POVdown.WhenReleased(m_pManualStopClimbCmd);
 }
 void RobotContainer::SetDpadLeft()
 {
-  m_POVleft.WhenHeld(m_ploadInnerCmd);
-  m_POVleft.WhenReleased(m_pLoadStop);
+  m_POVleft.WhenHeld(m_pManualDownClimbCmd);
+  m_POVleft.WhenReleased(m_pManualStopClimbCmd);
 }
 void RobotContainer::SetDpadRight()
 {
-  m_POVright.WhenHeld(m_pShoot);
-  m_POVright.WhenReleased(m_pShootStop);
+  m_POVright.WhenHeld(m_pManualUpClimbCmd);
+  m_POVright.WhenReleased(m_pManualStopClimbCmd);
 }
 
 void RobotContainer::SetRightBumper()

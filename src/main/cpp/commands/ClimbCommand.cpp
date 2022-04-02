@@ -22,18 +22,18 @@ void ClimbCommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void ClimbCommand::Execute() 
 {
-  //m_pClimb->ClimbDistance(m_dist, m_speed)
-  if (m_dist>=0)
-  {
-    m_pClimb->SetRatchet(false);
-    Util::DelayInSeconds(0.5_s);
-    m_pClimb->ClimbUpInInch(fabsf(m_dist),m_speed);
-    m_pClimb->SetRatchet(true);
-  }
-  else
-  {
-    m_pClimb->ClimbDownInInch(fabsf(m_dist),m_speed);
-  }
+ double current = m_pClimb->GetDistance();
+
+ if(m_dist < current)
+ {
+   m_pClimb->ClimbDownInInch(m_dist, m_speed);
+ }
+ else
+ {
+   m_pClimb->SetRatchet(false);
+   m_pClimb->ClimbUpInInch(m_dist, m_speed);
+   m_pClimb->SetRatchet(true);
+ }
 
  m_IsFinished = true;
 }
