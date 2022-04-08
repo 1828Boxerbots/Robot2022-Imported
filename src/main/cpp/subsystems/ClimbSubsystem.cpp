@@ -75,7 +75,7 @@ void ClimbSubsystem::ClimbUpInInch(double inch, double speed)
 
     if(currentDistance < inch)
     {
-        ClimbMotor(fabsf(speed));
+        ClimbMotor(-fabsf(speed));
     }
     while(currentDistance < inch)
     {
@@ -95,6 +95,8 @@ void ClimbSubsystem::ClimbUpInInch(double inch, double speed)
 void ClimbSubsystem::ClimbDownInInch(double inch, double speed)
 {
 #ifndef NOHW_CLIMB
+
+
     frc::Timer timer;
     timer.Start();
     units::second_t targetTime = timer.Get() + 5_s;
@@ -104,7 +106,7 @@ void ClimbSubsystem::ClimbDownInInch(double inch, double speed)
 
     if(currentDistance > fabsf(inch))
     {
-        ClimbMotor(-fabsf(speed));
+        ClimbMotor(fabsf(speed));
     }
     while(currentDistance > fabsf(inch))
     {

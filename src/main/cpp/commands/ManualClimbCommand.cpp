@@ -29,20 +29,20 @@ void ManualClimbCommand::Execute()
   switch(pov)
   {
       
-    case 90:
+    case 0:
       // Pressing the D-Pad Right.
       // Climb arms are moving up.
       m_pClimbSub->SetRatchet(false);
       Util::DelayInSeconds(0.3_s);
-      m_pClimbSub->ClimbMotor(fabsf(m_speed));
+      m_pClimbSub->ClimbMotor(-fabsf(m_speed));
       break;
 
-    case 270:
+    case 180:
       // Pressing the D-Pad Left.
       // Climb arms are moving down.
       m_pClimbSub->SetRatchet(true);
       //Util::DelayInSeconds(0.3_s);
-      m_pClimbSub->ClimbMotor(-fabsf(m_speed));
+      m_pClimbSub->ClimbMotor(fabsf(m_speed));
       break;
     
     default:

@@ -2,17 +2,16 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/CompetitionCMD.h"
+#include "commands/UtahCompetitionCMD.h"
 
-CompetitionCMD::CompetitionCMD(DriveTrainSubsystem *pDrive, ShooterSubsystem *pShoot, LoaderSubsystem *pLoader, double shootSpeed, 
-                                double driveSpeed, double driveTime)
+UtahCompetitionCMD::UtahCompetitionCMD(DriveTrainSubsystem* pDrive, LoaderSubsystem* pLoader, ShooterSubsystem* pShoot,
+                                        double driveSpeed, double shootSpeed)
 {
   m_pDrive = pDrive;
-  m_pShoot = pShoot;
   m_pLoader = pLoader;
-  m_shootSpeed = shootSpeed;
+  m_pShoot = pShoot;
   m_driveSpeed = driveSpeed;
-  m_driveTime = driveTime;
+  m_shootSpeed = shootSpeed;
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements(m_pDrive);
   AddRequirements(m_pLoader);
@@ -20,35 +19,35 @@ CompetitionCMD::CompetitionCMD(DriveTrainSubsystem *pDrive, ShooterSubsystem *pS
 }
 
 // Called when the command is initially scheduled.
-void CompetitionCMD::Initialize() {}
+void UtahCompetitionCMD::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void CompetitionCMD::Execute() 
+void UtahCompetitionCMD::Execute()
 {
-  //Move Arm
+  // Drop Arm
   m_pLoader->MoveArm(0.3);
   Util::DelayInSeconds(0.75_s);
   m_pLoader->MoveArm(0.0);
 
-  //Shoot
-  //m_pShoot->SetShooterSpeed(m_shootSpeed);
+  // Start Shoot
   m_pShoot->ShootMotor(m_shootSpeed);
-  Util::DelayInSeconds(0.5_s);
+  Util::DelayInSeconds(2_s);
+  // Back up
+  m_pDrive->ForwardInTime(1.0, -m_driveSpeed);
+  // Shoot / Load
   m_pLoader->InnerLoader(-0.5);
   Util::DelayInSeconds(1_s);
   m_pLoader->InnerLoader(0.0);
-  m_pShoot->ShootMotor(0.0);
-
-  //Back up
-  m_pDrive->ForwardInTime(m_driveTime, -m_driveSpeed);
+  // Back up more
+  m_pDrive->ForwardInTime(0.5, -m_driveSpeed);
 
   m_isFinished = true;
 }
 
 // Called once the command ends or is interrupted.
-void CompetitionCMD::End(bool interrupted) {}
+void UtahCompetitionCMD::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool CompetitionCMD::IsFinished() {
+bool UtahCompetitionCMD::IsFinished() {
   return m_isFinished;
 }

@@ -6,7 +6,10 @@
 #include "cmath"
 #include "Util.h"
 
-// The distance is inches.
+#include <thread>
+
+ClimbSubsystem *ClimbCommand::m_pClimb = nullptr;
+
 ClimbCommand::ClimbCommand(ClimbSubsystem *pClimb,double distance, double speed) 
 {
   m_pClimb = pClimb;
@@ -19,6 +22,18 @@ ClimbCommand::ClimbCommand(ClimbSubsystem *pClimb,double distance, double speed)
 // Called when the command is initially scheduled.
 void ClimbCommand::Initialize() {}
 
+void ClimbCommand::threadFun(double dist, double speed)
+{
+  m_pClimb->ClimbDownInInch(dist, speed);
+}
+
+void ClimbCommand::UpThread(double dist, double speed)
+{
+  m_pClimb->SetRatchet(false);
+  m_pClimb->ClimbUpInInch(dist, speed);
+  m_pClimb->SetRatchet(true);
+}
+
 // Called repeatedly when this Command is scheduled to run
 void ClimbCommand::Execute() 
 {
@@ -26,13 +41,15 @@ void ClimbCommand::Execute()
 
  if(m_dist < current)
  {
-   m_pClimb->ClimbDownInInch(m_dist, m_speed);
+    //std::thread(m_pClimb->ClimbDownInInch(m_dist, m_speed));
+    std::thread threadObj(threadFun, m_dist, m_speed);
  }
  else
  {
-   m_pClimb->SetRatchet(false);
-   m_pClimb->ClimbUpInInch(m_dist, m_speed);
-   m_pClimb->SetRatchet(true);
+    // m_pClimb->SetRatchet(false);
+    // m_pClimb->ClimbUpInInch(m_dist, m_speed);
+    // m_pClimb->SetRatchet(true);
+    std::thread threadObj(UpThread, m_dist, m_speed);
  }
 
  m_IsFinished = true;

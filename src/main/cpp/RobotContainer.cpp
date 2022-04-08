@@ -33,10 +33,11 @@ RobotContainer::RobotContainer()
   m_pArmDown = new ArmCommand(&m_loaderSub,0.65,&m_controllerTwo);
   m_pArmStop = new ArmCommand(&m_loaderSub,0,&m_controllerTwo);
 
-  m_pAutoUpClimbCmd = new ClimbCommand(&m_ClimbSub,25.0,0.4);
-  m_pAutoDownClimbCmd = new ClimbCommand (&m_ClimbSub,0.0,0.4);
-  m_pManualUpClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.5);
-  m_pManualDownClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.5);
+  // Climb
+  m_pAutoUpClimbCmd = new ClimbCommand(&m_ClimbSub, 500.0, 0.6);
+  m_pAutoDownClimbCmd = new ClimbCommand (&m_ClimbSub, 0.0, 0.8);
+  m_pManualUpClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.6);
+  m_pManualDownClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.8);
   m_pManualStopClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.0);
 
   //Auto
@@ -44,10 +45,12 @@ RobotContainer::RobotContainer()
   m_pMiddleAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, -135.0);
   m_pWallAutoCmd = new PosWallAutoCommand(&m_loaderSub, &m_shootSub, &m_driveTrainSub, 155.0, 70.0);
   m_plowHub = new CompetitionCMD(&m_driveTrainSub, &m_shootSub, &m_loaderSub, 0.3, 0.6, 1.2);
+  m_phighHub = new UtahCompetitionCMD(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 0.6, 0.3);
 
   // Configure the button bindings
   ConfigureButtonBindings();
 }
+
 
 void RobotContainer::Init()
 {
@@ -60,6 +63,14 @@ void RobotContainer::Init()
 void RobotContainer::TeleopPeriodic()
 {
   EncoderValues();
+  if(m_shootSub.GetShooterSpeed() <= -30)
+  {
+    Util::Log("READY TO SHOOT", true);
+  }
+  else
+  {
+    Util::Log("READY TO SHOOT", false);
+  }
   //m_ClimbSub.PeriodicRatchet();
 
   //m_ClimbSub.ClimbDistance(25, -m_controllerTwo.GetLeftY(), m_controllerTwo.GetLeftX(), 0.5);
@@ -124,22 +135,24 @@ void RobotContainer::SetButtonA()
 
 void RobotContainer::SetDpadUp()
 {
-  m_POVup.WhenHeld(m_pAutoUpClimbCmd);
+  m_POVup.WhenHeld(m_pManualUpClimbCmd);
   m_POVup.WhenReleased(m_pManualStopClimbCmd);
 }
 void RobotContainer::SetDpadDown()
 {
-  m_POVdown.WhenHeld(m_pAutoDownClimbCmd);
+  // m_POVdown.WhenHeld(m_pAutoDownClimbCmd);
+  // m_POVdown.WhenReleased(m_pManualStopClimbCmd);
+  m_POVdown.WhenHeld(m_pManualDownClimbCmd);
   m_POVdown.WhenReleased(m_pManualStopClimbCmd);
 }
 void RobotContainer::SetDpadLeft()
 {
-  m_POVleft.WhenHeld(m_pManualDownClimbCmd);
+  m_POVleft.WhenHeld(m_pAutoDownClimbCmd);
   m_POVleft.WhenReleased(m_pManualStopClimbCmd);
 }
 void RobotContainer::SetDpadRight()
 {
-  m_POVright.WhenHeld(m_pManualUpClimbCmd);
+  m_POVright.WhenHeld(m_pAutoUpClimbCmd);
   m_POVright.WhenReleased(m_pManualStopClimbCmd);
 }
 
@@ -236,8 +249,8 @@ frc2::Command* RobotContainer::GetAutonomousCommand()
   {
     case 1:
       //For Pos 1 AND 2
-      cmd = m_pAloneAutoCmd;
-      frc::SmartDashboard::PutString("AutoCMD String", "m_pAloneAutoCmd");
+      cmd = m_phighHub;
+      frc::SmartDashboard::PutString("AutoCMD String", "m_highHub");
       break;
       
     case 2:

@@ -17,7 +17,7 @@ constexpr int PWM_LOADER_INTAKE_UPPER   = 5;
 constexpr int PWM_LOADER_INNER          = 4; 
 constexpr int PWM_SHOOTER               = 6;
 constexpr int PWM_CLIMB                 = 7;
-constexpr int PWM_CLIMB_SERVO           = 9; 
+constexpr int PWM_CLIMB_SERVO           = 8; 
 
 //DIO
 constexpr int DIO_DRIVE_LEFT_A          = 4;

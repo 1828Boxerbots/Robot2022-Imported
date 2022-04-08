@@ -68,17 +68,20 @@ void Pos1AutoCommand::Execute()
   m_pshooter->SetShooterSpeed(shooterTargetSpeed);
   frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 6");
 
-
   //7. Load in Seconds to Shoot.
-  m_ploader->LoadToTimer(3.0, innerSpeed);
+  m_ploader->LoadToTimer(0.5, innerSpeed);
   frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 7");
 
+    // Wait then load second ball
+    Util::DelayInSeconds(1_s);
+    m_ploader->LoadToTimer(1, innerSpeed);
+
   //8. Turn off Intake.
-  m_ploader->IntakeLoader(StopSpeed);
+  m_ploader->IntakeLoader(0.0);
   frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 8");
 
   //9. Turn off Shooter
-  m_pshooter->SetShooterSpeed(StopSpeed);
+  m_pshooter->SetShooterSpeed(0.0);
   frc::SmartDashboard::PutString("Pos1AutoCommand", "Step 9");
 
   m_IsFinished = true;

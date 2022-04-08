@@ -6,8 +6,12 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include <frc/smartdashboard/SmartDashboard.h>
-#include "subsystems/ClimbSubsystem.h"
+
+#include "subsystems/DriveTrainSubsystem.h"
+#include "subsystems/LoaderSubsystem.h"
+#include "subsystems/ShooterSubsystem.h"
+
+#include "Util.h"
 
 /**
  * An example command.
@@ -16,11 +20,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class ClimbCommand
-    : public frc2::CommandHelper<frc2::CommandBase, ClimbCommand> 
-  {
+class UtahCompetitionCMD
+    : public frc2::CommandHelper<frc2::CommandBase, UtahCompetitionCMD> {
  public:
-  ClimbCommand(ClimbSubsystem *pClimb,double distance, double speed);
+  UtahCompetitionCMD(DriveTrainSubsystem* pDrive, LoaderSubsystem* pLoader, ShooterSubsystem* pShoot, double driveSpeed, double shootSpeed);
 
   void Initialize() override;
 
@@ -30,12 +33,13 @@ class ClimbCommand
 
   bool IsFinished() override;
 
-  void static threadFun(double dist, double speed);
-  void static UpThread(double dist, double speed);
+ protected:
+  DriveTrainSubsystem* m_pDrive;
+  LoaderSubsystem* m_pLoader;
+  ShooterSubsystem* m_pShoot;
 
-  private:
-  static ClimbSubsystem *m_pClimb;
-  double m_dist;
-  double m_speed;
-  bool m_IsFinished = false;
+  double m_driveSpeed;
+  double m_shootSpeed;
+
+  bool m_isFinished = false;
 };

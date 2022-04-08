@@ -36,6 +36,7 @@
 #include "commands/ShootTriggerController.h"
 #include "commands/CompetitionCMD.h"
 #include "commands/ManualClimbCommand.h"
+#include "commands/UtahCompetitionCMD.h"
 
 #include <frc2/command/button/POVButton.h>
 #include <frc/DigitalInput.h>
@@ -86,7 +87,9 @@ class RobotContainer
     ManualClimbCommand *m_pManualDownClimbCmd = nullptr;
     ManualClimbCommand *m_pManualStopClimbCmd = nullptr;
     
+    // Competition Commands
     CompetitionCMD *m_plowHub = nullptr;
+    UtahCompetitionCMD *m_phighHub = nullptr;
 
     VisionAllignCommand* m_pVisionAllignCmd = nullptr;
     VisionShootCommand* m_p15ftShoot        = nullptr;
@@ -101,6 +104,8 @@ class RobotContainer
     PosWallTimerAutoCommand *m_pWallTimeAutoCmd = nullptr;
     TheLoneTimerAutonomus *m_pLonelyTimer = nullptr;
     TheLoneTimerAutonomus *m_pMiddleTimer = nullptr;
+
+
     frc::XboxController m_controllerOne{USB_CONTROLLER_ONE};
     frc::XboxController m_controllerTwo{USB_CONTROLLER_TWO};
 
