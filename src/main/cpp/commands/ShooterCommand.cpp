@@ -21,11 +21,11 @@ void ShooterCommand::Execute()
   frc::SmartDashboard::PutNumber("Shooter Speed: RPS ", m_pShooter->GetShooterSpeed());
   if(m_pXBox->GetLeftBumper())
   {
-    m_pShooter->ShootMotor(-m_speed);
+    m_pShooter->MotorVoltage((units::volt_t)-m_speed);
   }
   else
   {
-    m_pShooter->ShootMotor(m_speed);
+    m_pShooter->MotorVoltage((units::volt_t)m_speed);
   }
   m_isFinished = true;
 }

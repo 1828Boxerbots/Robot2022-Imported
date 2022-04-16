@@ -51,6 +51,28 @@ void DriveCommand::Execute()
       CheckDeadZone(m_left);
       CheckDeadZone(m_right);
       m_pDriveTrain->MoveArcade(m_left * m_scale, m_right * m_scale);
+      // if(m_left > 0)
+      // {
+      //   if(m_right > 0)
+      //   {
+      //     m_pDriveTrain->MoveArcade(m_left * m_left, m_right * m_right);
+      //   }
+      //   else
+      //   {
+      //     m_pDriveTrain->MoveArcade(m_left * m_left, -(m_right * m_right));
+      //   }
+      // }
+      // else
+      // {
+      //   if(m_right > 0)
+      //   {
+      //     m_pDriveTrain->MoveArcade(-(m_left * m_left), m_right * m_right);
+      //   }
+      //   else
+      //   {
+      //     m_pDriveTrain->MoveArcade(-(m_left * m_left), -(m_right * m_right));
+      //   }
+      // }
       break;
 
     //Uh oh forgot to SetDrive()

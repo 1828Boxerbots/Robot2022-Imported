@@ -103,3 +103,11 @@ void ShooterSubsystem::ShootMotor(double speed)
     frc::SmartDashboard::PutNumber("ShootMotor-Speed",speed);
 #endif
 }
+
+void ShooterSubsystem::MotorVoltage(units::volt_t volts)
+{
+#ifndef NOHW
+    m_shooterMotor.SetVoltage(volts);
+    frc::SmartDashboard::PutNumber("ShootMotor-Volts", (double)volts);
+#endif
+}

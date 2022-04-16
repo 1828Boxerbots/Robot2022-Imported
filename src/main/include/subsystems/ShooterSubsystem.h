@@ -30,6 +30,7 @@ class ShooterSubsystem : public frc2::SubsystemBase {
 
   // Shooter Functions
   void ShootMotor(double speed);
+  void MotorVoltage(units::volt_t volts);
 
  private:
  #ifndef NOHW

@@ -37,25 +37,23 @@ void TheLoneTimerAutonomus::Execute()
 
 
   //1. DropArm
-    //m_ploader->AutoArm(armSpeed);
-    m_ploader->MoveArm(0.2);
-    Util::DelayInSeconds(0.5_s);
+    m_ploader->MoveArm(0.3);
+    Util::DelayInSeconds(0.75_s);
     m_ploader->MoveArm(0.0);
     frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 1");
 
   //2. Turn on Intake 
-  //m_ploader->IntakeLoader(intakeSpeed);
+  m_ploader->IntakeLoader(intakeSpeed);
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 2");
   
   //3. Forward to Ball
-  // 0.76 to avoid wall
   m_pdrive->ForwardInTime(1, forwardSpeed);
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 3");
   Util::DelayInSeconds(1.0_s);
 
   //5. Turn Around 180 Towards Target
   m_ploader->IntakeLoader(0);
-  // m_pdrive->TurnAngleRelative(turnAngle, turnSpeed, turnDeadZone);
+  m_pdrive->TurnAngleRelative(turnAngle, turnSpeed, turnDeadZone);
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 5");
 
   // 6. Allign Robot to Target to Prepare for Shooting
@@ -63,9 +61,11 @@ void TheLoneTimerAutonomus::Execute()
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 6");
 
   // 7-8. Shoot Ball 1 Towards Target
-  //m_pshooter->SetShooterSpeed(shooterTargetSpeed);
+  m_pshooter->SetShooterSpeed(31);
   Util::Log("TheLoneTimerAutonomus-Steps","step 7");
   //m_ploader->LoadToTimer(1.5,0.6);
+  m_ploader->InnerLoader(0.5);
+  Util::DelayInSeconds(0.5_s);
   frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 8");
 
   //10. Allign Robot to Target to Prepare for Shooting
@@ -73,12 +73,16 @@ void TheLoneTimerAutonomus::Execute()
     frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 10");
 
   //11. Shoot Ball 2 Towards Target 
-  //m_pshooter->SetShooterSpeed(shooterTargetSpeed);
-    frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 11");
+  m_pshooter->SetShooterSpeed(31);
+  m_ploader->InnerLoader(0.5);
+  m_ploader->IntakeLoader(0.5);
+  Util::DelayInSeconds(1_s);
+  frc::SmartDashboard::PutString("TheLoneTimerAutonomus-Steps", "step 11");
 
-  //12. Load Ball 2 to Shooter  
-  //m_ploader->LoadToTimer(3,innerSpeed);
-  //m_pshooter->ShootMotor(0.0);
+  // Turn off shooter & loader
+  m_ploader->InnerLoader(0.0);
+  m_ploader->IntakeLoader(0.0);
+  m_pshooter->ShootMotor(0.0);
 
   m_IsFinished = true;
 }
