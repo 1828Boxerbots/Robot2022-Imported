@@ -30,14 +30,16 @@ void UtahCompetitionCMD::Execute()
   m_pLoader->MoveArm(0.0);
 
   // Start Shoot
+  //m_pShoot->MotorVoltage((units::volt_t)m_shootSpeed);
   m_pShoot->ShootMotor(m_shootSpeed);
-  Util::DelayInSeconds(2_s);
+  Util::DelayInSeconds(1_s);
   // Back up
   m_pDrive->ForwardInTime(1.0, -m_driveSpeed);
   // Shoot / Load
   m_pLoader->InnerLoader(-0.5);
   Util::DelayInSeconds(1_s);
   m_pLoader->InnerLoader(0.0);
+  m_pShoot->ShootMotor(0.0);
   // Back up more
   m_pDrive->ForwardInTime(0.5, -m_driveSpeed);
 

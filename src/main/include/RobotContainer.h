@@ -37,6 +37,7 @@
 #include "commands/CompetitionCMD.h"
 #include "commands/ManualClimbCommand.h"
 #include "commands/UtahCompetitionCMD.h"
+#include "commands/StopManualClimb.h"
 
 #include <frc2/command/button/POVButton.h>
 #include <frc/DigitalInput.h>
@@ -63,6 +64,7 @@ class RobotContainer
   void RunDrive();
   int GetDPDT();
   void TeleopPeriodic();
+  void AutoPeriodic();
   void EncoderValues();
 
  private:
@@ -85,7 +87,8 @@ class RobotContainer
     ClimbCommand *m_pAutoDownClimbCmd = nullptr;
     ManualClimbCommand *m_pManualUpClimbCmd = nullptr;
     ManualClimbCommand *m_pManualDownClimbCmd = nullptr;
-    ManualClimbCommand *m_pManualStopClimbCmd = nullptr;
+   // ManualClimbCommand *m_pManualStopClimbCmd = nullptr;
+    StopManualClimb *m_pStopManualClimbCMD = nullptr;
     
     // Competition Commands
     CompetitionCMD *m_plowHub = nullptr;

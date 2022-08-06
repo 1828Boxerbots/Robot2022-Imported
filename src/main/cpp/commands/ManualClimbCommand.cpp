@@ -23,33 +23,48 @@ void ManualClimbCommand::Execute()
 {
 
   m_pClimbSub->GetDistance();
-       
-  int pov = m_pXbox->GetPOV();
-
-  switch(pov)
+  
+  if(m_pXbox->GetLeftBumper())
   {
-      
-    case 0:
-      // Pressing the D-Pad Right.
-      // Climb arms are moving up.
-      m_pClimbSub->SetRatchet(false);
-      Util::DelayInSeconds(0.3_s);
-      m_pClimbSub->ClimbMotor(-fabsf(m_speed));
-      break;
-
-    case 180:
-      // Pressing the D-Pad Left.
-      // Climb arms are moving down.
-      m_pClimbSub->SetRatchet(true);
-      //Util::DelayInSeconds(0.3_s);
-      m_pClimbSub->ClimbMotor(fabsf(m_speed));
-      break;
-    
-    default:
-      //Stop Climb Motor.
-      m_pClimbSub->ClimbMotor(0.0);
-      m_pClimbSub->SetRatchet(true);
+    //Climb arms are moving down.
+    m_pClimbSub->SetRatchet(true);
+    //Util::DelayInSeconds(0.3_s);
+    m_pClimbSub->ClimbMotor(fabsf(m_speed));
   }
+  else
+  {
+    // Climb arms are moving up.
+    m_pClimbSub->SetRatchet(false);
+    Util::DelayInSeconds(0.3_s);
+    m_pClimbSub->ClimbMotor(-fabsf(m_speed));
+  }
+
+  //int pov = m_pXbox->GetPOV();
+
+  // switch(pov)
+  // {
+      
+  //   case 0:
+  //     // Pressing the D-Pad Right.
+  //     // Climb arms are moving up.
+  //     m_pClimbSub->SetRatchet(false);
+  //     Util::DelayInSeconds(0.3_s);
+  //     m_pClimbSub->ClimbMotor(-fabsf(m_speed));
+  //     break;
+
+  //   case 180:
+  //     // Pressing the D-Pad Left.
+  //     // Climb arms are moving down.
+  //     m_pClimbSub->SetRatchet(true);
+  //     //Util::DelayInSeconds(0.3_s);
+  //     m_pClimbSub->ClimbMotor(fabsf(m_speed));
+  //     break;
+    
+  //   default:
+  //     //Stop Climb Motor.
+  //     m_pClimbSub->ClimbMotor(0.0);
+  //     m_pClimbSub->SetRatchet(true);
+  // }
   m_isFinished = true;
 }
 

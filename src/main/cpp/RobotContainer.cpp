@@ -22,12 +22,12 @@ RobotContainer::RobotContainer()
   m_pdownAutoArmCmd = new AutoArmCommand(&m_loaderSub, -0.25);
   //Shoot
   m_pShootSpeed = new ShootSpeedCommand(&m_shootSub, &m_loaderSub, 1600);
-  m_pShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 5);
-  m_pLowShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 5.5);
+  m_pShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.4);
+  m_pLowShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.20);
   m_pShootStop = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.0);
   m_pShootTrigger = new ShootTriggerController(&m_shootSub, &m_controllerTwo);
   m_pStopShoot = new ShooterCommand(&m_shootSub, &m_controllerTwo, 0.0);
-  m_pAdjSpeed = new ShooterCommand(&m_shootSub, &m_controllerTwo, 6);
+  m_pAdjSpeed = new ShooterCommand(&m_shootSub, &m_controllerTwo, 1);
 
   m_pVisionAllignCmd = new VisionAllignCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub);
   m_pArmDown = new ArmCommand(&m_loaderSub,0.65,&m_controllerTwo);
@@ -38,7 +38,8 @@ RobotContainer::RobotContainer()
   m_pAutoDownClimbCmd = new ClimbCommand (&m_ClimbSub, 0.0, 0.8);
   m_pManualUpClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.6);
   m_pManualDownClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.8);
-  m_pManualStopClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.0);
+  //m_pManualStopClimbCmd = new ManualClimbCommand (&m_ClimbSub,&m_controllerTwo, 0.0);
+  m_pStopManualClimbCMD = new StopManualClimb(&m_ClimbSub);
 
   //Auto
   m_pAloneAutoCmd = new Pos1AutoCommand(&m_driveTrainSub, &m_loaderSub, &m_shootSub, 180.0);
@@ -78,6 +79,11 @@ void RobotContainer::TeleopPeriodic()
 
   //m_ClimbSub.ClimbDistance(25, -m_controllerTwo.GetLeftY(), m_controllerTwo.GetLeftX(), 0.5);
   //m_ClimbSub.ClimbMotor(m_controllerTwo.GetLeftX() * 0.5);
+}
+
+void RobotContainer::AutoPeriodic()
+{
+  //m_shootSub.MotorVoltage((units::volt_t)5.0);
 }
 
 void RobotContainer::TestPhoto()
@@ -124,8 +130,8 @@ void RobotContainer::SetButtonY()
 {
   m_yButton.WhenHeld(m_ploader);
   m_yButton.WhenReleased(m_pLoadStop);
-  m_yButton2.WhileHeld(m_ploader);      
-  m_yButton2.WhenReleased(m_pLoadStop);
+  m_yButton2.WhileHeld(m_pManualUpClimbCmd);      
+  m_yButton2.WhenReleased(m_pStopManualClimbCMD);
 }
 
 void RobotContainer::SetButtonA()
@@ -138,15 +144,15 @@ void RobotContainer::SetButtonA()
 
 void RobotContainer::SetDpadUp()
 {
-  m_POVup.WhenHeld(m_pManualUpClimbCmd);
-  m_POVup.WhenReleased(m_pManualStopClimbCmd);
+  // m_POVup.WhenHeld(m_pManualUpClimbCmd);
+  // m_POVup.WhenReleased(m_pManualStopClimbCmd);
 }
 void RobotContainer::SetDpadDown()
 {
   // m_POVdown.WhenHeld(m_pAutoDownClimbCmd);
   // m_POVdown.WhenReleased(m_pManualStopClimbCmd);
-  m_POVdown.WhenHeld(m_pManualDownClimbCmd);
-  m_POVdown.WhenReleased(m_pManualStopClimbCmd);
+  // m_POVdown.WhenHeld(m_pManualDownClimbCmd);
+  // m_POVdown.WhenReleased(m_pManualStopClimbCmd);
 }
 void RobotContainer::SetDpadLeft()
 {
@@ -193,6 +199,7 @@ void RobotContainer::RunDrive()
 {
   // RUN DRIVE
   m_driveTrainSub .SetDefaultCommand(*m_pdriveCmd);
+  //m_shootSub.MotorVoltage((units::volt_t)0.0);
 }
 
 int RobotContainer::GetDPDT()

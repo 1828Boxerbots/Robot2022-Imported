@@ -48,6 +48,7 @@ void Robot::AutonomousInit() {
 void Robot::AutonomousPeriodic() 
 {
   m_container.EncoderValues();
+  //m_container.AutoPeriodic();
 }
 
 void Robot::TeleopInit() {
