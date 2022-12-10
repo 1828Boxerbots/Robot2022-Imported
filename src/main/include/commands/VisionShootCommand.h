@@ -14,6 +14,8 @@
 #include "subsystems/ShooterSubsystem.h"
 #include "subsystems/LoaderSubsystem.h"
 
+#include "Util.h"
+
 /**
  * An example command.
  *
@@ -24,7 +26,7 @@
 class VisionShootCommand
     : public frc2::CommandHelper<frc2::CommandBase, VisionShootCommand> {
  public:
-  VisionShootCommand(DriveTrainSubsystem* pDrive, ShooterSubsystem* pShooter, LoaderSubsystem* pLoader, double distance, double driveSpeed = 0.2, 
+  VisionShootCommand(DriveTrainSubsystem* pDrive, /*ShooterSubsystem* pShooter, LoaderSubsystem* pLoader,*/ double distance, double driveSpeed = 0.2, 
                       double loadSpeed = 1.0, double loadTime = 1, units::degree_t deadZone = 1_deg);
 
   void Initialize() override;
@@ -38,13 +40,23 @@ class VisionShootCommand
   bool IsFinished() override;
  protected:
   DriveTrainSubsystem* m_pDrive;
-  ShooterSubsystem* m_pShooter;
-  LoaderSubsystem* m_pLoader;
+  //ShooterSubsystem* m_pShooter;
+  //LoaderSubsystem* m_pLoader;
   double m_distance;
   double m_driveSpeed;
   double m_loadSpeed;
   double m_loadTime;
   units::degree_t m_deadZone;
+
+  // Test variables - 11/30/2022 (Ben Patla)
+  double m_turnAngle;
+  bool m_haveTurnAngle = false;
+  units::degree_t currentAngle;
+  units::degree_t targetAngle;
+  units::degree_t lowAngle;
+  units::degree_t highAngle;
+
+  int m_heart = 0;
 
   bool m_isFinished = false;
 };
